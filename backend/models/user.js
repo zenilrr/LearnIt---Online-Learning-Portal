@@ -9,4 +9,5 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
-//this user model is as per the frontend demo made will be changed later
+//this is done for connection perpose
+//this user model is as per the frontend demo made will be changed after
