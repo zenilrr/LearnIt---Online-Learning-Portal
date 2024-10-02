@@ -41,4 +41,47 @@ exports.auth = (req, res, next) => {
 };
 
 
-//authentication for student
+
+exports.isStudent = (req, res, next) => {
+    try {
+        const { accountType } = req.user || {};
+        
+        if (accountType !== 'Student') {
+            return res.status(403).json({
+                success: false,
+                message: 'Access denied: Students only'
+            });
+        }
+
+        next();
+    } catch (error) {
+        console.error('Student access validation failed:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Error during student access verification',
+            error: error.message
+        });
+    }
+};
+
+exports.isInstructor = (req, res, next) => {
+    try {
+        const { accountType } = req.user || {};
+        
+        if (accountType !== 'Instructor') {
+            return res.status(403).json({
+                success: false,
+                message: 'Access denied: Instructors only'
+            });
+        }
+
+        next();
+    } catch (error) {
+        console.error('Instructor access validation failed:', error);
+        return res.status(500).json({
+            success: false,
+            message: 'Error during instructor access verification',
+            error: error.message
+        });
+    }
+};
