@@ -58,7 +58,7 @@ exports.isStudent = (req, res, next) => {
         console.error('Student access validation failed:', error);
         return res.status(500).json({
             success: false,
-            message: 'Error during student access verification',
+            message: 'failed',
             error: error.message
         });
     }
