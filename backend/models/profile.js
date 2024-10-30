@@ -14,7 +14,20 @@ const profileSchema = new mongoose.Schema({
     contactNumber: {
         type: Number,
         trim: true
-    }
+    },
+    badge:{
+        type :String
+
+    },
+    CompletedCourse:[{
+        type:String
+    }],
+    EnrolledCourse:[{
+        type:String
+    }],
+    CreatedCourse:[{
+        type:String
+    }]
 
 });
 
