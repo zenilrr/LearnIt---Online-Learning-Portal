@@ -2,8 +2,11 @@
 
 import React from 'react';
 import './Home.css'; 
+import { useNavigate } from "react-router-dom";
+
 
 function Home() {
+
   return (
     <div className="home-container">
       <nav className="navbar">
