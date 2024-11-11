@@ -1,37 +1,71 @@
-// components/Register.js
-
-import React from 'react';
-import './Register.css'; 
+import React, { useState } from 'react';
+import './Register.css';
 
 function Register() {
-  return (
-    <div className="register-container">
-      <h1>Register</h1>
-      <form>
-        <div className="form-group">
-          <label htmlFor="firstName">First Name:</label>
-          <input type="text" id="firstName" name="firstName" required />
+    const [form, setForm] = useState({
+        username: '',
+        email: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const handleChange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Handle form submission logic here
+        console.log("Form submitted:", form);
+    };
+
+    return (
+        <div className="register-container">
+            <h2 className="register-title">Register a new account</h2>
+            <form className="register-form" onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    value={form.username}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={form.password}
+                    onChange={handleChange}
+                    required
+                />
+                <input
+                    type="password"
+                    name="confirmPassword"
+                    placeholder="Repeat Password"
+                    value={form.confirmPassword}
+                    onChange={handleChange}
+                    required
+                />
+                <button type="submit" className="register-button">Sign Up</button>
+            </form>
+            <p className="member-text">
+                Are you a member? <a href="/login" className="login-link">Login now</a>
+            </p>
+            <p className="demo-text">
+                Wanna see how Student, Instructor, or Admin look?<br />
+                <a href="/demo" className="demo-link">Click here to access Demo Account</a>
+            </p>
         </div>
-        <div className="form-group">
-          <label htmlFor="lastName">Last Name:</label>
-          <input type="text" id="lastName" name="lastName" required />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email ID:</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password (at least 8 characters):</label>
-          <input type="password" id="password" name="password" minLength="8" required />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input type="password" id="confirmPassword" name="confirmPassword" minLength="8" required />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-    </div>
-  );
+    );
 }
 
 export default Register;

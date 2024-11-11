@@ -1,32 +1,55 @@
-// Components/Login.js
+// components/Login.js
 
-import React from 'react';
-import './Login.css'; 
+import React, { useState } from 'react';
+import './Login.css';
 
-function Login() {
+function Login({ onClose }) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+
   return (
-    <div className="login-container">
-      <h1>Login</h1>
-      <form>
-        <div className="form-group">
-          <label htmlFor="username">Username or Email ID:</label>
-          <input type="text" id="username" name="username" required />
-        </div>
-        <div className="form-group">
-          <label htmlFor="loginId">Login ID:</label>
-          <input type="password" id="loginId" name="loginId" required />
-        </div>
-        <div className="form-group">
-          <input type="checkbox" id="rememberMe" name="rememberMe" />
-          <label htmlFor="rememberMe">Remember Me</label>
-        </div>
-        <div className="form-group">
-          <a href="/forgot-password">Forgot Password?</a>
-        </div>
-        <button type="submit">Login</button>
-      </form>
-      <div className="register-link">
-        <p>New user? <a href="/register">Register here</a></p>
+    <div className="login-overlay">
+      <div className="login-container">
+        <button className="close-btn" onClick={onClose}>×</button>
+        <h2 className="login-title">Login to your account</h2>
+        <form className="login-form">
+          <input type="text" placeholder="Username or Email" required />
+          <div className="password-container">
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Password"
+              required
+            />
+            <button
+              type="button"
+              className="password-toggle"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? 'Hide' : 'Show'}
+            </button>
+          </div>
+          <div className="login-options">
+            <label>
+              <input type="checkbox" />
+              Remember me
+            </label>
+            <a href="/lost-password" className="lost-password">
+              Lost your password?
+            </a>
+          </div>
+          <button type="submit" className="login-button">Login</button>
+        </form>
+        <p className="member-text">
+          Not a member yet? <span className="register-link" onClick={onClose}>Register</span>
+        </p>
+        <p className="demo-text">
+                Wanna see how Student, Instructor, or Admin look?<br />
+                <a href="/demo" className="demo-link">Click here to access Demo Account</a>
+            </p>
       </div>
     </div>
   );
