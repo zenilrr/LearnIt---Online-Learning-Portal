@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
 import SearchIcon from '@mui/icons-material/Search'; // Material UI search icon
-import './Header.css';
+import './Styles/Header.css';
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);

@@ -10,8 +10,8 @@ import {
   faShoppingCart,
   faList,
 } from "@fortawesome/free-solid-svg-icons";
-import "./Profile.css";
-import img from "./images/profile-img.jpeg";
+import './Styles/Profile.css'
+import img from "../Assets/profile-img.jpeg";
 
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("All");

@@ -1,7 +1,7 @@
 // components/Login.js
 
 import React, { useState } from 'react';
-import './Login.css';
+import './Styles/Login.css';
 
 function Login({ onClose }) {
   const [showPassword, setShowPassword] = useState(false);

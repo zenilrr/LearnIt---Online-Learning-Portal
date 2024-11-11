@@ -7,7 +7,7 @@ import Login from './Components/Login';
 import Register from './Components/Register';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
-import Profile from './Profile';
+import Profile from './Components/Profile';
 function App() {
   return (
     // <Router>
