@@ -71,27 +71,27 @@ const Profile = () => {
           {activeSidebar === "My Courses" && (
             <>
               <div className="course-summary">
-                <div className="course-card">
+                <div className="course-card-2">
                   <FontAwesomeIcon icon={faBookOpen} size="2x" />
                   <h3>Enrolled Course</h3>
                   <p>0</p>
                 </div>
-                <div className="course-card">
+                <div className="course-card-2">
                   <FontAwesomeIcon icon={faHourglassHalf} size="2x" />
                   <h3>Inprogress Course</h3>
                   <p>0</p>
                 </div>
-                <div className="course-card">
+                <div className="course-card-2">
                   <FontAwesomeIcon icon={faClipboardCheck} size="2x" />
                   <h3>Finished Course</h3>
                   <p>0</p>
                 </div>
-                <div className="course-card">
+                <div className="course-card-2">
                   <FontAwesomeIcon icon={faCheckCircle} size="2x" />
                   <h3>Passed Course</h3>
                   <p>0</p>
                 </div>
-                <div className="course-card">
+                <div className="course-card-2">
                   <FontAwesomeIcon icon={faTimesCircle} size="2x" />
                   <h3>Failed Course</h3>
                   <p>0</p>

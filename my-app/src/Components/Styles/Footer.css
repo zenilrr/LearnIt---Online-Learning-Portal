@@ -1,7 +1,8 @@
 /* Footer.css */
 .footer {
+  font-family: 'Poppins', sans-serif;
     padding: 20px;
-    background-color: #1f3064;
+    background-color: #0a194f;
     color: #fff;
     text-align: center;
   }

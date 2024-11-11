@@ -41,7 +41,7 @@ function Login({ onClose }) {
               Lost your password?
             </a>
           </div>
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit" className="login-button-2">Login</button>
         </form>
         <p className="member-text">
           Not a member yet? <span className="register-link" onClick={onClose}>Register</span>

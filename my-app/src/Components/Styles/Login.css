@@ -84,7 +84,7 @@
 
 
 /* Submit button styling */
-.login-button {
+.login-button-2 {
   width: 100%;
   padding: 12px;
   background-color: #ff7d00;
@@ -97,7 +97,7 @@
   margin-top: 10px;
 }
 
-.login-button:hover {
+.login-button-2:hover {
   background-color: #e36f00;
 }
 

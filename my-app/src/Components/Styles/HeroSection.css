@@ -1,0 +1,54 @@
+/* Import Poppins font with available weights */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+/* Apply Poppins font family to the hero section and its text */
+.hero-section {
+  font-family: 'Poppins', sans-serif; /* Apply Poppins font */
+  background: url(../../Assets/hero-background.svg);
+  background-position: left;
+  background-blend-mode: overlay; /* Overlay blend for better text contrast */
+  height: 100vh;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  max-width: 1200px;
+}
+
+.hero-text {
+  text-align: left;
+  max-width: 50%;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  font-weight: 800; /* Adjusted to 900 for maximum weight */
+  color: #ffffff;
+  padding-left: 5px;
+  padding-bottom: 30px;
+  opacity: 0.8;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 800; /* Adjusted to 900 for maximum weight */
+  line-height: 1.2;
+  padding-bottom: 30px;
+}
+
+.hero-image {
+  max-width: 45%;
+}
+
+.hero-image-img {
+  width: 100%;
+  height: 603px;
+  border-radius: 10px;
+}

@@ -83,7 +83,7 @@
     margin-bottom: 20px;
   }
   
-  .course-card {
+  .course-card-2 {
     background-color: #1f3064;
     padding: 20px;
     border-radius: 8px;
@@ -91,13 +91,13 @@
     flex: 1;
   }
   
-  .course-card h3 {
+  .course-card-2 h3 {
     color: #a9b1e3;
     font-size: 1rem;
     margin-top: 10px;
   }
   
-  .course-card p {
+  .course-card-2 p {
     font-size: 1.5rem;
     font-weight: bold;
     margin-top: 5px;

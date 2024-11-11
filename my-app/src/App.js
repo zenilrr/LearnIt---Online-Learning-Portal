@@ -8,6 +8,13 @@ import Register from './Components/Register';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Profile from './Components/Profile';
+import HeroSection from './Components/HeroSection';
+import FeaturesSection from './Components/FeaturesSection';
+import CoursesCatalog from './Components/CoursesCatalog';
+import About from './Components/About';
+import Contact from './Components/Contact';
+import './App.css';
+
 function App() {
   return (
     // <Router>
@@ -21,11 +28,24 @@ function App() {
     // </Router>
     <>
     <div className="app">
-      <Header />
+      {/* <Header />
       <main className="main-content">
         <Profile />
       </main>
+      <Footer /> */}
+
+      <Header />
+      <HeroSection />
+      <FeaturesSection />
+      <CoursesCatalog />
+      <section id="about">
+          <About />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
       <Footer />
+
     </div>
     </>
     
