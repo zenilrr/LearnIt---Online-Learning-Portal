@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
-const User = require('./models/User');
+const User = require('./models/user');
+const userRoutes = require('./Routes/userRoutes'); // Correctly importing userRoutes
+const Teacher = require('./models/Teacher'); // Import Teacher model
 
 const app = express();
 const PORT = 3001;
@@ -22,36 +24,60 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-// Login route
-app.post('/login', async (req, res) => {
-  const { username, email, password } = req.body;
-  const user = await User.findOne({ $or: [{ username }, { email }] });
+// Use '/api/user' for user routes
+app.use('/api/user', userRoutes);
 
-  if (user && await bcrypt.compare(password, user.password)) {
-    res.status(200).send({ message: 'Login successful' });
-  } else {
-    res.status(401).send({ message: 'Invalid credentials' });
-  }
-});
+// app.post('/add-teacher', async (req, res) => {
+//   const { biodata, education, experience, skills, subject, qualifications, courses_taught } = req.body;
 
-// Register route
-app.post('/register', async (req, res) => {
-  const { name, email, username, password, rememberMe } = req.body;
+//   try {
+//     const teacher = new Teacher({
+//       biodata,
+//       education,
+//       experience,
+//       skills,
+//       subject,
+//       qualifications,
+//       courses_taught
+//     });
 
-  if (password.length < 8) {
-    return res.status(400).send({ message: 'Password must be at least 8 characters long' });
-  }
+//     await teacher.save();
+//     res.status(201).send({ message: 'Teacher added successfully', teacher });
+//   } catch (error) {
+//     res.status(500).send({ message: 'Error adding teacher', error });
+//   }
+// });
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const user = new User({ name, email, username, password: hashedPassword, rememberMe });
+// // Login route
+// app.post('/login', async (req, res) => {
+//   const { username, email, password } = req.body;
+//   const user = await User.findOne({ $or: [{ username }, { email }] });
 
-  try {
-    await user.save();
-    res.status(201).send({ message: 'User registered successfully' });
-  } catch (error) {
-    res.status(500).send({ message: 'Registration failed', error });
-  }
-});
+//   if (user && await bcrypt.compare(password, user.password)) {
+//     res.status(200).send({ message: 'Login successful' });
+//   } else {
+//     res.status(401).send({ message: 'Invalid credentials' });
+//   }
+// });
+
+// // Register route
+// app.post('/register', async (req, res) => {
+//   const { name, email, username, password, rememberMe } = req.body;
+
+//   if (password.length < 8) {
+//     return res.status(400).send({ message: 'Password must be at least 8 characters long' });
+//   }
+
+//   const hashedPassword = await bcrypt.hash(password, 10);
+//   const user = new User({ name, email, username, password: hashedPassword, rememberMe });
+
+//   try {
+//     await user.save();
+//     res.status(201).send({ message: 'User registered successfully' });
+//   } catch (error) {
+//     res.status(500).send({ message: 'Registration failed', error });
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
