@@ -14,6 +14,8 @@ import CoursesCatalog from './Components/CoursesCatalog';
 import About from './Components/About';
 import Contact from './Components/Contact';
 import './App.css';
+import CreateCourse from './Components/CreateCourse';
+import FeedbackPage from './Components/FeedbackPage';
 
 function App() {
   return (
@@ -31,6 +33,8 @@ function App() {
       {/* <Header />
       <main className="main-content">
         <Profile />
+        <CreateCourse />
+        <FeedbackPage />
       </main>
       <Footer /> */}
 
