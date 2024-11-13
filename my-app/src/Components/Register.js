@@ -1,31 +1,45 @@
 import React, { useState } from 'react';
 import './Styles/Register.css';
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+
 function Register({ onClose, onLogin }) {
-  const navigate = useNavigate();
-  const [role, setRole] = useState('User'); // Default role
+  const [role, setRole] = useState(''); // Default role
   const [username, setUsername] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(''); 
+  const [success, setSuccess] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
     try {
-      const response = await axios.post('http://localhost:5000/auth/register', {
-        userName: username,
-        userEmail: userEmail,
-        password: password,
-        role: role,
+      const response = await fetch('http://localhost:5000/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userName: username,
+          userEmail,
+          password,
+          role,
+        }),
       });
-  
-      if (response.status === 201) {
-        console.log('User registered successfully');
-        navigate('/auth/login'); // make change here 
+      const data = await response.json();
+      
+      if (response.ok) {
+        setSuccess(data.message);
+        setError('');
+        console.log(response.ok)
+        console.log("userEmail in frontend:");
+        onLogin();
+
+      } else {
+        setError(data.message || 'Registration failed');
+        setSuccess('');
       }
-    } catch (error) {
-      console.error('Error during registration:', error);
+    } catch (err) {
+      setError('An error occurred. Please try again later.');
+      setSuccess('');
     }
   };
 
@@ -43,7 +57,7 @@ function Register({ onClose, onLogin }) {
         <div className="role-buttons-container">
           <button 
             className={`role-button ${role === 'User' ? 'active' : ''}`} 
-            onClick={() => handleRoleChange('User')}
+            onClick={() => handleRoleChange('Student')}
           >
             Student
           </button>
@@ -82,6 +96,9 @@ function Register({ onClose, onLogin }) {
 
           <button type="submit" className="login-button">Register</button>
         </form>
+
+        {error && <p className="error-text">{error}</p>}
+        {success && <p className="success-text">{success}</p>}
 
         <p className="member-text">
           Already a member? <span className="register-link" onClick={onLogin}>Login</span>
