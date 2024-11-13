@@ -1,26 +1,33 @@
-const User = require("../../models/User");
+const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const loginUser = async (req, res) => {
   const { userEmail, password } = req.body;
 
+  // Find the user by email
   const checkUser = await User.findOne({ userEmail });
 
+  // Check if the user exists and the password is correct
   if (!checkUser || !(await bcrypt.compare(password, checkUser.password))) {
     return res.status(401).json({
       success: false,
       message: "Invalid credentials",
     });
   }
+
+  // Retrieve role from the user data in the database
+  const userRole = checkUser.role;
+
+  // Generate a JWT including the role for further use in protected routes
   const accessToken = jwt.sign(
     {
       _id: checkUser._id,
       userName: checkUser.userName,
       userEmail: checkUser.userEmail,
-      role: checkUser.role,
+      role: userRole, // Include role in token for role-based access control
     },
-    "JWT_SECRET",
+    process.env.JWT_SECRET,
     { expiresIn: "120m" }
   );
 
@@ -33,7 +40,7 @@ const loginUser = async (req, res) => {
         _id: checkUser._id,
         userName: checkUser.userName,
         userEmail: checkUser.userEmail,
-        role: checkUser.role,
+        role: userRole, // Return the role to the client if needed
       },
     },
   });
