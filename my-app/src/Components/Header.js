@@ -4,6 +4,8 @@ import { FaChevronDown } from 'react-icons/fa';
 import SearchIcon from '@mui/icons-material/Search';
 import './Styles/Header.css';
 import capLogo from '../Assets/Cap.png';
+import Login from './Login'; 
+import Register from './Register'; 
 
 function Header() {
   const [showSearch, setShowSearch] = useState(false);
@@ -11,11 +13,12 @@ function Header() {
   const [activeLink, setActiveLink] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-  const [selectedSuggestion, setSelectedSuggestion] = useState(''); // Track selected suggestion
+  const [selectedSuggestion, setSelectedSuggestion] = useState('');
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Sample list of search suggestions
   const suggestions = [
     'Web Development',
     'Data Science',
@@ -29,21 +32,27 @@ function Header() {
     'Python'
   ];
 
-  // Toggle search visibility and handle redirection when search is triggered
   const toggleSearch = () => {
     if (selectedSuggestion) {
-      // Navigate to the selected suggestion if available
       navigate(`/courses/${selectedSuggestion.toLowerCase().replace(/\s+/g, '-')}`);
-      setSearchTerm(''); // Clear the search term
-      setSelectedSuggestion(''); // Reset selected suggestion
-    } else {
-      // Clear the search term and hide suggestions if invalid
       setSearchTerm('');
-      setFilteredSuggestions([]); // Hide the suggestion box
+      setSelectedSuggestion('');
+    } else {
+      setSearchTerm('');
+      setFilteredSuggestions([]);
     }
-    setShowSearch(!showSearch); // Toggle search visibility
+    setShowSearch(!showSearch);
   };
-  
+
+  const toggleLogin = () => {
+    setShowLogin(!showLogin);
+    setShowRegister(false);  
+  };
+
+  const toggleRegister = () => {
+    setShowRegister(!showRegister);
+    setShowLogin(false); 
+  };
 
   const handleMouseEnter = () => {
     setShowDropdown(true);
@@ -65,10 +74,9 @@ function Header() {
     const userInput = e.target.value;
     setSearchTerm(userInput);
 
-    // Filter suggestions based on input (matches starting letters)
     if (userInput) {
       const filtered = suggestions.filter((suggestion) =>
-        suggestion.toLowerCase().startsWith(userInput.toLowerCase()) // Filter by startsWith
+        suggestion.toLowerCase().startsWith(userInput.toLowerCase())
       );
       setFilteredSuggestions(filtered);
     } else {
@@ -78,11 +86,10 @@ function Header() {
 
   const handleSuggestionClick = (suggestion) => {
     setSearchTerm(suggestion);
-    setSelectedSuggestion(suggestion); // Save selected suggestion
-    setFilteredSuggestions([]); // Hide suggestions after selection
+    setSelectedSuggestion(suggestion);
+    setFilteredSuggestions([]);
   };
 
-  // Function to highlight the search term in the suggestion
   const highlightSearchTerm = (course) => {
     const index = course.toLowerCase().indexOf(searchTerm.toLowerCase());
     if (index !== -1) {
@@ -144,10 +151,7 @@ function Header() {
         <Link to="/" className={activeLink === 'home' ? 'active' : ''} onClick={() => scrollToSection('home')}>
           Home
         </Link>
-        <span
-          className={`header-button ${activeLink === 'about' ? 'active' : ''}`}
-          onClick={() => scrollToSection('about')}
-        >
+        <span className={`header-button ${activeLink === 'about' ? 'active' : ''}`} onClick={() => scrollToSection('about')}>
           About
         </span>
 
@@ -166,10 +170,7 @@ function Header() {
           )}
         </div>
 
-        <span
-          className={`header-button ${activeLink === 'contact' ? 'active' : ''}`}
-          onClick={() => scrollToSection('contact')}
-        >
+        <span className={`header-button ${activeLink === 'contact' ? 'active' : ''}`} onClick={() => scrollToSection('contact')}>
           Contact
         </span>
       </nav>
@@ -186,15 +187,10 @@ function Header() {
         <button className="searchButton" onClick={toggleSearch}>
           <SearchIcon style={{ color: '#ffffff' }} />
         </button>
-        {/* Display filtered suggestions */}
         {filteredSuggestions.length > 0 && (
           <div className="suggestions-dropdown">
             {filteredSuggestions.map((suggestion, index) => (
-              <div
-                key={index}
-                className="suggestion-item"
-                onClick={() => handleSuggestionClick(suggestion)}
-              >
+              <div key={index} className="suggestion-item" onClick={() => handleSuggestionClick(suggestion)}>
                 {highlightSearchTerm(suggestion)}
               </div>
             ))}
@@ -202,9 +198,17 @@ function Header() {
         )}
       </div>
 
-      <button className="login-button" onClick={() => navigate('/login')}>
+      <button className="login-button" onClick={toggleLogin}>
         Register/Login
       </button>
+
+      {showLogin && (
+        <Login onClose={toggleLogin} onRegister={toggleRegister} />
+      )}
+
+      {showRegister && (
+        <Register onClose={toggleRegister} onLogin={toggleLogin} />
+      )}
     </header>
   );
 }
