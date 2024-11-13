@@ -1,15 +1,32 @@
 import React, { useState } from 'react';
 import './Styles/Register.css';
-
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 function Register({ onClose, onLogin }) {
+  const navigate = useNavigate();
   const [role, setRole] = useState('User'); // Default role
   const [username, setUsername] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic
+  
+    try {
+      const response = await axios.post('http://localhost:5000/auth/register', {
+        userName: username,
+        userEmail: userEmail,
+        password: password,
+        role: role,
+      });
+  
+      if (response.status === 201) {
+        console.log('User registered successfully');
+        navigate('/auth/login'); // make change here 
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
   };
 
   const handleRoleChange = (selectedRole) => {
