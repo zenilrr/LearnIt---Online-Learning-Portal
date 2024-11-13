@@ -12,7 +12,6 @@
   z-index: 1000;
 }
 
-/* Overall container for the login form */
 .login-container {
   background-color: #0e1325;
   color: #ffffff;
@@ -23,14 +22,12 @@
   position: relative;
 }
 
-/* Title styling */
 .login-title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-/* Form input fields */
 .login-form input {
   width: 100%;
   padding: 12px;
@@ -46,17 +43,16 @@
   color: #5a5f7d;
 }
 
-/* Password visibility toggle container */
+/* Password container */
 .password-container {
   position: relative;
   display: flex;
-  width: 100%; /* Ensure it takes full width for alignment */
+  width: 100%; 
 }
 
-/* Password input field */
 .password-container input {
   width: 100%;
-  padding: 12px 10px 12px 10px; /* Adjust padding to create space for the toggle */
+  padding: 12px 10px 12px 10px; 
   background-color: #11172f;
   border: none;
   border-radius: 4px;
@@ -64,27 +60,7 @@
   font-size: 16px;
 }
 
-/* Password toggle button */
-.password-toggle {
-  position: absolute;
-  right: 10px;
-  top: 50%; /* Vertically center */
-  transform: translateY(-50%); /* Correct vertical alignment */
-  background: none;
-  border: none;
-  color: #ff7d00;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-/* Remove outline on focus */
-.password-toggle:focus {
-  outline: none;
-}
-
-
-/* Submit button styling */
-.login-button-2 {
+.login-button {
   width: 100%;
   padding: 12px;
   background-color: #ff7d00;
@@ -97,33 +73,10 @@
   margin-top: 10px;
 }
 
-.login-button-2:hover {
+.login-button:hover {
   background-color: #e36f00;
 }
 
-/* Remember me and lost password options */
-.login-options {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 14px;
-  color: #ffffff;
-  margin: 10px 0;
-}
-
-.lost-password {
-  color: #ff7d00;
-  text-decoration: none;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.lost-password:hover {
-  text-decoration: underline;
-}
-
-
-/* Link to register */
 .member-text {
   font-size: 14px;
   margin-top: 15px;
@@ -140,24 +93,6 @@
   text-decoration: underline;
 }
 
-
-/* Demo account text */
-.demo-text {
-  font-size: 14px;
-  margin-top: 15px;
-}
-
-.demo-link {
-  color: #ff7d00;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.demo-link:hover {
-  text-decoration: underline;
-}
-
-/* Close button styling */
 .close-btn {
   position: absolute;
   top: 10px;
