@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const authRoutes = require("./Routes/auth-routes/index");
-
+const studentViewCourseRoutes = require("./Routes/student-routes/course-routes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,15 +26,17 @@ mongoose
   .catch((e) => console.log(e));
 
 
+  
 //routes
 app.use("/auth", authRoutes);
-  app.use((err, req, res, next) => {
+app.use("/student/course", studentViewCourseRoutes);
+app.use((err, req, res, next) => {
     console.log(err.stack);
     res.status(500).json({
       success: false,
       message: "Something went wrong",
     });
-  });
+});
   
   app.listen(PORT, () => {
     console.log(`Server is now running on port ${PORT}`);
