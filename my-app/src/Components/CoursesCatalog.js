@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Divider } from '@mui/material';
 import { Person, AccessTime } from '@mui/icons-material'; // Import MUI icons
@@ -151,9 +151,27 @@ const courses = [
 ];
 
 function CourseCatalog() {
+  const [courses, setCourses] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [showAllCourses] = useState(false);
+  const [showAllCourses, setShowAllCourses] = useState(false);
   const navigate = useNavigate();
+
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/student/course/get');
+        const data = await response.json();
+        setCourses(Array.isArray(data) ? data : []);
+        console.log(setCourses)
+      } catch (error) {
+        console.error('Error fetching courses:', error);
+      }
+    };
+
+    fetchCourses();
+  }, []);
+  // console.log(course);
 
   const filteredCourses = selectedCategory === "All"
     ? courses
@@ -162,7 +180,7 @@ function CourseCatalog() {
   const coursesToShow = showAllCourses ? filteredCourses : filteredCourses.slice(0, 4);
 
   const handleViewAll = () => {
-    navigate('/all-courses');
+    setShowAllCourses(true);
   };
 
   return (
@@ -171,7 +189,7 @@ function CourseCatalog() {
         <h2 className={`category ${selectedCategory === "All" ? "active" : ""}`} onClick={() => setSelectedCategory("All")}>All</h2>
         <h2 className={`category ${selectedCategory === "Web Development" ? "active" : ""}`} onClick={() => setSelectedCategory("Web Development")}>Web Development</h2>
         <h2 className={`category ${selectedCategory === "Machine Learning" ? "active" : ""}`} onClick={() => setSelectedCategory("Machine Learning")}>Machine Learning</h2>
-        <h2 className={`category ${selectedCategory === "Data Science" ? "active" : ""}`} onClick={() => setSelectedCategory("Data Science")}>Data science</h2>
+        <h2 className={`category ${selectedCategory === "Data Science" ? "active" : ""}`} onClick={() => setSelectedCategory("Data Science")}>Data Science</h2>
       </div>
 
       <div className="course-grid">
@@ -181,23 +199,23 @@ function CourseCatalog() {
             <div className="course-category">{course.category}</div>
             <h3 className="course-title">{course.title}</h3>
             <div className="course-info">
-            <span className="course-stats">
-              <Person className="icon" /> {/* Student icon */}
-              <span>{course.students} Students</span>
-            </span>
-            <Divider id="separator"
-              orientation="vertical" // Make the divider vertical
-              sx={{
-                height: '18px', // Adjust height of the vertical line
-                borderRight: '2px solid #888', // Set the thickness and color of the line
-                margin: '0 12px', // Optional margin for spacing
-              }}
-            />
-            <span className="course-stats">
-              <AccessTime className="icon" /> {/* Duration icon */}
-              <span>{course.duration}</span>
-            </span>
-</div>
+              <span className="course-stats">
+                <Person className="icon" />
+                <span>{course.students} Students</span>
+              </span>
+              <Divider
+                orientation="vertical"
+                sx={{
+                  height: '18px',
+                  borderRight: '2px solid #888',
+                  margin: '0 12px',
+                }}
+              />
+              <span className="course-stats">
+                <AccessTime className="icon" />
+                <span>{course.duration}</span>
+              </span>
+            </div>
             <p className="course-description">{course.description}</p>
             <div className="course-footer">
               <span className="course-price">{course.price}</span>
