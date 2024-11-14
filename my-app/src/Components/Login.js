@@ -31,6 +31,7 @@ function Login({ onClose, onRegister }) {
         console.log('Logged in successfully');
         
         localStorage.setItem('accessToken', data.data.accessToken);
+        onClose();
         navigate('/course');
       } else {
         
