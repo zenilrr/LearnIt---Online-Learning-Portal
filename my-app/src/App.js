@@ -16,7 +16,7 @@ import Contact from './Components/Contact';
 import './App.css';
 import CreateCourse from './Components/CreateCourse';
 import FeedbackPage from './Components/FeedbackPage';
-
+import InstructorDashboard from './Components/InstructorDashboard';
 function App() {
   return (
     // <Router>
