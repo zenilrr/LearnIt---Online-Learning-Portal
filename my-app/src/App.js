@@ -17,6 +17,7 @@ import './App.css';
 import CreateCourse from './Components/CreateCourse';
 import FeedbackPage from './Components/FeedbackPage';
 import InstructorDashboard from './Components/InstructorDashboard';
+import LearnPressDemo from './Components/LearnPressDemo';
 function App() {
   return (
     // <Router>
@@ -38,7 +39,7 @@ function App() {
       </main>
       <Footer /> */}
       
-      <Header />
+      {/* <Header />
       <HeroSection />
       <FeaturesSection />
       <CoursesCatalog />
@@ -48,8 +49,8 @@ function App() {
         <section id="contact">
           <Contact />
         </section>
-      <Footer />
-
+      <Footer /> */}
+      <LearnPressDemo/>
     </div>
     </>
     
