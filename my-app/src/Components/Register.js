@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Styles/Register.css';
 
 function Register({ onClose, onLogin }) {
-  const [role, setRole] = useState(''); // Default role
+  const [role, setRole] = useState('Student'); // Default role
   const [username, setUsername] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,7 +56,7 @@ function Register({ onClose, onLogin }) {
         {/* Role Selection Buttons */}
         <div className="role-buttons-container">
           <button 
-            className={`role-button ${role === 'User' ? 'active' : ''}`} 
+            className={`role-button ${role === 'Student' ? 'active' : ''}`}
             onClick={() => handleRoleChange('Student')}
           >
             Student
