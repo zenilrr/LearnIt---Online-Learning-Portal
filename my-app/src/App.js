@@ -34,15 +34,15 @@ function App() {
     // </Router>
     <>
     <div className="app">
-      {/* <Header />
-      <main className="main-content">
-        <Profile />
-        <CreateCourse />
-        <FeedbackPage />
-      </main>
-      <Footer /> */}
-      
       <Header />
+      <main className="main-content">
+        {/* <Profile /> */}
+        <CreateCourse />
+        {/* <FeedbackPage /> */}
+      </main>
+      <Footer />
+      
+      {/* <Header />
       <HeroSection />
       <FeaturesSection />
       <CoursesCatalog />
@@ -52,6 +52,7 @@ function App() {
         <section id="contact">
           <Contact />
         </section>
+
       <Footer />
       {/* <LearnPressDemo/> */}
 

@@ -162,16 +162,19 @@ function CourseCatalog() {
       try {
         const response = await fetch('http://localhost:5000/student/course/get');
         const data = await response.json();
-        setCourses(Array.isArray(data) ? data : []);
-        console.log(setCourses)
+        setCourses(data.data);
+        console.log(courses)
+        // console.log(data.data[0])
       } catch (error) {
         console.error('Error fetching courses:', error);
       }
     };
 
     fetchCourses();
-  }, []);
+  }, [selectedCategory]);
   // console.log(course);
+  const ans=courses;
+  // console.log(ans);   
 
   const filteredCourses = selectedCategory === "All"
     ? courses
@@ -218,7 +221,7 @@ function CourseCatalog() {
             </div>
             <p className="course-description">{course.description}</p>
             <div className="course-footer">
-              <span className="course-price">{course.price}</span>
+              <span className="course-price">{course.pricing}rs</span>
               <button className="start-learning">Start Learning</button>
             </div>
           </div>
