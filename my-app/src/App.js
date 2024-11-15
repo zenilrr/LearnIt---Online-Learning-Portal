@@ -18,6 +18,8 @@ import CreateCourse from './Components/CreateCourse';
 import FeedbackPage from './Components/FeedbackPage';
 import InstructorDashboard from './Components/InstructorDashboard';
 import LearnPressDemo from './Components/LearnPressDemo';
+import CoursePage from './Components/CoursePage';
+
 function App() {
   return (
     // <Router>
@@ -50,7 +52,10 @@ function App() {
           <Contact />
         </section>
       <Footer /> */}
-      <LearnPressDemo/>
+      {/* <LearnPressDemo/> */}
+
+      <CoursePage />
+
     </div>
     </>
     
