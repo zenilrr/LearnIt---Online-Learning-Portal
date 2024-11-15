@@ -13,11 +13,12 @@ import FeaturesSection from './Components/FeaturesSection';
 import CoursesCatalog from './Components/CoursesCatalog';
 import About from './Components/About';
 import Contact from './Components/Contact';
+import Popup from './Components/Popup';
 import './App.css';
 // import CreateCourse from './Components/CreateCourse';
 // import FeedbackPage from './Components/FeedbackPage';
 // import InstructorDashboard from './Components/InstructorDashboard';
-import LearnPressDemo from './Components/LearnPressDemo';
+// import LearnPressDemo from './Components/LearnPressDemo';
 // import CoursePage from './Components/CoursePage';
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
       </main>
       <Footer /> */}
       
-      {/* <Header />
+      <Header />
       <HeroSection />
       <FeaturesSection />
       <CoursesCatalog />
@@ -51,10 +52,12 @@ function App() {
         <section id="contact">
           <Contact />
         </section>
-      <Footer /> */}
-      <LearnPressDemo/>
+      <Footer />
+      {/* <LearnPressDemo/> */}
 
       {/* <CoursePage /> */}
+
+      <Popup />
 
     </div>
     </>
