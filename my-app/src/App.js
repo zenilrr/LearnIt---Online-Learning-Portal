@@ -1,7 +1,8 @@
 // App.js
 
 import React from 'react';
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import Home from './Components/Home';
 // import Login from './Components/Login';
 // import Register from './Components/Register';
@@ -18,50 +19,57 @@ import './App.css';
 // import CreateCourse from './Components/CreateCourse';
 // import FeedbackPage from './Components/FeedbackPage';
 // import InstructorDashboard from './Components/InstructorDashboard';
-// import LearnPressDemo from './Components/LearnPressDemo';
-// import CoursePage from './Components/CoursePage';
+import LearnPressDemo from './Components/LearnPressDemo';
+//import CoursePage from './Components/CoursePage';
 
 function App() {
   return (
-    // <Router>
-    //   <div>
-    //     <Routes>
-    //       <Route path="/" element={<Home />} />
-    //       <Route path="/login" element={<Login />} />
-    //       <Route path="/register" element={<Register />} />
-    //     </Routes>
-    //   </div>
-    // </Router>
+    // // <Router>
+    // //   <div>
+    // //     <Routes>
+    // //       <Route path="/" element={<Home />} />
+    // //       <Route path="/login" element={<Login />} />
+    // //       <Route path="/register" element={<Register />} />
+             // <Route path="/coursedetails" element={<LearnPressDemo />} />
+    // //     </Routes>
+    // //   </div>
+    // // </Router>
+    // <Routes>
+    //         <Route path="/viewcoursedetails" element={<LearnPressDemo />} />
+    // </Routes>
     <>
     <div className="app">
-      <Header />
-      <main className="main-content">
-        {/* <Profile /> */}
-        <CreateCourse />
-        {/* <FeedbackPage /> */}
-      </main>
-      <Footer />
       
-      {/* <Header />
-      <HeroSection />
-      <FeaturesSection />
-      <CoursesCatalog />
-      <section id="about">
-          <About />
-        </section>
-        <section id="contact">
-          <Contact />
-        </section>
 
-      <Footer />
-      {/* <LearnPressDemo/> */}
+       {/* <Header />
+    //   <main className="main-content">
+    //     {/* <Profile /> 
+    //     <CreateCourse />
+    //     {/* <FeedbackPage /> 
+    //     </main>
+    //   <Footer />*/}
 
-      {/* <CoursePage /> */}
+       {/* <Header />
+    //   <HeroSection />
+    //   <FeaturesSection />
+    //   <CoursesCatalog />
+    //   <section id="about">
+    //       <About />
+    //     </section>
+    //     <section id="contact">
+    //       <Contact />
+    //     </section>
 
-      <Popup />
+    //   <Footer />*/}
+      <LearnPressDemo/> 
+        
+    {/* <CoursePage /> */}
+
+    {/* <Popup /> */}
 
     </div>
     </>
+    
     
   );
 }
