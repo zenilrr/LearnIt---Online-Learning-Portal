@@ -197,14 +197,14 @@ function CourseCatalog() {
 
       <div className="course-grid">
         {coursesToShow.map(course => (
-          <div key={course.id} className="course-card">
-            <img src={course.imgSrc} alt={course.title} className="course-image" />
+          <div key={course._id} className="course-card">
+            <img src={course.image} alt={course.title} className="course-image" />
             <div className="course-category">{course.category}</div>
             <h3 className="course-title">{course.title}</h3>
             <div className="course-info">
               <span className="course-stats">
                 <Person className="icon" />
-                <span>{course.students} Students</span>
+                <span>{course.students} Students</span> { /* need to change */ }
               </span>
               <Divider
                 orientation="vertical"
