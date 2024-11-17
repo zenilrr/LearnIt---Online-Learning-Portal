@@ -6,9 +6,9 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import Home from './Components/Home';
 // import Login from './Components/Login';
 // import Register from './Components/Register';
-// import Header from './Components/Header';
-// import Footer from './Components/Footer';
-// import Profile from './Components/Profile';
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+//import Profile from './Components/Profile';
 // import HeroSection from './Components/HeroSection';
 // import FeaturesSection from './Components/FeaturesSection';
 // import CoursesCatalog from './Components/CoursesCatalog';
@@ -16,11 +16,12 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 // import Contact from './Components/Contact';
 // import Popup from './Components/Popup';
 import './App.css';
-import CreateCourse from './Components/CreateCourse';
+//import CreateCourse from './Components/CreateCourse';
 // import FeedbackPage from './Components/FeedbackPage';
 // import InstructorDashboard from './Components/InstructorDashboard';
 // import LearnPressDemo from './Components/LearnPressDemo';
 //import CoursePage from './Components/CoursePage';
+import Edit_Profile from './Components/Edit_Profile';
 
 function App() {
   return (
@@ -41,7 +42,7 @@ function App() {
     <div className="app">
       
 
-       {/* <Header />
+        <Header /> {/*
     //   <main className="main-content">
     //     {/* <Profile /> 
     //     {/* <FeedbackPage /> 
@@ -58,15 +59,16 @@ function App() {
     //     <section id="contact">
     //       <Contact />
     //     </section>
-
-    //   <Footer />*/}
+*/}
+<Edit_Profile />
+      <Footer />
       {/* <LearnPressDemo/>  */}
         
     {/* <CoursePage /> */}
 
     {/* <Popup /> */}
 
-    <CreateCourse />
+    
 
     </div>
     </>
