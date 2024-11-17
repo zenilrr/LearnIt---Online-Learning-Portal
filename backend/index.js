@@ -1,37 +1,45 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 const mongoose = require("mongoose");
 const authRoutes = require("./Routes/auth-routes/index");
-const studentViewCourseRoutes = require("./Routes/student-routes/course-routes");
 const mediaRoutes = require("./Routes/instructor-routes/media-routes");
+const studentCourse = require("./Routes/instructor-routes/course-routes")
 const instructorCourseRoutes = require("./Routes/instructor-routes/course-routes");
-
+const coursedetailsRoute = require('./Routes/student-routes/course-routes');
+const CoursePage = require("./Routes/student-routes/coursePage-route");
+// const { default: CoursePage } = require("../my-app/src/Components/CoursePage");
 const app = express();
-const PORT = process.env.PORT || 5000;
-const MONGO_URI = process.env.MONGO_URI;
+const PORT = process.env.PORT || 8000;
 
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-    methods: ["GET", "POST", "DELETE", "PUT"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors({
+  origin: 'http://localhost:3000', // Allow only the React app to access the API
+  methods: 'GET,POST', // Allow GET and POST requests
+  allowedHeaders: 'Content-Type,Authorization' // Allow these headers in requests
+}));
 
-app.use(express.json());
+
 
 //database connection
 mongoose
-  .connect(MONGO_URI)
-  .then(() => console.log("mongodb is connected"))
-  .catch((e) => console.log(e));
+.connect("mongodb://localhost:27017/learn")
+.then(() => console.log("mongodb is connected"))
+.catch((e) => console.log(e));
 
 
+
+
+
+
+app.use(express.json());
   
 //routes
+
+app.use("/student/course",studentCourse)
+app.use("/apix",CoursePage)
 app.use("/auth", authRoutes);
-app.use("/student/course", studentViewCourseRoutes);
+app.use('/api/coursedetails', coursedetailsRoute);
 app.use("/media", mediaRoutes);
 app.use("/instructor/course", instructorCourseRoutes);
 app.use((err, req, res, next) => {
@@ -43,5 +51,5 @@ app.use((err, req, res, next) => {
 });
   
   app.listen(PORT, () => {
-    console.log(`Server is now running on port ${PORT}`);
+    console.log(`Server is now running on port http://localhost:3000`);
   });

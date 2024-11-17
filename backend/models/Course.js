@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 
 const LectureSchema = new mongoose.Schema({
-  title: String,
-  videoUrl: String,
-  public_id: String,
-  freePreview: Boolean,
+  moduleName: String,
+  moduleType: String,
+  moduleVideoUrl: String,
+  // public_id: String,
+  // freePreview: Boolean,
+  moduleContentUrl: String,
 });
 
 const CourseSchema = new mongoose.Schema({
@@ -17,7 +19,7 @@ const CourseSchema = new mongoose.Schema({
   primaryLanguage: String,
   subtitle: String,
   description: String,
-  image: String,
+  image : String ,
   welcomeMessage: String,
   pricing: Number,
   objectives: String,
