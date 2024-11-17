@@ -1,0 +1,186 @@
+/* Define color variables for easy maintenance */
+:root {
+    --primary-color: #ff9100;  /* button color */
+    --secondary-color: #ffffff; /* background color for buttons */
+    --hover-color: #ff5e00;     /* hover color */
+    --text-color: #ffffff;      /* text color for most elements */
+    --border-color: #1f3064;    /* border and accent color */
+    --background-color: #000e3dfb; /* page background color */
+}
+
+/* Set global font family */
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color); /* Use white color for text */
+    background-color: var(--background-color); /* Set the background color */
+}
+
+/* Main container for the course creation page */
+
+.create-course-container {
+    padding: 40px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* Style for section tabs */
+.section-tabs {
+    background-color: ;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.section-tabs button {
+    transition: all 0.3s ease;
+    background-color: var(--secondary-color);
+    color: var(--text-color); /* Text color white for buttons */
+    border: 2px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+.section-tabs button:hover {
+    background-color: var(--hover-color);
+    color: var(--secondary-color);
+    border-color: var(--hover-color);
+}
+
+/* Styling for individual course details section */
+.course-details {
+    background-color: var(--secondary-color);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.course-details:hover {
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for form fields in course details */
+.form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Styling for module sections */
+.modules-section {
+    background-color: var(--secondary-color);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+    transition: all 0.3s ease;
+}
+
+.modules-section:hover {
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for individual module containers */
+.module-container {
+    padding: 24px;
+    background-color: #f9f9f9;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.module-container:hover {
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Spacing between text fields and buttons in module section */
+.module-container .MuiTextField-root, .module-container .MuiFormControl-root {
+    margin-bottom: 24px;
+}
+
+/* File upload buttons in the module section */
+.file-upload-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+/* Footer buttons */
+.footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    gap: 16px;
+}
+
+/* Hover effect on footer buttons */
+.footer-buttons button {
+    transition: all 0.3s ease;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.footer-buttons button:hover {
+    background-color: var(--hover-color);
+    color: var(--secondary-color);
+    transform: scale(1.05);
+}
+
+/* Button styles */
+button {
+    transition: all 0.3s ease;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+}
+
+button:hover {
+    background-color: var(--hover-color);
+    color: var(--secondary-color);
+    transform: scale(1.05);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Spacing between form fields */
+.MuiTextField-root {
+    margin-bottom: 16px;
+}
+
+/* Larger padding for the entire container */
+.create-course-container {
+    padding: 40px;
+}
+
+/* Styling for form fields */
+.MuiTextField-root, .MuiSelect-root, .MuiInputLabel-root {
+    margin-bottom: 20px;
+}
+
+/* Add more subtle hover effects to input fields */
+.MuiTextField-root:hover .MuiInputBase-root {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for module type select dropdown */
+.MuiFormControl-root {
+    margin-bottom: 20px;
+}
+
+/* Styling for file upload buttons */
+button[type="button"] {
+    border-color: var(--border-color);
+    color: var(--border-color);
+}
+
+button[type="button"]:hover {
+    background-color: var(--border-color);
+    color: var(--secondary-color);
+}
