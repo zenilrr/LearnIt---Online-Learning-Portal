@@ -198,8 +198,8 @@ function Header() {
         )}
       </div>
 
-      <button className="login-button_2" onClick={toggleLogin}>
-        Register/Login
+      <button className="login-button-2" onClick={toggleLogin}>
+        Login/Register
       </button>
 
       {showLogin && (
