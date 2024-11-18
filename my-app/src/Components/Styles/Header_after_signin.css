@@ -1,0 +1,313 @@
+/* Header.css */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f3064;
+  box-shadow:0px 1px 0px 1px rgba(0, 0, 0, 0.1);
+  padding: 10px 40px 10px 40px; /* up right down left */
+  border-top: 20px solid #000e3dfb;
+  /* border-radius: 5px; */
+}
+
+.header-logo {
+  font-family: 'Poppins', sans-serif;
+  color: #ff9100;
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-decoration: none;
+  margin: 0px
+}
+
+.header-links-2 {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1; /* Make the links container take available space */
+  margin-left: 20px;
+
+}
+
+.header-links-2 a {
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  margin: 0 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: color 0.3s;
+  opacity: 0.9;
+}
+
+.header-links-2 a.active,
+.header-button.active {
+  color: #ff5e00; /* Orange color for the active link */
+}
+
+.header-links-2 a:hover,
+.header-button:hover {
+  color: #ff5e00; /* Hover effect */
+}
+
+.header-button {
+  color:#ffffff;
+  font-family:'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.3s;
+  cursor: pointer; /* Ensures cursor changes to pointer */
+}
+
+.login-button-2 {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ff9100;
+  color: #ffffff;
+  font-weight: 700;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 20px;
+  margin-bottom:3px;
+  margin-top: 3px;
+  width:10rem;
+}
+
+.login-button-2:hover {
+  background-color: #ff5e00;
+}
+
+/* Additional styles for search functionality */
+
+/* Search Box Styling */
+.searchBox {
+  position: relative;
+  background: #000e3dfb;
+  height: 25px;
+  border-radius: 40px;
+  padding: 20x;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  transition: width 0.4s ease;
+}
+
+.searchButton {
+  color: #ff9100;
+  width: 35px;
+  height: 35px;
+  border:none;
+  border-radius: 50%;
+  background: #000e3dfb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.4s;
+}
+
+.searchInput {
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  background: none;
+  outline: none;
+  color: white;
+  font-size: 16px;
+  transition: width 0.4s ease;
+  width: 0px;
+  font-weight: 700;
+}
+
+.searchBox:hover .searchInput {
+  width: 240px;
+  padding: 6px 6px;
+}
+
+.searchBox:hover .searchButton {
+  background: #ff5e00;
+  color: #2f3640;
+}
+
+/* Styles for the dropdown menu */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-link {
+  position: relative;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  margin-right: 0px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%; /* Position it directly below the link */
+  /* left: -5%; */
+  background-color: #1f3064;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+  padding: 25px 10px 15px 10px;
+}
+
+.dropdown:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-menu a:hover {
+  color: #ff5e00;
+}
+
+/* Adjustments for smooth appearance with other styles */
+.header-links-2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropdown-icon {
+  font-size: 0.8rem;
+  margin-left: 5px;
+  transition: transform 0.3s ease;
+}
+
+/* Rotate the icon when dropdown is visible */
+.dropdown:hover .dropdown-icon {
+  transform: rotate(180deg);
+}
+
+.logo-image {
+  height: 40px; /* Adjust height as needed */
+  width: auto;
+  margin-left: 10px; /* Space between logo and text */
+  vertical-align: middle;
+}
+
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #1f3064;
+  width: 240px;
+  max-height: 200px;
+  overflow-y: auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.suggestion-item {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.suggestion-item:hover {
+  background-color: #ff5e00;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #000e3dfb; /* Dark color for the highlighted part of the search term */
+}
+
+
+/* Profile Button Styling */
+.profile-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  margin-right: 15px; /* Shift left by reducing right margin */
+}
+
+.profile-button img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+
+/* Updated Dropdown Menu Styling */
+.profile-dropdown {
+  position: absolute;
+  top: 70px; /* Adjust based on your header height */
+  right: 10px; /* Align to the profile button */
+  background-color: #1f3064; /* Updated background color */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  width: 130px;
+  padding: 5px 0; /* Add padding for better spacing */
+}
+
+.profile-dropdown .dropdown-item {
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff; /* Text color */
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.profile-dropdown .dropdown-item:hover {
+  color: #ff5e00; /* Hover text color */
+  cursor: pointer;
+}
+
+.profile-dropdown button.dropdown-item {
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'Poppins', sans-serif; /* Ensure consistent font */
+}
+
+/* Smooth Dropdown Animation */
+.profile-dropdown {
+  animation: dropdownFadeIn 0.3s ease-in-out;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
