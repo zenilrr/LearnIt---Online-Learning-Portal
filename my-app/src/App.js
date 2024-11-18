@@ -69,10 +69,14 @@ function App() {
 
           {/* <LearnPressDemo/>  */}
           <Route path="/learnCourse" element={<CoursePage />} />
+          <Route path="/instructor-dashboard" element={<InstructorDashboard />} /> 
+          <Route path="/create-course" element={<CreateCourse />} />
+
         </Routes>
 
         {/* <Edit_Profile /> */}
         {/* <Popup /> */}
+        
       </div>
     </>
   );
