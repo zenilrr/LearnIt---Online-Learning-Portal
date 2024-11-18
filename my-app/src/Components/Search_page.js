@@ -28,21 +28,22 @@ function Search() {
   ];
 
   const courses = [
-    { title: "Photography Mastery", price: 50, dateAdded: "2024-01-01", popularity: 5, category: "Photography" },
-    { title: "Advanced IT Skills", price: 20, dateAdded: "2024-02-01", popularity: 8, category: "IT" },
-    { title: "Web Development Bootcamp", price: 100, dateAdded: "2024-03-01", popularity: 10, category: "Developer" },
-    { title: "Marketing for Professionals", price: 75, dateAdded: "2024-01-15", popularity: 12, category: "Marketing" },
-    { title: "Health & Wellness 101", price: 30, dateAdded: "2024-04-01", popularity: 7, category: "Health" },
-    { title: "Teach Online Like a Pro", price: 120, dateAdded: "2024-02-15", popularity: 3, category: "Teaching Online" },
-    { title: "Tech Innovations 2024", price: 200, dateAdded: "2024-03-15", popularity: 15, category: "Technology" },
-    { title: "Business Fundamentals", price: 90, dateAdded: "2024-01-10", popularity: 18, category: "Business" },
-    { title: "Creative Design Techniques", price: 45, dateAdded: "2024-05-01", popularity: 9, category: "Design" },
-    { title: "Intro to Photography", price: 0, dateAdded: "2024-06-01", popularity: 2, category: "Photography" },
-    { title: "Free IT Resources", price: 0, dateAdded: "2024-06-10", popularity: 4, category: "IT" },
-    { title: "Learn Web Development (Free)", price: 0, dateAdded: "2024-06-15", popularity: 6, category: "Developer" },
-    { title: "Free Marketing Strategies", price: 0, dateAdded: "2024-06-20", popularity: 1, category: "Marketing" },
-    { title: "Health Basics for All", price: 0, dateAdded: "2024-06-25", popularity: 3, category: "Health" },
-  ];
+    { imageUrl: "https://picsum.photos/150?random=1", title: "Photography Mastery", price: 50, dateAdded: "2024-01-01", level: "Advanced", category: "Photography" },
+    { imageUrl: "https://picsum.photos/150?random=2", title: "Advanced IT Skills", price: 20, dateAdded: "2024-02-01", level: "Intermediate", category: "IT" },
+    { imageUrl: "https://picsum.photos/150?random=3", title: "Web Development Bootcamp", price: 100, dateAdded: "2024-03-01", level: "Advanced", category: "Developer" },
+    { imageUrl: "https://picsum.photos/150?random=4", title: "Marketing for Professionals", price: 75, dateAdded: "2024-01-15", level: "Intermediate", category: "Marketing" },
+    { imageUrl: "https://picsum.photos/150?random=5", title: "Health & Wellness 101", price: 30, dateAdded: "2024-04-01", level: "Basic", category: "Health" },
+    { imageUrl: "https://picsum.photos/150?random=6", title: "Teach Online Like a Pro", price: 120, dateAdded: "2024-02-15", level: "Intermediate", category: "Teaching Online" },
+    { imageUrl: "https://picsum.photos/150?random=7", title: "Tech Innovations 2024", price: 200, dateAdded: "2024-03-15", level: "Advanced", category: "Technology" },
+    { imageUrl: "https://picsum.photos/150?random=8", title: "Business Fundamentals", price: 90, dateAdded: "2024-01-10", level: "Basic", category: "Business" },
+    { imageUrl: "https://picsum.photos/150?random=9", title: "Creative Design Techniques", price: 45, dateAdded: "2024-05-01", level: "Intermediate", category: "Design" },
+    { imageUrl: "https://picsum.photos/150?random=10", title: "Intro to Photography", price: 0, dateAdded: "2024-06-01", level: "Basic", category: "Photography" },
+    { imageUrl: "https://picsum.photos/150?random=11", title: "Free IT Resources", price: 0, dateAdded: "2024-06-10", level: "Basic", category: "IT" },
+    { imageUrl: "https://picsum.photos/150?random=12", title: "Learn Web Development (Free)", price: 0, dateAdded: "2024-06-15", level: "Basic", category: "Developer" },
+    { imageUrl: "https://picsum.photos/150?random=13", title: "Free Marketing Strategies", price: 0, dateAdded: "2024-06-20", level: "Basic", category: "Marketing" },
+    { imageUrl: "https://picsum.photos/150?random=14", title: "Health Basics for All", price: 0, dateAdded: "2024-06-25", level: "Basic", category: "Health" },
+    { imageUrl: "https://picsum.photos/150?random=15", title: "Health Basics for Boys", price: 0, dateAdded: "2024-06-25", level: "Basic", category: "Health" },
+  ];    
 
   const toggleFilterDropdown = () => {
     setShowFilterDropdown((prev) => !prev);
@@ -78,6 +79,8 @@ function Search() {
   };
 
   const sortCourses = (courses, sortAlgorithm) => {
+    const levelOrder = { Basic: 1, Intermediate: 2, Advanced: 3 };
+  
     switch (sortAlgorithm) {
       case "A-Z":
         return [...courses].sort((a, b) => a.title.localeCompare(b.title));
@@ -89,12 +92,12 @@ function Search() {
         return [...courses].sort((a, b) => b.price - a.price);
       case "newly-added":
         return [...courses].sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
-      case "popular":
-        return [...courses].sort((a, b) => b.popularity - a.popularity);
+      case "level":
+        return [...courses].sort((a, b) => levelOrder[a.level] - levelOrder[b.level]);
       default:
         return courses;
     }
-  };
+  };  
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -211,7 +214,7 @@ function Search() {
                 <li onClick={() => handleSortChange("price-low-high")}>Price Low-High</li>
                 <li onClick={() => handleSortChange("price-high-low")}>Price High-Low</li>
                 <li onClick={() => handleSortChange("newly-added")}>Newly Added</li>
-                <li onClick={() => handleSortChange("popular")}>Popular</li>
+                <li onClick={() => handleSortChange("level")}>Level</li>
               </ul>
             </div>
           )}
@@ -222,9 +225,13 @@ function Search() {
         {sortedCourses.map((course, index) => (
           <div key={index} className="course-card">
             <div className="course-tag">{course.price === 0 ? 'Free' : 'Paid'}</div>
-            <img src="https://picsum.photos/150" alt="Course" className="course-image" />
+            
+            {/* Image before title */}
+            <img src={course.imageUrl} alt={course.title} className="course-image" />
+            
             <h3 className="course-title">{course.title}</h3>
             <p className="course-meta">Price: ${course.price}</p>
+            <p className="course-meta">Level: {course.level}</p>
             <p className="course-description">This is a description of the course.</p>
             <button
               className="course-plus-btn"
