@@ -64,7 +64,7 @@
   cursor: pointer; /* Ensures cursor changes to pointer */
 }
 
-.login-button_2 {
+.login-button-2 {
   font-family: 'Poppins', sans-serif;
   background-color: #ff9100;
   color: #ffffff;
@@ -80,7 +80,7 @@
   width:10rem;
 }
 
-.login-button_2:hover {
+.login-button-2:hover {
   background-color: #ff5e00;
 }
 
@@ -92,7 +92,7 @@
   background: #000e3dfb;
   height: 25px;
   border-radius: 40px;
-  padding: 10px;
+  padding: 20x;
   display: flex;
   align-items: center;
   margin-right: 20px;
