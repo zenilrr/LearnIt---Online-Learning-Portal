@@ -1,0 +1,102 @@
+:root {
+    --primary-color: #ff9100;
+    --hover-color: #ff5e00;
+    --text-color: #ffffff;
+    --border-color: #1f3064;
+    --background-color: #000e3dfb;
+}
+
+.quiz_creation-container {
+    padding: 40px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    min-height: 100vh;
+}
+
+.quiz_creation-title {
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-color);
+}
+
+.quiz_creation-passing-score-input,
+.quiz_creation-question-input,
+.quiz_creation-option-input,
+.quiz_creation-correct-answer-select {
+    margin-bottom: 16px;
+}
+
+.quiz_creation-textarea {
+    border: 2px solid var(--primary-color);
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+.quiz_creation-textarea:focus {
+    outline: none;
+    border-color: var(--hover-color);
+}
+
+.quiz_creation-correct-answer-section {
+    margin-top: 16px;
+}
+
+.quiz_creation-correct-answer-select .MuiInputBase-root {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border-radius: 4px;
+}
+
+.quiz_creation-correct-answer-select .MuiInputBase-root:hover {
+    background-color: var(--hover-color);
+}
+
+.quiz_creation-questions-section {
+    margin-top: 24px;
+}
+
+.quiz_creation-question-container {
+    margin-bottom: 24px;
+    padding: 16px;
+    background-color: var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.quiz_creation-options-section {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.quiz_creation-add-question-button,
+.quiz_creation-submit-button,
+.quiz_creation-cancel-button {
+    margin-top: 16px;
+    padding: 10px 16px;
+    color: var(--text-color);
+    border-radius: 8px;
+}
+
+.quiz_creation-add-question-button{
+    display:flex;
+    justify-content:center;
+}
+
+.quiz_creation-add-question-button:hover,
+.quiz_creation-submit-button:hover,
+.quiz_creation-cancel-button:hover {
+    /* background-color: var(--hover-color); */
+    color: var(--text-color);
+}
+
+.quiz_creation-buttons-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-top: 24px;
+}
