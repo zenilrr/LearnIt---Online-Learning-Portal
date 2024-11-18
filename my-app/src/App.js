@@ -22,6 +22,7 @@ import InstructorDashboard from "./Components/InstructorDashboard";
 import LearnPressDemo from "./Components/LearnPressDemo";
 import CoursePage from "./Components/CoursePage";
 import Edit_Profile from "./Components/Edit_Profile";
+import CreateQuiz from "./Components/CreateQuiz";
 
 function App() {
   return (
@@ -77,6 +78,8 @@ function App() {
         {/* <Edit_Profile /> */}
         {/* <Popup /> */}
         
+        {/* <CreateQuiz/> */}
+
       </div>
     </>
   );
