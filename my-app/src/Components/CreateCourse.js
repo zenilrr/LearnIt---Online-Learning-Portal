@@ -1,293 +1,360 @@
 import React, { useState } from 'react';
-import { TextField, Button, Tabs, Tab, Typography, Box, MenuItem, Select } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import {
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Box,
+} from '@mui/material';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { useNavigate } from 'react-router-dom';
+import { NavigateBefore } from '@mui/icons-material';
+import './Styles/CreateCourse.css';
 
-// Outer wrapper to color the margin
-const Wrapper = styled('div')({
-  // backgroundColor: 'green',  // Green color for margin space
-  backgroundColor: '#fff',
-  // background: 'linear-gradient(180deg, #000e3d, #091749, #122058, #192661)',
-  padding: '40px',  // This will create a space around the container with green color
-});
-
-const Container = styled('div')(({ theme }) => ({
-  backgroundColor: "#0A1F44",
-  color: "#ffffff",
-  padding: '40px 20px 60px',  // Padding for top, left, bottom, right
-  borderRadius: '8px',
-  width: '90%',
-  margin: '0 auto', // Center the container and remove the margin for the container itself
-  position: 'relative', // To allow the positioning of the submit button
-  fontFamily: "'Poppins', sans-serif"
-}));
-
-const Section = styled(Box)(({ theme }) => ({
-  marginTop: theme.spacing(2),
-  padding: theme.spacing(2),
-  backgroundColor: '#1f3064',
-  borderRadius: '8px',
-}));
-
-const SubmitButton = styled(Button)({
-  position: 'absolute',
-  top: '20px',
-  right: '20px',
-  backgroundColor: '#FF8C00',
-  color: '#fff',
-  fontFamily: "'Poppins', sans-serif",
-  '&:hover': {
-    backgroundColor: '#FF7000',
-  },
-});
-
-const StyledTextField = styled(TextField)(({
-  marginBottom: "20px",
-  backgroundColor: '#0A1F44',
-  borderRadius: 4,
-  "& .MuiInputBase-input": {
-    color: "#ffffff", // Text color inside the input
-  },
-  "& .MuiInputLabel-root": {
-    color: "#aaaaaa", // Label color
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: "#555555", // Border color
-    },
-    "&:hover fieldset": {
-      borderColor: "#888888", // Border color on hover
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: "#ff9800", // Border color when focused
-    },
-  },
-  "& .MuiInputBase-input::placeholder": {
-    color: "#888888", // Placeholder text color
-  },
-  fontFamily: "'Poppins', sans-serif",
-}));
-
-
-const FileInput = styled('input')({
-  display: 'none', // Hides the default file input
-});
-
-const UploadVideoComponent = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setSelectedFile(file);
-    }
-  };
-
-  return (
-    <Section>
-      <Typography variant="h6" color="white" sx={{ marginBottom: 2 }}>
-        Upload Videos
-      </Typography>
-      <Button 
-        variant="contained" 
-        component="label" 
-        sx={{
-          width: '200px', // Fixed width
-          height: '50px', // Fixed height
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: '#ff8c00', // Custom button color
-          padding: 0, // Remove padding to ensure exact size
-          '&:hover': {
-            backgroundColor: '#e87a00', // Slightly darker on hover
-          }
-        }}
-      >
-        Upload File
-        <FileInput 
-          type="file" 
-          onChange={handleFileChange} 
-          accept="video/*" // Only accept video files
-        />
-      </Button>
-      
-      {selectedFile && (
-        <Box sx={{ marginTop: 2, color: 'white' }}>
-          <Typography variant="body2">
-            <strong>Selected File:</strong> {selectedFile.name}
-          </Typography>
-        </Box>
-      )}
-    </Section>
-  );
-};
-
-
-function CreateCourse() {
-  const [tabValue, setTabValue] = useState(0);
-  const [courseInfo, setCourseInfo] = useState({
+const CreateCourse = () => {
+  const [currentSection, setCurrentSection] = useState(1);
+  const [courseDetails, setCourseDetails] = useState({
     title: '',
     category: '',
     level: '',
-    language: '',
+    primaryLanguage: '',
     subtitle: '',
     description: '',
     pricing: '',
+    welcomeMessage: '',
+    image: '',
+    video: '',
+    pdf: '',
+    courseImage: null,
+    isPublished: false, // Added default for isPublished
   });
+  const [modules, setModules] = useState([]);
+  
+  const navigate = useNavigate();
 
-  const handleTabChange = (event, newValue) => {
-    setTabValue(newValue);
+  const handleAddModule = () => {
+    setModules([
+      ...modules,
+      { moduleName: '', moduleType: '', moduleContent: null, moduleVideo: null },
+    ]);
   };
 
-  const handleChange = (e) => {
-    setCourseInfo({
-      ...courseInfo,
-      [e.target.name]: e.target.value,
-    });
+  const handleModuleChange = (index, key, value) => {
+    const updatedModules = [...modules];
+    updatedModules[index][key] = value;
+    setModules(updatedModules);
+  };
+
+  const handleFileUpload = (key, index = null) => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept =
+      key === 'courseImage'
+        ? 'image/*'
+        : key === 'moduleVideo'
+        ? 'video/*'
+        : key === 'moduleContent'
+        ? '.pdf'
+        : '';
+    fileInput.onchange = (e) => {
+      if (key === 'courseImage') {
+        setCourseDetails({ ...courseDetails, courseImage: e.target.files[0] });
+      } else {
+        handleModuleChange(index, key, e.target.files[0]);
+      }
+    };
+    fileInput.click();
+  };
+
+  const uploadCourseImage = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    try {
+      const response = await fetch('http://localhost:8000/media/upload', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) { // Check that url exists in the response
+        console.log('Course image uploaded successfully:', result.data);
+        setCourseDetails({ ...courseDetails, image: result.data });
+      } else {
+        console.error('Failed to upload course image:', result.message);
+      }
+    } catch (error) {
+      console.error('Error during course image upload:', error);
+    }
+  };
+    
+  const handleFileUploadToServer = async (file, fileType) => {
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    try {
+      const response = await fetch('http://localhost:8000/media/upload', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      const result = await response.json();
+  
+      if (response.ok) {
+        // setCourseDetails({ ...courseDetails, video: result.data.url });
+        console.log(`${fileType} uploaded successfully:, result.data`);
+        return result.data; // Assuming result.data.url is the URL of the uploaded file
+      } else {
+        console.error(`Failed to upload ${fileType}:, result.message`);
+        return null;
+      }
+    } catch (error) {
+      console.error(`Error during ${fileType} upload:, error`);
+      return null;
+    }
+  };
+  
+  const handleSubmit = async () => {
+    // Validate required fields
+    if (!courseDetails.title || !courseDetails.category || !courseDetails.level) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+  
+    // Upload the course image if it exists
+    if (courseDetails.courseImage) {
+      await uploadCourseImage(courseDetails.courseImage);
+    }
+  
+    // Upload files for each module (content and video)
+    for (const module of modules) {
+      if (module.moduleContent) {
+        const contentUrl = await handleFileUploadToServer(module.moduleContent, 'content');
+        module.moduleContentUrl = contentUrl; // Save the uploaded content URL
+      }
+      if (module.moduleVideo) {
+        const videoUrl = await handleFileUploadToServer(module.moduleVideo, 'video');
+        module.moduleVideoUrl = videoUrl; // Save the uploaded video URL
+      }
+    }
+  
+    const courseData = {
+      instructorId: 'InstructorID', // Example: dynamically set based on logged-in user
+      instructorName: 'Instructor Name', // Example: dynamically set based on logged-in user
+      title: courseDetails.title,
+      category: courseDetails.category,
+      level: courseDetails.level,
+      primaryLanguage: courseDetails.primaryLanguage,
+      subtitle: courseDetails.subtitle,
+      description: courseDetails.description,
+      image: courseDetails.image,
+      welcomeMessage: courseDetails.welcomeMessage,
+      pricing: courseDetails.pricing,
+      objectives: courseDetails.objectives,
+      curriculum: modules, // Include modules with updated URLs
+      isPublished: courseDetails.isPublished, // Ensure isPublished is set
+    };
+  
+    try {
+      console.log(courseData);
+      const response = await fetch('http://localhost:8000/instructor/course/add', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(courseData),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        console.log('Course created successfully:', data);
+        alert('Course created successfully!');
+        navigate('/courses'); // Redirect to courses page
+      } else {
+        console.error('Failed to create course:', data.message);
+        alert('Failed to create course');
+      }
+    } catch (error) {
+      console.error('Error creating course:', error);
+      alert('An error occurred while creating the course');
+    }
+  };
+  
+  const handleQuizRedirect = () => {
+    navigate('/create-quiz');
   };
 
   return (
-    <Wrapper>
-      <Container>
-        <Typography variant="h4" gutterBottom>
-          Create a New Course
-        </Typography>
-
-        {/* Submit button at the top-right corner */}
-        <SubmitButton variant="contained">SUBMIT</SubmitButton>
-
-        <Tabs
-          value={tabValue}
-          onChange={handleTabChange}
-          textColor="primary"
-          indicatorColor="primary"
-          variant="fullWidth"
-          sx={{
-            '& .MuiTabs-indicator': {
-              backgroundColor: '#FF8C00', // Orange indicator color
-            },
-            '& .MuiTab-root': {
-              color: '#ffffff', // White text color for normal (inactive) tabs
-            },
-            '& .MuiTab-root.Mui-selected': {
-              color: '#FF8C00', // Orange text color for the selected tab
-            },
-          }}
-          style={{ marginBottom: '20px', fontFamily: "'Poppins', sans-serif" }}
+    <Box className="create-course-container">
+      <Box className="section-tabs">
+        <Button
+          variant={currentSection === 1 ? 'contained' : 'outlined'}
+          onClick={() => setCurrentSection(1)}
         >
-          <Tab label="Course Details" />
-          <Tab label="Curriculum" />
-          <Tab label="Upload Videos" />
-          <Tab label="Settings" />
-        </Tabs>
+          Course Details
+        </Button>
+        <Button
+          variant={currentSection === 2 ? 'contained' : 'outlined'}
+          onClick={() => setCurrentSection(2)}
+        >
+          Modules
+        </Button>
+      </Box>
 
-        {tabValue === 0 && (
-          <Section>
-            <Typography variant="h6">Course Landing Page</Typography>
-            <StyledTextField
-              fullWidth
-              label="Title"
-              name="title"
-              value={courseInfo.title}
-              onChange={handleChange}
-              variant="outlined"
-              margin="normal"
-            />
+      <Box className="section-content">
+        {currentSection === 1 && (
+          <Box className="course-details">
+            <Box className="form-fields">
+              <TextField
+                label="Course Title"
+                variant="outlined"
+                fullWidth
+                value={courseDetails.title}
+                onChange={(e) => setCourseDetails({ ...courseDetails, title: e.target.value })}
+              />
+              <TextField
+                label="Category"
+                variant="outlined"
+                fullWidth
+                value={courseDetails.category}
+                onChange={(e) => setCourseDetails({ ...courseDetails, category: e.target.value })}
+              />
+              <TextField
+                label="Level (e.g., Beginner, Intermediate, Advanced)"
+                variant="outlined"
+                fullWidth
+                value={courseDetails.level}
+                onChange={(e) => setCourseDetails({ ...courseDetails, level: e.target.value })}
+              />
+              <TextField
+                label="Primary Language"
+                variant="outlined"
+                fullWidth
+                value={courseDetails.primaryLanguage}
+                onChange={(e) => setCourseDetails({ ...courseDetails, primaryLanguage: e.target.value })}
+              />
+              <TextField
+                label="Subtitle"
+                variant="outlined"
+                fullWidth
+                value={courseDetails.subtitle}
+                onChange={(e) => setCourseDetails({ ...courseDetails, subtitle: e.target.value })}
+              />
+              <TextField
+                label="Description"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={4}
+                value={courseDetails.description}
+                onChange={(e) => setCourseDetails({ ...courseDetails, description: e.target.value })}
+              />
+              <TextField
+                label="Pricing"
+                variant="outlined"
+                fullWidth
+                type="number"
+                value={courseDetails.pricing}
+                onChange={(e) => setCourseDetails({ ...courseDetails, pricing: e.target.value })}
+              />
+              <TextField
+                label="Welcome Message"
+                variant="outlined"
+                fullWidth
+                multiline
+                rows={2}
+                value={courseDetails.welcomeMessage}
+                onChange={(e) => setCourseDetails({ ...courseDetails, welcomeMessage: e.target.value })}
+              />
+              <Button
+                variant="contained"
+                startIcon={<CloudUploadIcon />}
+                onClick={() => handleFileUpload('courseImage')}
+              >
+                {courseDetails.courseImage
+                  ? `Change Course Image (${courseDetails.courseImage.name})`
+                  : 'Add Course Image'}
+              </Button>
+            </Box>
+          </Box>
+        )}
 
-            <StyledTextField
-              fullWidth
-              select
-              label="Category"
-              name="category"
-              value={courseInfo.category}
-              onChange={handleChange}
+        {currentSection === 2 && (
+          <Box className="modules-section">
+            {modules.map((module, index) => (
+              <Box key={index} className="module-container">
+                <TextField
+                  label="Module Name"
+                  variant="outlined"
+                  fullWidth
+                  value={module.moduleName}
+                  onChange={(e) => handleModuleChange(index, 'moduleName', e.target.value)}
+                />
+                <FormControl fullWidth>
+                  <InputLabel>Module Type</InputLabel>
+                  <Select
+                    value={module.moduleType}
+                    onChange={(e) => handleModuleChange(index, 'moduleType', e.target.value)}
+                  >
+                    <MenuItem value="" disabled>Select Module Type</MenuItem>
+                    <MenuItem value="lecture">Lecture</MenuItem>
+                    <MenuItem value="quiz">Quiz</MenuItem>
+                  </Select>
+                </FormControl>
+                {module.moduleType === 'lecture' && (
+                  <Box className="module-files">
+                    <Button
+                      variant="contained"
+                      startIcon={<CloudUploadIcon />}
+                      onClick={() => handleFileUpload('moduleContent', index)}
+                    >
+                      Upload Module Content (PDF)
+                    </Button>
+                    <Button
+                      variant="contained"
+                      startIcon={<CloudUploadIcon />}
+                      onClick={() => handleFileUpload('moduleVideo', index)}
+                    >
+                      Upload Module Video
+                    </Button>
+                  </Box>
+                )}
+              </Box>
+            ))}
+            <Button
               variant="outlined"
-              margin="normal"
+              startIcon={<AddCircleOutlineIcon />}
+              onClick={handleAddModule}
             >
-              <MenuItem value="" disabled>
-                Category
-              </MenuItem>
-              <MenuItem value="Technology">Technology</MenuItem>
-              <MenuItem value="Business">Business</MenuItem>
-            </StyledTextField>
-
-            <StyledTextField
-              fullWidth
-              label="Subtitle"
-              name="subtitle"
-              value={courseInfo.subtitle}
-              onChange={handleChange}
-              variant="outlined"
-              margin="normal"
-            />
-            <StyledTextField
-              fullWidth
-              multiline
-              rows={4}
-              label="Description"
-              name="description"
-              value={courseInfo.description}
-              onChange={handleChange}
-              variant="outlined"
-              margin="normal"
-            />
-            <StyledTextField
-              fullWidth
-              label="Pricing"
-              name="pricing"
-              value={courseInfo.pricing}
-              onChange={handleChange}
-              variant="outlined"
-              margin="normal"
-            />
-          </Section>
+              Add Module
+            </Button>
+          </Box>
         )}
+      </Box>
 
-        {tabValue === 1 && (
-          <Section>
-            <Typography variant="h6">Curriculum</Typography>
-            <StyledTextField
-              fullWidth
-              label="Module Title"
-              variant="outlined"
-              margin="normal"
-            />
-            <StyledTextField
-              fullWidth
-              multiline
-              rows={2}
-              label="Module Description"
-              variant="outlined"
-              margin="normal"
-            />
-          </Section>
-        )}
-
-        {tabValue === 2 && (
-          // <Section>
-          //   <Typography variant="h6">Upload Videos</Typography>
-          //   <Button variant="contained" component="label" color="secondary">
-          //     Upload File
-          //     <input type="file" hidden />
-          //   </Button>
-          // </Section>
-          <UploadVideoComponent />
-        )}
-
-        {tabValue === 3 && (
-          <Section>
-            <Typography variant="h6">Settings</Typography>
-            <StyledTextField
-              fullWidth
-              label="Course Visibility"
-              variant="outlined"
-              margin="normal"
-            />
-          </Section>
-        )}
-      </Container>
-    </Wrapper>
+      <Box className="buttons-container">
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+        >
+          Save Course
+        </Button>
+        <Button
+          variant="outlined"
+          startIcon={<NavigateBefore />}
+          onClick={() => navigate('/courses')}
+        >
+          Cancel
+        </Button>
+      </Box>
+    </Box>
   );
-}
+};
 
 export default CreateCourse;

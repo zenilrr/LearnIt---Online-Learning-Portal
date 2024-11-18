@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* General Styling */
+body, .learnpress-container {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #f4f4f4;
+}
+
+/* Header */
+.learnpress-header {
+  background: linear-gradient(135deg, #ff6600, #e05b00);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  border-bottom: 2px solid #ff9100;
+}
+
+.learnpress-header h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Main Content Layout */
+.learnpress-main-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Sidebar */
+.learnpress-sidebar {
+  flex: 1;
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.learnpress-video iframe {
+  width: 100%;
+  height: 250px;
+  border: none;
+  border-radius: 10px;
+}
+
+.learnpress-sidebar p {
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+.learnpress-start-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ff6600;
+  color: #fff;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.learnpress-start-button:hover {
+  background-color: #e05b00;
+}
+
+/* Main Content Section */
+.learnpress-content {
+  flex: 3;
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tabs */
+.learnpress-tabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #333;
+}
+
+.learnpress-tab {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: 600;
+  background-color: #222;
+  border-radius: 5px 5px 0 0;
+  transition: all 0.3s;
+}
+
+.learnpress-tab-active {
+  background-color: #ff6600;
+  color: #fff;
+}
+
+/* Tab Content */
+.learnpress-tab-content {
+  padding: 15px;
+  background-color: #2a2a2a;
+  border-radius: 5px;
+}
+
+/* Feature Box */
+.learnpress-feature-box {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.learnpress-feature-box h3 {
+  color: #ff9100;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+/* Images */
+.learnpress-image {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 15px;
+  transition: transform 0.3s;
+}
+
+.learnpress-image:hover {
+  transform: scale(1.05);
+}
+
+/* Curriculum Section */
+.learnpress-chapter-box {
+  margin-bottom: 20px;
+}
+
+.learnpress-chapter-box h3 {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #ff6600;
+  transition: color 0.3s;
+}
+
+.learnpress-chapter-box h3:hover {
+  color: #e05b00;
+}
+
+.learnpress-section-list p {
+  font-size: 1rem;
+  color: #ddd;
+  margin: 8px 0;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.learnpress-section-list p:hover {
+  background-color: #333;
+  color: #ff9100;
+}
+
+/* Instructor Section */
+.learnpress-instructor-profile {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.learnpress-instructor-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}
+
+.learnpress-instructor-profile p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.learnpress-linkedin-link {
+  color: #0077b5;
+  font-size: 2rem;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.learnpress-linkedin-link:hover {
+  color: #66a9d9;
+}
+
+/* Leaderboard */
+.learnpress-leaderboard {
+  background-color: #1f1f1f;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.learnpress-leaderboard-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #ff9100;
+}
+
+.learnpress-leaderboard-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
+
+.learnpress-leaderboard-row:hover {
+  background-color: #333;
+}
+
+/* Rating Section */
+.learnpress-rating-section {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 20px;
+  color: #ff9100;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .learnpress-main-content {
+    flex-direction: column;
+  }
+
+  .learnpress-sidebar, .learnpress-content {
+    width: 100%;
+  }
+
+  .learnpress-video iframe {
+    height: 200px;
+  }
+}
