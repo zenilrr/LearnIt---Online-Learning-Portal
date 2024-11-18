@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaEdit, FaPlus } from "react-icons/fa";
 import axios from "axios";
 import "./Styles/InstructorDashboard.css";
+import CreateCourse from "./CreateCourse";
 
 // Initial course and quiz data
 // const initialCoursesData = [
@@ -103,7 +104,7 @@ const InstructorDashboard = () => {
           <>
             <header className="header-2">
               <h1>Courses Dashboard</h1>
-              <Link to="/create-course" className="create-course-btn">
+              <Link to="/create-course" className="create-course-btn" onClick={() => setActiveTab("create-course")}>
                 <FaPlus style={{ marginRight: "5px" }} /> New Course
               </Link>
             </header>
@@ -150,7 +151,7 @@ const InstructorDashboard = () => {
           <>
             <header className="header-2">
               <h1>Quizzes</h1>
-              <Link to="/create-quiz" className="create-quiz-btn">
+              <Link to="/create-quiz" className="create-quiz-btn" onClick={() => setActiveTab("create-quiz")}>
                 <FaPlus style={{ marginRight: "5px" }} /> New Quiz
               </Link>
             </header>
@@ -176,6 +177,18 @@ const InstructorDashboard = () => {
                 ))}
               </tbody>
             </table>
+          </>
+        )}
+
+        {activeTab === 'create-course' && (
+          <>
+            <CreateCourse />
+          </>
+        )}
+
+        {activeTab === 'create-quiz' && (
+          <>
+            {/* <CreateCourse /> */}
           </>
         )}
       </main>

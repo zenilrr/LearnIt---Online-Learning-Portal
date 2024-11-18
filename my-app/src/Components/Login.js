@@ -41,7 +41,7 @@ function Login({ onClose, onRegister }) {
         if (userRole === 'Instructor') {
           navigate('/instructor-dashboard');
         } else {
-          navigate('/course');
+          navigate('/profile');
         }
       } else {
         setError(data.message || 'Login failed');

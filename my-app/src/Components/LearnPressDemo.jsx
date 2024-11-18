@@ -41,7 +41,7 @@ function LearnPressDemo() {
         const sectionList = document.getElementById(chapterId);
         sectionList.style.display = sectionList.style.display === "none" ? "block" : "none";
     };
-
+    
     return (
         <div className="container">
             {/* Header */}

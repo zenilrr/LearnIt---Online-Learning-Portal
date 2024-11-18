@@ -39,6 +39,9 @@ const Profile = () => {
               <img src={img} alt="Profile Avatar" />
             </div>
             <h2>Kaushik</h2>
+            <p className="profile-description">
+              Enthusiastic learner and tech enthusiast. Passionate about coding and exploring new technologies.
+            </p>
           </div>
           <ul className="sidebar-menu">
             <li
@@ -52,12 +55,6 @@ const Profile = () => {
               onClick={() => handleSidebarClick("Quizzes")}
             >
               <FontAwesomeIcon icon={faBookOpen} /> Quizzes
-            </li>
-            <li
-              className={activeSidebar === "Orders" ? "active" : ""}
-              onClick={() => handleSidebarClick("Orders")}
-            >
-              <FontAwesomeIcon icon={faShoppingCart} /> Orders
             </li>
             <li
               className={activeSidebar === "Logout" ? "active" : ""}
@@ -86,19 +83,9 @@ const Profile = () => {
                   <h3>Finished Course</h3>
                   <p>0</p>
                 </div>
-                <div className="course-card-2">
-                  <FontAwesomeIcon icon={faCheckCircle} size="2x" />
-                  <h3>Passed Course</h3>
-                  <p>0</p>
-                </div>
-                <div className="course-card-2">
-                  <FontAwesomeIcon icon={faTimesCircle} size="2x" />
-                  <h3>Failed Course</h3>
-                  <p>0</p>
-                </div>
               </div>
               <div className="course-tabs">
-                {["All", "In Progress", "Finished", "Passed", "Failed"].map(
+                {["All Courses", "In Progress Courses", "Finished Courses", "Badges"].map(
                   (tab) => (
                     <button
                       key={tab}
@@ -114,7 +101,7 @@ const Profile = () => {
                 {activeTab === "All" || activeTab === "Failed" ? (
                   <p className="no-course">No Course available!</p>
                 ) : (
-                  <p>Showing {activeTab} Courses...</p>
+                  <p>Showing {activeTab}...</p>
                 )}
               </div>
             </>
@@ -123,12 +110,6 @@ const Profile = () => {
             <div className="quizzes-section">
               <h3>Your Quizzes</h3>
               <p>No quizzes available!</p>
-            </div>
-          )}
-          {activeSidebar === "Orders" && (
-            <div className="orders-section">
-              <h3>Your Orders</h3>
-              <p>No orders found!</p>
             </div>
           )}
           {activeSidebar === "Logout" && (
