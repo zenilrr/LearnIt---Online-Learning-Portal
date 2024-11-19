@@ -10,7 +10,7 @@ import CreateCourse from "./Components/CreateCourse";
 import FeedbackPage from "./Components/FeedbackPage";
 import LearnPressDemo from "./Components/LearnPressDemo";
 import CoursePage from "./Components/CoursePage";
-
+import CreateQuiz from "./Components/CreateQuiz";
 
 import HomePage from "./Pages/General/HomePage";
 import InstructorDashboardPage from "./Pages/Instructor/InstructorDashboardPage";
@@ -34,7 +34,7 @@ function App() {
         <Route path="/profile" element={<SturdentProfilePage />} />
         <Route path="/edit-profile" element={<EditProfilePage />} />
         <Route path="/search-courses" element={<SearchPage />} />
-        <Route path="/abcd" element={<LearnPressDemo />} />
+        <Route path="/create-quize" element={<CreateQuiz />} />
       </Routes>
     </div>
   );

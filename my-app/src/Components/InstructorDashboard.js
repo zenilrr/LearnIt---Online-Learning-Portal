@@ -4,7 +4,7 @@ import { FaEdit, FaPlus } from "react-icons/fa";
 import axios from "axios";
 import "./Styles/InstructorDashboard.css";
 import CreateCourse from "./CreateCourse";
-
+import CreateQuiz from "./CreateQuiz";
 // Initial course and quiz data
 // const initialCoursesData = [
 //   { id: 1, title: "React & Redux Complete Course 2024", students: 10, revenue: "$1500" },
@@ -154,9 +154,12 @@ const InstructorDashboard = () => {
           <>
             <header className="header-2">
               <h1>Quizzes</h1>
-              <Link to="/create-quiz" className="create-quiz-btn" onClick={() => setActiveTab("create-quiz")}>
-                <FaPlus style={{ marginRight: "5px" }} /> New Quiz
-              </Link>
+              <button
+                className="create-quiz-btn"
+                onClick={() => setActiveTab("create-quiz")}
+              >
+                <FaPlus style={{ marginRight: "5px" }} /> New Quize
+              </button>
             </header>
             <table className="courses-table">
               <thead>
@@ -191,7 +194,7 @@ const InstructorDashboard = () => {
 
         {activeTab === 'create-quiz' && (
           <>
-            {/* <CreateCourse /> */}
+            <CreateQuiz />
           </>
         )}
       </main>

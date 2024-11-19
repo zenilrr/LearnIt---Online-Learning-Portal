@@ -10,7 +10,7 @@ import {
   faShoppingCart,
   faList,
 } from "@fortawesome/free-solid-svg-icons";
-import './Styles/Profile.css'
+import './Styles/StudentProfile.css'
 import img from "../Assets/profile-img.jpeg";
 
 const Profile = () => {
