@@ -1,4 +1,4 @@
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEdit, FaPlus } from "react-icons/fa";
 import axios from "axios";
@@ -68,7 +68,7 @@ const InstructorDashboard = () => {
       return acc + revenue;
     }, 0);
   };
-  
+
 
   // Function to calculate total courses
   const getTotalCourses = () => {
@@ -81,14 +81,14 @@ const InstructorDashboard = () => {
         <h2>Instructor View</h2>
         <nav>
           <ul>
-            <li 
-              className={activeTab === 'courses' ? 'active' : ''} 
+            <li
+              className={activeTab === 'courses' ? 'active' : ''}
               onClick={() => setActiveTab('courses')}
             >
               Courses
             </li>
-            <li 
-              className={activeTab === 'quizzes' ? 'active' : ''} 
+            <li
+              className={activeTab === 'quizzes' ? 'active' : ''}
               onClick={() => setActiveTab('quizzes')}
             >
               Quizzes
@@ -104,9 +104,12 @@ const InstructorDashboard = () => {
           <>
             <header className="header-2">
               <h1>Courses Dashboard</h1>
-              <Link to="/create-course" className="create-course-btn" onClick={() => setActiveTab("create-course")}>
+              <button
+                className="create-course-btn"
+                onClick={() => setActiveTab("create-course")}
+              >
                 <FaPlus style={{ marginRight: "5px" }} /> New Course
-              </Link>
+              </button>
             </header>
             <div className="dashboard-overview">
               <div className="stat-box">

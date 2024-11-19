@@ -1,18 +1,16 @@
-/* Define color variables for easy maintenance */
+Define color variables for easy maintenance
 :root {
-    --primary-color: #ff9100;         /* Main button color */
+    --primary-color: #ff7900;         /* Main button color */
     --secondary-color: #ffffff;       /* Background color for buttons and panels */
-    --hover-color: #ff5e00;           /* Hover color */
+    --hover-color: #ff7900;           /* Orange shade for hover */
     --text-color: #ffffff;            /* General text color */
-    --border-color: #1f3064;          /* Border and accent color */
-    --background-color: #641f4f;      /* Page background color */
+    --border-color: #ff7900;          /* Border and accent color */
+    
 }
 
 /* Global styles */
 body {
-    font-family: 'Poppins', sans-serif;
-    color: var(--text-color);
-    background-color: var(--background-color);
+    
     margin: 0;
     padding: 0;
 }
@@ -21,6 +19,9 @@ body {
 .create-course-container {
     padding: 40px;
     min-height: 100vh;
+    background-color: #000e3dfb;
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -35,18 +36,17 @@ body {
 }
 
 .section-tabs button {
-    background-color: var(--secondary-color);
-    color: var(--text-color);
+    background-color:#ff7900;
+    color: #fff;
     border: 2px solid var(--border-color);
     padding: 8px 16px;
     border-radius: 8px;
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.section-tabs button:hover {
-    background-color: var(--hover-color);
-    color: var(--secondary-color);
-}
+/* .section-tabs button:hover {
+   
+} */
 
 /* Course details and module sections */
 .course-details,
@@ -102,31 +102,31 @@ body {
 }
 
 .footer-buttons button {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    background-color: #ff7900;
+    color: #fff;
     border-radius: 8px;
     padding: 10px 20px;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: transform 0.3s;
 }
 
 .footer-buttons button:hover {
-    background-color: var(--hover-color);
+    background-color: #ff7900;
     transform: scale(1.05);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
 }
 
 /* General button styling */
 button {
-    background-color: var(--primary-color);
-    color: var(--secondary-color);
+    background-color: #ff7900;
+    color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 8px;
-    transition: background-color 0.3s, transform 0.3s;
+    transition:transform 0.3s;
 }
 
 button:hover {
-    background-color: var(--hover-color);
-    transform: scale(1.05);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ff7900;
+    transform: scale(1.01);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }

@@ -26,11 +26,11 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/learnCourse" element={<CoursePage />} />
         <Route path="/instructor-dashboard" element={<InstructorDashboardPage />} />
-        <Route path="/create-course" element={
+        {/* <Route path="/create-course" element={
           <> <Header />
             <CreateCourse />
             <Footer />
-          </>} />
+          </>} /> */}
         <Route path="/profile" element={<SturdentProfilePage />} />
         <Route path="/edit-profile" element={<EditProfilePage />} />
         <Route path="/search-courses" element={<SearchPage />} />
