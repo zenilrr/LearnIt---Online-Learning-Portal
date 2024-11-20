@@ -9,7 +9,7 @@ const studentCourse = require("./Routes/instructor-routes/course-routes")
 const instructorCourseRoutes = require("./Routes/instructor-routes/course-routes");
 const coursedetailsRoute = require('./Routes/student-routes/course-routes');
 const CoursePage = require("./Routes/student-routes/coursePage-route");
-// const { default: CoursePage } = require("../my-app/src/Components/CoursePage");
+const { default: CoursePage } = require("../my-app/src/Components/CoursePage");
 const app = express();
 const PORT = process.env.PORT || 8000;
 
@@ -51,5 +51,5 @@ app.use((err, req, res, next) => {
 });
   
   app.listen(PORT, () => {
-    console.log(`Server is now running on port http://localhost:3000`);
+    console.log(`Server is now running on port http://localhost:${PORT}`);
   });
