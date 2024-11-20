@@ -37,9 +37,11 @@ function App() {
         <Route path="/search-courses" element={<SearchPage />} />
         <Route path="/create-quize" element={<CreateQuiz />} />
         <Route path="/course/:id" element={<EditCourse />} />
+        <Route path="/buy-now/:id" element={<BuyNowPage />} />
+        <Route path="/start-learning/:id" element={<StartLearningPage />} />
       </Routes>
-      <BuyNowPage/>
-      {/* <StartLearningPage/> */}
+      
+      
     </div>
   );
 }

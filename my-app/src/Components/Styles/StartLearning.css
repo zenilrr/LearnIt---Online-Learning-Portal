@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 /* General Styling */
-body, .start-learning-course-container {
+body, .course-container {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
@@ -10,21 +10,22 @@ body, .start-learning-course-container {
 }
 
 /* Header */
-.start-learning-course-header {
+.course-header {
+  font-family: 'Poppins';
   background: #000f41;
-  color: #ff6600;
+  color:#ff6600;
   text-align: center;
   padding: 20px;
 }
 
-.start-learning-course-header h1 {
+.course-header h1 {
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 70;
   margin: 0;
 }
 
 /* Main Content Layout */
-.start-learning-course-main-content {
+.course-main-content {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -32,7 +33,7 @@ body, .start-learning-course-container {
 }
 
 /* Sidebar */
-.start-learning-course-sidebar {
+.course-sidebar {
   flex: 0 0 230px;
   background-color: #000f41;
   padding: 20px;
@@ -40,19 +41,19 @@ body, .start-learning-course-container {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.start-learning-course-video iframe {
+.course-video iframe {
   width: 100%;
   height: 250px;
   border: none;
   border-radius: 10px;
 }
 
-.start-learning-course-sidebar p {
+.course-sidebar p {
   margin: 10px 0;
   font-size: 1.1rem;
 }
 
-.start-learning-course-start-button {
+.course-start-button {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
@@ -66,12 +67,12 @@ body, .start-learning-course-container {
   transition: background-color 0.3s;
 }
 
-.start-learning-course-start-button:hover {
-  background-color: #ff8c33;
+.course-start-button:hover {
+  background-color: #ff6600;
 }
 
 /* Main Content Section */
-.start-learning-course-content {
+.course-content {
   flex: 3;
   background-color: #000f41;
   padding: 20px;
@@ -80,14 +81,14 @@ body, .start-learning-course-container {
 }
 
 /* Tabs */
-.start-learning-course-tabs {
+.course-tabs {
   display: flex;
   gap: 15px;
   margin-bottom: 20px;
   border-bottom: 2px solid #333;
 }
 
-.start-learning-course-tab {
+.course-tab {
   padding: 10px 15px;
   cursor: pointer;
   font-weight: 600;
@@ -96,43 +97,43 @@ body, .start-learning-course-container {
   transition: all 0.3s;
 }
 
-.start-learning-course-tab-active {
+.course-tab-active {
   background-color: #ff6600;
   color: #fff;
 }
 
-.start-learning-course-tab:hover {
+.course-tab:hover {
   background-color: #1e2a47;
   color: #ff6600;
 }
 
 /* Tab Content */
-.start-learning-course-tab-content {
+.course-tab-content {
   margin-top: 20px;
 }
 
-.start-learning-course-feature-box {
+.course-feature-box {
   background-color: #2d3a6a;
   border-radius: 5px;
   padding: 15px;
   margin-top: 10px;
 }
 
-.start-learning-course-feature-box h3 {
+.course-feature-box h3 {
   margin-bottom: 10px;
 }
 
-.start-learning-course-feature-box ul {
+.course-feature-box ul {
   list-style-type: disc;
   margin-left: 20px;
 }
 
 /* Curriculum Section */
-.start-learning-course-chapter-box {
+.course-chapter-box {
   margin-bottom: 15px;
 }
 
-.start-learning-course-chapter-box h3 {
+.course-chapter-box h3 {
   font-size: 1.2rem;
   cursor: pointer;
   margin-bottom: 5px;
@@ -140,45 +141,41 @@ body, .start-learning-course-container {
   transition: all 0.3s;
 }
 
-.start-learning-course-chapter-box h3:hover {
-  color: #ff8c33;
+
+.course-section-list p {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    background-color: #2d3a6a; /* Default background */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .course-section-list p:hover {
+    background-color: #ff6600; /* Highlight color */
+    color: white; /* Text color when hovered */
+    transform: scale(1); /* Slightly increase size */
+  }
+
+.course-instructor-profile {
+    text-align: left;
+    margin-top: 20px;
 }
 
-.start-learning-course-section-list p {
-  padding: 10px;
-  border-radius: 5px;
-  margin: 5px 0;
-  background-color: #2d3a6a;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+.instructor-image {
+    width: 200px;
+    height: 120px;
+    margin-bottom: 15px;
 }
 
-.start-learning-course-section-list p:hover {
-  background-color: #ff6600;
-  color: white;
-  transform: scale(1.05);
-}
-
-/* Instructor Profile */
-.start-learning-course-instructor-profile {
-  text-align: left;
-  margin-top: 20px;
-}
-
-.start-learning-instructor-image {
-  width: 200px;
-  height: 120px;
-  margin-bottom: 15px;
-}
-
-.start-learning-linkedin-link {
+.linkedin-link {
   text-decoration: none;
   color: #2d3a6a;
 }
 
-.start-learning-linkedin-icon {
+.linkedin-icon {
   transition: all 0.3s;
 }
 
-.start-learning-linkedin-icon:hover {
-  color: #ff6600;
+.linkedin-icon:hover {
+  color: #fff;
 }

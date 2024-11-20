@@ -6,7 +6,8 @@ const LectureSchema = new mongoose.Schema({
   moduleVideoUrl: String,
   // public_id: String,
   // freePreview: Boolean,
-  moduleContentUrl: String,
+  moduleContentUrl: [String],
+  moduleSections : [String],
 });
 
 const CourseSchema = new mongoose.Schema({
