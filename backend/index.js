@@ -10,6 +10,7 @@ const instructorCourseRoutes = require("./Routes/instructor-routes/course-routes
 const coursedetailsRoute = require('./Routes/student-routes/course-routes');
 const CoursePage = require("./Routes/student-routes/coursePage-route");
 const { default: CoursePage } = require("../my-app/src/Components/CoursePage");
+const quizRoutes = require('./Routes/instructor-routes/quiz-routes');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
@@ -42,6 +43,8 @@ app.use("/auth", authRoutes);
 app.use('/api/coursedetails', coursedetailsRoute);
 app.use("/media", mediaRoutes);
 app.use("/instructor/course", instructorCourseRoutes);
+app.use("/instructor/quiz/add", quizRoutes);
+
 app.use((err, req, res, next) => {
     console.log(err.stack);
     res.status(500).json({

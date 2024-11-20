@@ -10,8 +10,9 @@ const quizSchema = new mongoose.Schema({
       questionText: { type: String, required: true },
       options: [
         {
-          optionText: { type: String, required: true },
-        },
+          type: String, 
+          required: true
+        }
       ],
       correctAnswer: { type: Number, required: true }, // Index of correct answer
     },
