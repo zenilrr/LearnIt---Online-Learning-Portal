@@ -1,0 +1,143 @@
+/* Center the container */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: fit-content; /* Ensures full viewport height */
+    background-color: #f0f4f8; /* Light background for the page */
+  }
+  
+  h2 {
+    color: #ff7f11;
+  }
+  
+  /* Profile Page Wrapper */
+  .profile-page {
+    min-height: 645px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #000e3dfb; /* White background for profile container */
+    border-radius: 2px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Soft shadow around the container */
+    padding: 30px;
+    padding-top: 15px;
+  }
+  
+  /* Center the profile image inside the container */
+  .profile-image {
+    display: flex;
+    justify-content: center; /* Horizontally center the image */
+    align-items: center; /* Vertically center the image */
+    flex-direction: column; /* Ensures the input button stays below the image */
+    margin-bottom: 20px; /* Adds some space below the image */
+  }
+  
+  .avatar img {
+    width: 120px; /* Set a fixed width for the image */
+    height: 120px; /* Set a fixed height for the image */
+    border-radius: 50%; /* Make the image round */
+    object-fit: cover; /* Ensure the image covers the circle without distortion */
+  }
+  
+  /* Form Styling */
+  .edit-form {
+    padding: 30px;
+    background-color: #1f3064;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Form Group Styling */
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  /* Label Styling */
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #a9b1e3;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  /* Adjust the input and textarea styling */
+  .form-group input,
+  .form-group textarea {
+    width: 96%;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #283366;
+    background-color: #000e3dfb;
+    color: #ffffff;
+    transition: border-color 0.3s;
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 40px; /* Adjust the height */
+    max-height: 150px; /* Adjust max height if needed */
+  }
+  
+  .form-group input:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #ff7f11;
+    box-shadow: 0 0 8px rgba(255, 127, 17, 0.4);
+  }
+  
+/* Save Button Styling */
+.save-button {
+    width: 96%;
+    padding: 12px 20px;
+    background-color: #ff7f11;
+    color: #ffffff;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.3s ease; /* Transition only for the transform effect */
+  }
+  
+  /* Remove any unwanted color change or background color on hover */
+  .save-button:hover {
+    transform: translateY(-2px); /* Only the translation effect */
+    background-color: #ff7f11; /* Keep the same background color on hover */
+  }
+  
+  
+  /* Image Upload Button Styling */
+  .img-upload-button {
+    margin-top: 20px;
+    width: 225px;
+    background-color: #000e3dfb;
+    color: #ffffff;
+    padding: 15px 5px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s; /* Removed background-color transition */
+  }
+  
+  .img-upload-button:hover {
+    transform: translateY(-2px); /* Only translation effect */
+  }
+
+  
+  /* Media Query for Small Screens */
+  @media (max-width: 768px) {
+    .edit-form {
+      margin: 20px;
+      padding: 20px;
+    }
+  
+    .form-group input,
+    .form-group textarea {
+      font-size: 0.95rem;
+    }
+  
+    .save-button {
+      font-size: 1rem;
+    }
+  }
+  

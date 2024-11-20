@@ -23,18 +23,27 @@ function Login({ onClose, onRegister }) {
         }),
       });
       const data = await response.json();
-      console.log(data)
-
+      console.log(data);
+  
       if (response.ok) {
-       
         setError('');
         console.log('Logged in successfully');
         
+        const userRole = data.data.user?.role;  
+        console.log('User role:', userRole);  
+  
         localStorage.setItem('accessToken', data.data.accessToken);
+        localStorage.setItem('userRole', userRole); 
+  
         onClose();
-        navigate('/course');
+  
+        // Redirect based on the role
+        if (userRole === 'Instructor') {
+          navigate('/instructor-dashboard');
+        } else {
+          navigate('/profile');
+        }
       } else {
-        
         setError(data.message || 'Login failed');
       }
     } catch (err) {

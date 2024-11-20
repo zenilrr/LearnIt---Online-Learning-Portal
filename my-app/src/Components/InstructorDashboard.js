@@ -1,16 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaEdit, FaPlus } from "react-icons/fa";
+import axios from "axios";
 import "./Styles/InstructorDashboard.css";
-
+import CreateCourse from "./CreateCourse";
+import CreateQuiz from "./CreateQuiz";
 // Initial course and quiz data
-const initialCoursesData = [
-  { id: 1, title: "React & Redux Complete Course 2024", students: 10, revenue: "$1500" },
-  { id: 2, title: "Next JS Full Course 2025", students: 10, revenue: "$10000" },
-  { id: 3, title: "CSS Full Course 2025", students: 10, revenue: "$4000" },
-  { id: 4, title: "Python Full Course 2025", students: 10, revenue: "$50000" },
-  { id: 5, title: "JavaScript Mastery 2024", students: 10, revenue: "$5400" },
-];
+// const initialCoursesData = [
+//   { id: 1, title: "React & Redux Complete Course 2024", students: 10, revenue: "$1500" },
+//   { id: 2, title: "Next JS Full Course 2025", students: 10, revenue: "$10000" },
+//   { id: 3, title: "CSS Full Course 2025", students: 10, revenue: "$4000" },
+//   { id: 4, title: "Python Full Course 2025", students: 10, revenue: "$50000" },
+//   { id: 5, title: "JavaScript Mastery 2024", students: 10, revenue: "$5400" },
+// ];
 
 const initialQuizzesData = [
   { id: 1, title: "React Basics Quiz", attempts: 10, passRate: "80%" },
@@ -21,9 +23,22 @@ const initialQuizzesData = [
 
 const InstructorDashboard = () => {
   const [activeTab, setActiveTab] = useState('courses'); // Default to 'courses'
-  const [coursesData, setCoursesData] = useState(initialCoursesData); // Managing courses state
+  const [coursesData, setCoursesData] = useState([]); // Managing courses state
   const [quizzesData, setQuizzesData] = useState(initialQuizzesData); // Managing quizzes state
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/instructor/course/get");
+        setCoursesData(response.data.data); // Set courses data
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+
+    fetchCourses();  // Call the fetch function
+  }, []);
 
   // Function to handle edit button click for courses
   const handleEditCourse = (id) => {
@@ -42,15 +57,18 @@ const InstructorDashboard = () => {
 
   // Function to calculate total students
   const getTotalStudents = () => {
-    return coursesData.reduce((acc, course) => acc + course.students, 0);
+    return coursesData.reduce((acc, course) => acc + course.students.length, 0);
   };
 
   // Function to calculate total revenue
   const getTotalRevenue = () => {
     return coursesData.reduce((acc, course) => {
-      return acc + parseFloat(course.revenue.replace("$", ""));
+      // Calculate the revenue for each course
+      const revenue = course.students.length * course.pricing;
+      return acc + revenue;
     }, 0);
   };
+
 
   // Function to calculate total courses
   const getTotalCourses = () => {
@@ -63,14 +81,14 @@ const InstructorDashboard = () => {
         <h2>Instructor View</h2>
         <nav>
           <ul>
-            <li 
-              className={activeTab === 'courses' ? 'active' : ''} 
+            <li
+              className={activeTab === 'courses' ? 'active' : ''}
               onClick={() => setActiveTab('courses')}
             >
               Courses
             </li>
-            <li 
-              className={activeTab === 'quizzes' ? 'active' : ''} 
+            <li
+              className={activeTab === 'quizzes' ? 'active' : ''}
               onClick={() => setActiveTab('quizzes')}
             >
               Quizzes
@@ -86,9 +104,12 @@ const InstructorDashboard = () => {
           <>
             <header className="header-2">
               <h1>Courses Dashboard</h1>
-              <Link to="/create-course" className="create-course-btn">
+              <button
+                className="create-course-btn"
+                onClick={() => setActiveTab("create-course")}
+              >
                 <FaPlus style={{ marginRight: "5px" }} /> New Course
-              </Link>
+              </button>
             </header>
             <div className="dashboard-overview">
               <div className="stat-box">
@@ -117,8 +138,8 @@ const InstructorDashboard = () => {
                 {coursesData.map((course) => (
                   <tr key={course.id}>
                     <td><Link to={`/course/${course.id}`}>{course.title}</Link></td>
-                    <td>{course.students}</td>
-                    <td>{course.revenue}</td>
+                    <td>{course.students.length}</td>
+                    <td>{course.students.length * course.pricing}</td>
                     <td>
                       <button className="edit-btn" onClick={() => handleEditCourse(course.id)}><FaEdit /></button>
                     </td>
@@ -133,9 +154,12 @@ const InstructorDashboard = () => {
           <>
             <header className="header-2">
               <h1>Quizzes</h1>
-              <Link to="/create-quiz" className="create-quiz-btn">
-                <FaPlus style={{ marginRight: "5px" }} /> New Quiz
-              </Link>
+              <button
+                className="create-quiz-btn"
+                onClick={() => setActiveTab("create-quiz")}
+              >
+                <FaPlus style={{ marginRight: "5px" }} /> New Quize
+              </button>
             </header>
             <table className="courses-table">
               <thead>
@@ -159,6 +183,18 @@ const InstructorDashboard = () => {
                 ))}
               </tbody>
             </table>
+          </>
+        )}
+
+        {activeTab === 'create-course' && (
+          <>
+            <CreateCourse />
+          </>
+        )}
+
+        {activeTab === 'create-quiz' && (
+          <>
+            <CreateQuiz />
           </>
         )}
       </main>

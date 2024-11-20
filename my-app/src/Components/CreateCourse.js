@@ -32,7 +32,7 @@ const CreateCourse = () => {
     isPublished: false, // Added default for isPublished
   });
   const [modules, setModules] = useState([]);
-  
+
   const navigate = useNavigate();
 
   const handleAddModule = () => {
@@ -55,10 +55,10 @@ const CreateCourse = () => {
       key === 'courseImage'
         ? 'image/*'
         : key === 'moduleVideo'
-        ? 'video/*'
-        : key === 'moduleContent'
-        ? '.pdf'
-        : '';
+          ? 'video/*'
+          : key === 'moduleContent'
+            ? '.pdf'
+            : '';
     fileInput.onchange = (e) => {
       if (key === 'courseImage') {
         setCourseDetails({ ...courseDetails, courseImage: e.target.files[0] });
@@ -72,15 +72,15 @@ const CreateCourse = () => {
   const uploadCourseImage = async (file) => {
     const formData = new FormData();
     formData.append('file', file);
-  
+
     try {
       const response = await fetch('http://localhost:8000/media/upload', {
         method: 'POST',
         body: formData,
       });
-  
+
       const result = await response.json();
-  
+
       if (response.ok) { // Check that url exists in the response
         console.log('Course image uploaded successfully:', result.data);
         setCourseDetails({ ...courseDetails, image: result.data });
@@ -91,19 +91,19 @@ const CreateCourse = () => {
       console.error('Error during course image upload:', error);
     }
   };
-    
+
   const handleFileUploadToServer = async (file, fileType) => {
     const formData = new FormData();
     formData.append('file', file);
-  
+
     try {
       const response = await fetch('http://localhost:8000/media/upload', {
         method: 'POST',
         body: formData,
       });
-  
+
       const result = await response.json();
-  
+
       if (response.ok) {
         // setCourseDetails({ ...courseDetails, video: result.data.url });
         console.log(`${fileType} uploaded successfully:, result.data`);
@@ -117,19 +117,19 @@ const CreateCourse = () => {
       return null;
     }
   };
-  
+
   const handleSubmit = async () => {
     // Validate required fields
     if (!courseDetails.title || !courseDetails.category || !courseDetails.level) {
       alert('Please fill in all required fields.');
       return;
     }
-  
+
     // Upload the course image if it exists
     if (courseDetails.courseImage) {
       await uploadCourseImage(courseDetails.courseImage);
     }
-  
+
     // Upload files for each module (content and video)
     for (const module of modules) {
       if (module.moduleContent) {
@@ -141,7 +141,7 @@ const CreateCourse = () => {
         module.moduleVideoUrl = videoUrl; // Save the uploaded video URL
       }
     }
-  
+
     const courseData = {
       instructorId: 'InstructorID', // Example: dynamically set based on logged-in user
       instructorName: 'Instructor Name', // Example: dynamically set based on logged-in user
@@ -158,7 +158,7 @@ const CreateCourse = () => {
       curriculum: modules, // Include modules with updated URLs
       isPublished: courseDetails.isPublished, // Ensure isPublished is set
     };
-  
+
     try {
       console.log(courseData);
       const response = await fetch('http://localhost:8000/instructor/course/add', {
@@ -168,13 +168,13 @@ const CreateCourse = () => {
         },
         body: JSON.stringify(courseData),
       });
-  
+
       const data = await response.json();
-  
+
       if (response.ok) {
         console.log('Course created successfully:', data);
         alert('Course created successfully!');
-        navigate('/courses'); // Redirect to courses page
+        navigate('/instructor-dashboard'); // Redirect to instructor dashboard page
       } else {
         console.error('Failed to create course:', data.message);
         alert('Failed to create course');
@@ -184,7 +184,7 @@ const CreateCourse = () => {
       alert('An error occurred while creating the course');
     }
   };
-  
+
   const handleQuizRedirect = () => {
     navigate('/create-quiz');
   };
@@ -208,11 +208,35 @@ const CreateCourse = () => {
 
       <Box className="section-content">
         {currentSection === 1 && (
-          <Box className="course-details">
+          <Box className="course-details" sx={{ backgroundColor: '#1f3064' }}>
             <Box className="form-fields">
               <TextField
                 label="Course Title"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 value={courseDetails.title}
                 onChange={(e) => setCourseDetails({ ...courseDetails, title: e.target.value })}
@@ -220,6 +244,30 @@ const CreateCourse = () => {
               <TextField
                 label="Category"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 value={courseDetails.category}
                 onChange={(e) => setCourseDetails({ ...courseDetails, category: e.target.value })}
@@ -227,6 +275,30 @@ const CreateCourse = () => {
               <TextField
                 label="Level (e.g., Beginner, Intermediate, Advanced)"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 value={courseDetails.level}
                 onChange={(e) => setCourseDetails({ ...courseDetails, level: e.target.value })}
@@ -234,6 +306,30 @@ const CreateCourse = () => {
               <TextField
                 label="Primary Language"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 value={courseDetails.primaryLanguage}
                 onChange={(e) => setCourseDetails({ ...courseDetails, primaryLanguage: e.target.value })}
@@ -241,6 +337,30 @@ const CreateCourse = () => {
               <TextField
                 label="Subtitle"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 value={courseDetails.subtitle}
                 onChange={(e) => setCourseDetails({ ...courseDetails, subtitle: e.target.value })}
@@ -248,6 +368,30 @@ const CreateCourse = () => {
               <TextField
                 label="Description"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 multiline
                 rows={4}
@@ -257,6 +401,30 @@ const CreateCourse = () => {
               <TextField
                 label="Pricing"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 type="number"
                 value={courseDetails.pricing}
@@ -265,6 +433,30 @@ const CreateCourse = () => {
               <TextField
                 label="Welcome Message"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 multiline
                 rows={2}
@@ -272,6 +464,13 @@ const CreateCourse = () => {
                 onChange={(e) => setCourseDetails({ ...courseDetails, welcomeMessage: e.target.value })}
               />
               <Button
+                sx={{
+                  backgroundColor: '#FF7900', // Orange color
+                  color: '#FFFFFF', // White text
+                  '&:hover': {
+                    backgroundColor: '#FF7900', // Prevent color change on hover
+                  },
+                }}
                 variant="contained"
                 startIcon={<CloudUploadIcon />}
                 onClick={() => handleFileUpload('courseImage')}
@@ -285,37 +484,116 @@ const CreateCourse = () => {
         )}
 
         {currentSection === 2 && (
-          <Box className="modules-section">
+          <Box className="modules-section" sx={{ backgroundColor: '#1f3064' }}>
             {modules.map((module, index) => (
-              <Box key={index} className="module-container">
+              <Box key={index} className="module-container" sx={{ backgroundColor: '#1f3064' }}>
                 <TextField
                   label="Module Name"
                   variant="outlined"
+                  sx={{
+                    '& label': {
+                      color: 'white', // Default label color when not focused
+                    },
+                    '& label.Mui-focused': {
+                      color: '#FF7900', // Orange color when the label is focused
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'grey', // Default border color
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#FF7900', // Orange color on hover
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#FF7900', // Orange color when focused
+                      },
+                      '& input': {
+                        color: 'white', // Text color inside input
+                      },
+                    },
+                    backgroundColor: '#000e3dfb',
+                    borderRadius: '5px',
+                    marginBottom: '20px'
+                  }}
                   fullWidth
                   value={module.moduleName}
                   onChange={(e) => handleModuleChange(index, 'moduleName', e.target.value)}
                 />
-                <FormControl fullWidth>
-                  <InputLabel>Module Type</InputLabel>
+                <FormControl
+                  fullWidth
+                  sx={{
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'grey', // Default border color
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#FF7900', // Orange on hover
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#FF7900', // Orange when focused
+                      },
+                    },
+                    backgroundColor: '#000e3dfb',
+                    borderRadius: '5px',
+                  }}
+                >
+                  <InputLabel
+                    sx={{
+                      color: 'white', // Default label color
+                      '&.Mui-focused': {
+                        color: '#FF7900', // Orange color when focused
+                      },
+                    }}
+                  >
+                    Module Type
+                  </InputLabel>
                   <Select
                     value={module.moduleType}
                     onChange={(e) => handleModuleChange(index, 'moduleType', e.target.value)}
+                    label="Module Type"
+                    sx={{
+                      color: 'white', // Text color inside input
+                    }}
+                    fullWidth
                   >
-                    <MenuItem value="" disabled>Select Module Type</MenuItem>
+                    <MenuItem value="" disabled>
+                      Select Module Type
+                    </MenuItem>
                     <MenuItem value="lecture">Lecture</MenuItem>
                     <MenuItem value="quiz">Quiz</MenuItem>
                   </Select>
                 </FormControl>
+
+
                 {module.moduleType === 'lecture' && (
                   <Box className="module-files">
                     <Button
+                      sx={{
+                        backgroundColor: '#FF7900', // Orange color
+                        color: '#FFFFFF', // White text
+                        '&:hover': {
+                          backgroundColor: '#FF7900', // Prevent color change on hover
+                        },
+                        marginRight: '20px',
+                        marginTop: '20px'
+                      }}
                       variant="contained"
                       startIcon={<CloudUploadIcon />}
                       onClick={() => handleFileUpload('moduleContent', index)}
+
                     >
                       Upload Module Content (PDF)
                     </Button>
                     <Button
+                      sx={{
+                        backgroundColor: '#FF7900', // Orange color
+                        color: '#FFFFFF', // White text
+                        '&:hover': {
+                          backgroundColor: '#FF7900', // Prevent color change on hover
+                        },
+                        marginRight: '20px',
+                        marginTop: '20px'
+                      }}
                       variant="contained"
                       startIcon={<CloudUploadIcon />}
                       onClick={() => handleFileUpload('moduleVideo', index)}
@@ -327,6 +605,13 @@ const CreateCourse = () => {
               </Box>
             ))}
             <Button
+              sx={{
+                backgroundColor: '#FF7900', // Orange color
+                color: '#FFFFFF', // White text
+                '&:hover': {
+                  backgroundColor: '#FF7900', // Prevent color change on hover
+                },
+              }}
               variant="outlined"
               startIcon={<AddCircleOutlineIcon />}
               onClick={handleAddModule}
@@ -340,15 +625,29 @@ const CreateCourse = () => {
       <Box className="buttons-container">
         <Button
           variant="contained"
-          color="primary"
+          sx={{
+            backgroundColor: '#FF7900', // Orange color
+            color: '#FFFFFF', // White text
+            '&:hover': {
+              backgroundColor: '#FF7900', // Prevent color change on hover
+            },
+            margin: '10px',
+          }}
           onClick={handleSubmit}
         >
           Save Course
         </Button>
         <Button
           variant="outlined"
+          sx={{
+            backgroundColor: '#FF7900', // Orange color
+            color: '#FFFFFF', // White text
+            '&:hover': {
+              backgroundColor: '#FF7900', // Prevent color change on hover
+            },
+          }}
           startIcon={<NavigateBefore />}
-          onClick={() => navigate('/courses')}
+          onClick={() => navigate('/instructor-dashboard')}
         >
           Cancel
         </Button>
