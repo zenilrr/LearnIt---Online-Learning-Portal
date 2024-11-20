@@ -17,6 +17,7 @@ import EditProfilePage from "./Pages/General/EditProfilePage";
 import SearchPage from "./Pages/General/SearchPage";
 import BuyNowPage from "./Components/BuyNow"; 
 import StartLearningPage from "./Components/StartLearning";
+import EditCourse from './Components/EditCourse.js';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/edit-profile" element={<EditProfilePage />} />
         <Route path="/search-courses" element={<SearchPage />} />
         <Route path="/create-quize" element={<CreateQuiz />} />
+        <Route path="/course/:id" element={<EditCourse />} />
       </Routes>
       <BuyNowPage/>
       {/* <StartLearningPage/> */}
