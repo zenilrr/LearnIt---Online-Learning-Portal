@@ -9,15 +9,15 @@ const studentCourse = require("./Routes/instructor-routes/course-routes")
 const instructorCourseRoutes = require("./Routes/instructor-routes/course-routes");
 const coursedetailsRoute = require('./Routes/student-routes/course-routes');
 const CoursePage = require("./Routes/student-routes/coursePage-route");
-const { default: CoursePage } = require("../my-app/src/Components/CoursePage");
+//const { default: CoursePage } = require("../my-app/src/Components/CoursePage");
 const quizRoutes = require('./Routes/instructor-routes/quiz-routes');
 const app = express();
 const PORT = process.env.PORT || 8000;
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow only the React app to access the API
-  methods: 'GET,POST', // Allow GET and POST requests
-  allowedHeaders: 'Content-Type,Authorization' // Allow these headers in requests
+  origin: 'http://localhost:3000', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], 
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 

@@ -42,6 +42,7 @@ const InstructorDashboard = () => {
 
   // Function to handle edit button click for courses
   const handleEditCourse = (id) => {
+    console.log("MongoDB Course ID:", id); // Prints the MongoDB ID
     navigate(`/course/${id}`);
   };
 
@@ -122,7 +123,7 @@ const InstructorDashboard = () => {
               </div>
               <div className="stat-box">
                 <h3>Total Revenue</h3>
-                <p>${getTotalRevenue().toFixed(2)}</p>
+                <p>₹{getTotalRevenue().toFixed(2)}</p>
               </div>
             </div>
             <table className="courses-table">
@@ -141,7 +142,7 @@ const InstructorDashboard = () => {
                     <td>{course.students.length}</td>
                     <td>{course.students.length * course.pricing}</td>
                     <td>
-                      <button className="edit-btn" onClick={() => handleEditCourse(course.id)}><FaEdit /></button>
+                      <button className="edit-btn" onClick={() => handleEditCourse(course._id)}><FaEdit /></button>
                     </td>
                   </tr>
                 ))}
