@@ -1,5 +1,4 @@
-//const Course = require("../../models/Course");
-const CourseDetailsSchema = require("../../models/ViewCourseDetails");
+const Course = require("../../models/Course");
 
 
 // const getAllStudentViewCourses = async (req, res) => {
@@ -66,8 +65,8 @@ const CourseDetailsSchema = require("../../models/ViewCourseDetails");
 class getCourseDetails
 {static getStudentViewCourseDetails = async (req, res) => {
   try {
-    
-    const courseDetails = await CourseDetailsSchema.find();
+    const { id } = req.params;
+    const courseDetails = await Course.findById(id);
 
     if (!courseDetails) {
        res.status(404).json({

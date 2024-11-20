@@ -12,6 +12,9 @@ const LectureSchema = new mongoose.Schema({
 const CourseSchema = new mongoose.Schema({
   instructorId: String,
   instructorName: String,
+  expertise: String,
+  taughtStudents: Number,
+  offeredCourses: Number,
   date: Date,
   title: String,
   category: String,
@@ -23,6 +26,9 @@ const CourseSchema = new mongoose.Schema({
   welcomeMessage: String,
   pricing: Number,
   objectives: String,
+  demoVideourl: String,
+  rating: Number,
+  linkedinUrl: String,
   students: [
     {
       studentId: String,

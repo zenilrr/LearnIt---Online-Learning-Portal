@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 /* General Styling */
-body, .learnpress-container {
+body, learnit-container {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
@@ -10,7 +10,7 @@ body, .learnpress-container {
 }
 
 /* Header */
-.learnpress-header {
+learnit-header {
   background: linear-gradient(135deg, #ff6600, #e05b00);
   color: white;
   text-align: center;
@@ -18,14 +18,14 @@ body, .learnpress-container {
   border-bottom: 2px solid #ff9100;
 }
 
-.learnpress-header h1 {
+learnit-header h1 {
   font-size: 3rem;
   font-weight: 700;
   margin: 0;
 }
 
 /* Main Content Layout */
-.learnpress-main-content {
+learnit-main-content {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -33,7 +33,7 @@ body, .learnpress-container {
 }
 
 /* Sidebar */
-.learnpress-sidebar {
+learnit-sidebar {
   flex: 1;
   background-color: #1f1f1f;
   padding: 20px;
@@ -41,19 +41,19 @@ body, .learnpress-container {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.learnpress-video iframe {
+learnit-video iframe {
   width: 100%;
   height: 250px;
   border: none;
   border-radius: 10px;
 }
 
-.learnpress-sidebar p {
+learnit-sidebar p {
   margin: 10px 0;
   font-size: 1.1rem;
 }
 
-.learnpress-start-button {
+learnit-start-button {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
@@ -67,12 +67,12 @@ body, .learnpress-container {
   transition: background-color 0.3s;
 }
 
-.learnpress-start-button:hover {
+learnit-start-button:hover {
   background-color: #e05b00;
 }
 
 /* Main Content Section */
-.learnpress-content {
+learnit-content {
   flex: 3;
   background-color: #1a1a1a;
   padding: 20px;
@@ -81,14 +81,14 @@ body, .learnpress-container {
 }
 
 /* Tabs */
-.learnpress-tabs {
+learnit-tabs {
   display: flex;
   gap: 15px;
   margin-bottom: 20px;
   border-bottom: 2px solid #333;
 }
 
-.learnpress-tab {
+learnit-tab {
   padding: 10px 15px;
   cursor: pointer;
   font-weight: 600;
@@ -97,61 +97,61 @@ body, .learnpress-container {
   transition: all 0.3s;
 }
 
-.learnpress-tab-active {
+learnit-tab-active {
   background-color: #ff6600;
   color: #fff;
 }
 
 /* Tab Content */
-.learnpress-tab-content {
+learnit-tab-content {
   padding: 15px;
   background-color: #2a2a2a;
   border-radius: 5px;
 }
 
 /* Feature Box */
-.learnpress-feature-box {
+learnit-feature-box {
   background-color: #222;
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
 }
 
-.learnpress-feature-box h3 {
+learnit-feature-box h3 {
   color: #ff9100;
   font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
 /* Images */
-.learnpress-image {
+learnit-image {
   width: 100%;
   border-radius: 10px;
   margin-top: 15px;
   transition: transform 0.3s;
 }
 
-.learnpress-image:hover {
+learnit-image:hover {
   transform: scale(1.05);
 }
 
 /* Curriculum Section */
-.learnpress-chapter-box {
+learnit-chapter-box {
   margin-bottom: 20px;
 }
 
-.learnpress-chapter-box h3 {
+learnit-chapter-box h3 {
   cursor: pointer;
   font-size: 1.2rem;
   color: #ff6600;
   transition: color 0.3s;
 }
 
-.learnpress-chapter-box h3:hover {
+learnit-chapter-box h3:hover {
   color: #e05b00;
 }
 
-.learnpress-section-list p {
+learnit-section-list p {
   font-size: 1rem;
   color: #ddd;
   margin: 8px 0;
@@ -160,67 +160,67 @@ body, .learnpress-container {
   transition: background-color 0.3s, color 0.3s;
 }
 
-.learnpress-section-list p:hover {
+learnit-section-list p:hover {
   background-color: #333;
   color: #ff9100;
 }
 
 /* Instructor Section */
-.learnpress-instructor-profile {
+learnit-instructor-profile {
   text-align: center;
   margin-top: 20px;
 }
 
-.learnpress-instructor-image {
+learnit-instructor-image {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   margin-bottom: 15px;
 }
 
-.learnpress-instructor-profile p {
+learnit-instructor-profile p {
   font-size: 1rem;
   margin: 5px 0;
 }
 
-.learnpress-linkedin-link {
+learnit-linkedin-link {
   color: #0077b5;
   font-size: 2rem;
   margin-top: 10px;
   display: inline-block;
 }
 
-.learnpress-linkedin-link:hover {
+learnit-linkedin-link:hover {
   color: #66a9d9;
 }
 
 /* Leaderboard */
-.learnpress-leaderboard {
+learnit-leaderboard {
   background-color: #1f1f1f;
   padding: 15px;
   border-radius: 10px;
 }
 
-.learnpress-leaderboard-title {
+learnit-leaderboard-title {
   font-size: 2rem;
   text-align: center;
   margin-bottom: 15px;
   color: #ff9100;
 }
 
-.learnpress-leaderboard-row {
+learnit-leaderboard-row {
   display: flex;
   justify-content: space-between;
   padding: 10px;
   border-bottom: 1px solid #333;
 }
 
-.learnpress-leaderboard-row:hover {
+learnit-leaderboard-row:hover {
   background-color: #333;
 }
 
 /* Rating Section */
-.learnpress-rating-section {
+learnit-rating-section {
   font-size: 1.5rem;
   text-align: center;
   margin-top: 20px;
@@ -229,15 +229,15 @@ body, .learnpress-container {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .learnpress-main-content {
+  learnit-main-content {
     flex-direction: column;
   }
 
-  .learnpress-sidebar, .learnpress-content {
+  learnit-sidebar, learnit-content {
     width: 100%;
   }
 
-  .learnpress-video iframe {
+  learnit-video iframe {
     height: 200px;
   }
 }
