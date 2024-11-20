@@ -1,6 +1,6 @@
 import Header2 from "../../Components/HeaderAfterSignIn";
 import Footer from "../../Components/Footer";
-import Profile from "../../Components/Profile";
+import Profile from "../../Components/StudentProfile"
 
 function SturdentProfilePage() {
 
