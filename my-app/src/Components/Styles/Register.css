@@ -15,7 +15,7 @@
 .login-container {
   background-color: #0e1325;
   color: #ffffff;
-  width: 300px;
+  width: 400px;
   padding: 30px;
   border-radius: 8px;
   text-align: center;
@@ -124,15 +124,27 @@
 
 .close-btn {
   position: absolute;
-  top: 10px;
+  top: 15px;
   right: 10px;
   background: none;
   border: none;
   font-size: 24px;
   color: #ffffff;
   cursor: pointer;
+  padding: 10px 15px 8px 13px;
 }
 
 .close-btn:hover {
-  color: #ff7d00;
+  color: #f5f5f5;
+}
+
+.error-text {
+  color: #fff; 
+  font-size: 14px; 
+  margin-top: 10px; 
+  text-align: left; 
+  background-color: rgba(200, 87, 89, 0.1); 
+  padding: 8px; 
+  border: 1px solid #ff0004; 
+  border-radius: 4px;
 }

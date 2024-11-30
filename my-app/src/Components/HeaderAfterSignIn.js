@@ -74,8 +74,11 @@ function Header2() {
   };
 
   const handleLogout = () => {
-    console.log('User logged out');
-    navigate('/login');
+    localStorage.clear();
+    if(location.pathname != '/') {
+      navigate('/');
+    }
+    window.location.reload();
   };
 
   const handleProfilePicChange = (e) => {

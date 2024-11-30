@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
 import {
   faBookOpen,
   faHourglassHalf,
@@ -13,9 +14,11 @@ import {
 import './Styles/Profile.css'
 import img from "../Assets/profile-img.jpeg";
 
+
 const Profile = () => {
   const [activeTab, setActiveTab] = useState("All");
   const [activeSidebar, setActiveSidebar] = useState("My Courses");
+  const navigate = useNavigate();
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
@@ -23,6 +26,12 @@ const Profile = () => {
 
   const handleSidebarClick = (section) => {
     setActiveSidebar(section);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+    window.location.reload();
   };
 
   return (
@@ -58,7 +67,7 @@ const Profile = () => {
             </li>
             <li
               className={activeSidebar === "Logout" ? "active" : ""}
-              onClick={() => handleSidebarClick("Logout")}
+              onClick={() => handleLogout()}
             >
               <FontAwesomeIcon icon={faSignOutAlt} /> Logout
             </li>
@@ -113,10 +122,10 @@ const Profile = () => {
             </div>
           )}
           {activeSidebar === "Logout" && (
-            <div className="logout-section">
-              <h3>Logout</h3>
-              <p>You have been logged out.</p>
-            </div>
+            <div>
+            <h3>Logout</h3>
+            <p>You have been logged out.</p>
+          </div>
           )}
         </div>
       </div>

@@ -6,11 +6,46 @@ function Register({ onClose, onLogin }) {
   const [username, setUsername] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(''); 
   const [success, setSuccess] = useState('');
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,12}$/;
+    return passwordRegex.test(password);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Email validation
+    if (!validateEmail(userEmail)) {
+      setError('Invalid email format. Email should contain "@" with characters before and after.');
+      setSuccess('');
+      return;
+    }
+
+    // Password validation
+    if (!validatePassword(password)) {
+      setError(
+        'Password must contain a capital letter, a small letter, a number, a special character, and be 8-12 characters long.'
+      );
+      setSuccess('');
+      return;
+    }
+
+    // Password confirmation
+    if (password !== confirmPassword) {
+      setError('Password confirmation does not match the password.');
+      setSuccess('');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:8000/auth/register', {
         method: 'POST',
@@ -25,14 +60,11 @@ function Register({ onClose, onLogin }) {
         }),
       });
       const data = await response.json();
-      
+
       if (response.ok) {
         setSuccess(data.message);
         setError('');
-        console.log(response.ok)
-        console.log("userEmail in frontend:");
         onLogin();
-
       } else {
         setError(data.message || 'Registration failed');
         setSuccess('');
@@ -90,6 +122,15 @@ function Register({ onClose, onLogin }) {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
+          <div className="password-container">
+          <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
           </div>
