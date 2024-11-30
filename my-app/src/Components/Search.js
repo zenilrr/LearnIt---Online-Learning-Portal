@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Styles/Search.css'
 import { FaChevronDown } from 'react-icons/fa';
+import axios from 'axios';
 
 function Search() {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
@@ -11,6 +12,8 @@ function Search() {
   const [selectedSort, setSelectedSort] = useState("A-Z");
   const [bookmarkedCourses, setBookmarkedCourses] = useState([]); 
   const [toastMessages, setToastMessages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [courses, setCourses] = useState([]);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
 
@@ -27,22 +30,38 @@ function Search() {
     "Others"
   ];
 
-  const courses = [
-    { title: "Photography Mastery", price: 50, dateAdded: "2024-01-01", popularity: 5, category: "Photography" },
-    { title: "Advanced IT Skills", price: 20, dateAdded: "2024-02-01", popularity: 8, category: "IT" },
-    { title: "Web Development Bootcamp", price: 100, dateAdded: "2024-03-01", popularity: 10, category: "Developer" },
-    { title: "Marketing for Professionals", price: 75, dateAdded: "2024-01-15", popularity: 12, category: "Marketing" },
-    { title: "Health & Wellness 101", price: 30, dateAdded: "2024-04-01", popularity: 7, category: "Health" },
-    { title: "Teach Online Like a Pro", price: 120, dateAdded: "2024-02-15", popularity: 3, category: "Teaching Online" },
-    { title: "Tech Innovations 2024", price: 200, dateAdded: "2024-03-15", popularity: 15, category: "Technology" },
-    { title: "Business Fundamentals", price: 90, dateAdded: "2024-01-10", popularity: 18, category: "Business" },
-    { title: "Creative Design Techniques", price: 45, dateAdded: "2024-05-01", popularity: 9, category: "Design" },
-    { title: "Intro to Photography", price: 0, dateAdded: "2024-06-01", popularity: 2, category: "Photography" },
-    { title: "Free IT Resources", price: 0, dateAdded: "2024-06-10", popularity: 4, category: "IT" },
-    { title: "Learn Web Development (Free)", price: 0, dateAdded: "2024-06-15", popularity: 6, category: "Developer" },
-    { title: "Free Marketing Strategies", price: 0, dateAdded: "2024-06-20", popularity: 1, category: "Marketing" },
-    { title: "Health Basics for All", price: 0, dateAdded: "2024-06-25", popularity: 3, category: "Health" },
-  ];
+  // const courses = [
+  //   { title: "Photography Mastery", price: 50, dateAdded: "2024-01-01", popularity: 5, category: "Photography" },
+  //   { title: "Advanced IT Skills", price: 20, dateAdded: "2024-02-01", popularity: 8, category: "IT" },
+  //   { title: "Web Development Bootcamp", price: 100, dateAdded: "2024-03-01", popularity: 10, category: "Developer" },
+  //   { title: "Marketing for Professionals", price: 75, dateAdded: "2024-01-15", popularity: 12, category: "Marketing" },
+  //   { title: "Health & Wellness 101", price: 30, dateAdded: "2024-04-01", popularity: 7, category: "Health" },
+  //   { title: "Teach Online Like a Pro", price: 120, dateAdded: "2024-02-15", popularity: 3, category: "Teaching Online" },
+  //   { title: "Tech Innovations 2024", price: 200, dateAdded: "2024-03-15", popularity: 15, category: "Technology" },
+  //   { title: "Business Fundamentals", price: 90, dateAdded: "2024-01-10", popularity: 18, category: "Business" },
+  //   { title: "Creative Design Techniques", price: 45, dateAdded: "2024-05-01", popularity: 9, category: "Design" },
+  //   { title: "Intro to Photography", price: 0, dateAdded: "2024-06-01", popularity: 2, category: "Photography" },
+  //   { title: "Free IT Resources", price: 0, dateAdded: "2024-06-10", popularity: 4, category: "IT" },
+  //   { title: "Learn Web Development (Free)", price: 0, dateAdded: "2024-06-15", popularity: 6, category: "Developer" },
+  //   { title: "Free Marketing Strategies", price: 0, dateAdded: "2024-06-20", popularity: 1, category: "Marketing" },
+  //   { title: "Health Basics for All", price: 0, dateAdded: "2024-06-25", popularity: 3, category: "Health" },
+  // ];
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/instructor/course/get')
+      .then((response) => {
+        if (Array.isArray(response.data.data)) {
+          setCourses(response.data.data); // Set courses to state
+        } else {
+          console.error('Courses data is not an array:', response.data.data);
+        }
+        setLoading(false); // Stop loading after fetching
+      })
+      .catch((error) => {
+        console.error('Error fetching courses:', error);
+        setLoading(false); // Stop loading in case of error
+      });
+  }, []);
 
   const toggleFilterDropdown = () => {
     setShowFilterDropdown((prev) => !prev);
@@ -51,6 +70,12 @@ function Search() {
   const handleCategoryChange = (category) => {
     if (category === "Others") {
       setSelectedOthers(!selectedOthers);
+      if (!selectedOthers) {
+        // If "Others" is selected, filter courses to only show "Others" category
+        setSelectedCategories(["Others"]);
+      } else {
+        setSelectedCategories([]);
+      }
     } else {
       setSelectedCategories((prev) =>
         prev.includes(category) ? prev.filter((cat) => cat !== category) : [...prev, category]
@@ -84,9 +109,9 @@ function Search() {
       case "Z-A":
         return [...courses].sort((a, b) => b.title.localeCompare(a.title));
       case "price-low-high":
-        return [...courses].sort((a, b) => a.price - b.price);
+        return [...courses].sort((a, b) => a.pricing - b.pricing);
       case "price-high-low":
-        return [...courses].sort((a, b) => b.price - a.price);
+        return [...courses].sort((a, b) => b.pricing - a.pricing);
       case "newly-added":
         return [...courses].sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
       case "popular":
@@ -139,7 +164,7 @@ function Search() {
 
   const filteredCourses = courses.filter((course) => {
     const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(course.category);
-    const priceMatch = priceFilter ? (priceFilter === "Free" ? course.price === 0 : course.price > 0) : true;
+    const priceMatch = priceFilter ? (priceFilter === "Free" ? course.pricing === 0 : course.pricing > 0) : true;
     return categoryMatch && priceMatch;
   });
 
@@ -211,7 +236,8 @@ function Search() {
                 <li onClick={() => handleSortChange("price-low-high")}>Price Low-High</li>
                 <li onClick={() => handleSortChange("price-high-low")}>Price High-Low</li>
                 <li onClick={() => handleSortChange("newly-added")}>Newly Added</li>
-                <li onClick={() => handleSortChange("popular")}>Popular</li>
+                {/* <li onClick={() => handleSortChange("popular")}>Popular</li> */}
+                <li onClick={() => handleSortChange("popular")}>Level</li>
               </ul>
             </div>
           )}
@@ -221,11 +247,15 @@ function Search() {
       <div className="courses-container">
         {sortedCourses.map((course, index) => (
           <div key={index} className="course-card">
-            <div className="course-tag">{course.price === 0 ? 'Free' : 'Paid'}</div>
-            <img src="https://picsum.photos/150" alt="Course" className="course-image" />
+            {/* <div className="course-tag">{course.price === 0 ? 'Free' : 'Paid'}</div>
+            <img src="https://picsum.photos/150" alt="Course" className="course-image" /> */}
+            <div className="course-tag">{course.pricing === 0 ? 'Free' : 'Paid'}</div>
+            <img src={course.image} alt="Course" className="course-image" />
             <h3 className="course-title">{course.title}</h3>
-            <p className="course-meta">Price: ${course.price}</p>
-            <p className="course-description">This is a description of the course.</p>
+            {/* <p className="course-meta">Price: ${course.price}</p>
+            <p className="course-description">This is a description of the course.</p> */}
+             <p className="course-meta">Price: ${course.pricing}</p>
+            <p className="course-description">{course.description}</p>
             <button
               className="course-plus-btn"
               onClick={() => handleBookmark(course.title)}
