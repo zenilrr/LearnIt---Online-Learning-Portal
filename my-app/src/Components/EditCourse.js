@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import {
   Button,
   TextField,
@@ -10,10 +11,12 @@ import {
 } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import DeleteIcon from "@mui/icons-material/Delete"; // Trash icon for delete
-import { useNavigate, useParams } from "react-router-dom"; // For navigation
+import { Link, useNavigate, useParams } from "react-router-dom"; // For navigation
 import { NavigateBefore } from "@mui/icons-material";
 import "./Styles/EditCourse.css"; // Link to the external CSS file
 import axios from "axios";
+import Header2 from "./HeaderAfterSignIn";
+import Footer from "./Footer";
 
 const EditCourse = ({ courseData }) => {
   const { id } = useParams();
@@ -109,11 +112,20 @@ const EditCourse = ({ courseData }) => {
       !courseDetails.category ||
       !courseDetails.level ||
       !courseDetails.description ||
-      !courseDetails.pricing ||
-      !courseDetails.courseImage
+      !courseDetails.pricing
     ) {
       alert("Please fill all the required fields.");
-      return;
+      return 0;
+    }
+
+    else if(courseDetails.pricing<0){
+      alert("Price of the course must be non-zero integer.");
+      return 0;
+    }
+
+    else if(courseDetails.level!="Beginner" || courseDetails.level!="Intermediate" || courseDetails.level!="Advanced"){
+      alert("Chose an appropriate level.");
+      return 0;
     }
   
     // Prepare data for submission
@@ -134,6 +146,7 @@ const EditCourse = ({ courseData }) => {
   
       if (response.ok) {
         alert("Course Updated Successfully!");
+        window.location.href = '/instructor-dashboard';
       } else {
         alert("Error updating course.");
       }
@@ -147,30 +160,81 @@ const EditCourse = ({ courseData }) => {
     navigate("/edit-quiz"); // Adjust route path accordingly
   };
 
+  const FileUploadButton = ({ label, onChange, fileName }) => (
+    <Button
+      sx={{
+        backgroundColor: '#FF7900',
+        color: '#FFFFFF',
+        '&:hover': { backgroundColor: '#FF7900' },
+      }}
+      variant="outlined"
+      startIcon={<CloudUploadIcon />}
+      onClick={() => onChange()}
+    >
+      {fileName ? fileName : label}
+    </Button>
+  );
+
   return (
+     <>
+     <Header2></Header2>
     <Box className="edit-course-container">
-      <Box className="section-tabs">
+      <Box className="edit-section-tabs">
         <Button
-          variant={currentSection === 1 ? "contained" : "outlined"}
+          sx={{
+            backgroundColor: currentSection === 1 ? "#FF7900" : "transparent",
+            color: currentSection === 1 ? "#fff" : "#000",
+            "&:hover": { backgroundColor: "#FF7900" },
+          }}
+          variant="contained"
           onClick={() => setCurrentSection(1)}
         >
           Course Details
         </Button>
         <Button
-          variant={currentSection === 2 ? "contained" : "outlined"}
+          sx={{
+            backgroundColor: currentSection === 2 ? "#FF7900" : "transparent",
+            color: currentSection === 2 ? "#fff" : "#000",
+            "&:hover": { backgroundColor: "#FF7900" },
+          }}
+          variant="contained"
           onClick={() => setCurrentSection(2)}
         >
           Modules
         </Button>
       </Box>
 
-      <Box className="section-content">
+      <Box className="edit-section-content">
         {currentSection === 1 && (
-          <Box className="course-details">
-            <Box className="form-fields">
+          <Box className="edit-course-details" sx={{ backgroundColor: '#1f3064' }}>
+            <Box className="edit-form-fields">
               <TextField
                 label="Course Title"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 value={courseDetails.title}
                 onChange={(e) =>
@@ -183,6 +247,30 @@ const EditCourse = ({ courseData }) => {
                 variant="outlined"
                 fullWidth
                 value={courseDetails.category}
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 onChange={(e) =>
                   setCourseDetails({
                     ...courseDetails,
@@ -194,6 +282,30 @@ const EditCourse = ({ courseData }) => {
               <TextField
                 label="Level (e.g., Beginner, Intermediate, Advanced)"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 value={courseDetails.level}
                 onChange={(e) =>
@@ -204,6 +316,30 @@ const EditCourse = ({ courseData }) => {
               <TextField
                 label="Description"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: '#f9f9f9', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 multiline
                 rows={4}
@@ -219,6 +355,30 @@ const EditCourse = ({ courseData }) => {
               <TextField
                 label="Pricing"
                 variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#FF7900', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
                 fullWidth
                 type="number"
                 value={courseDetails.pricing}
@@ -230,23 +390,20 @@ const EditCourse = ({ courseData }) => {
                 }
                 required
               />
-              <Button
-                variant="contained"
-                startIcon={<CloudUploadIcon />}
-                onClick={() => handleFileUpload("courseImage")}
-              >
-                {courseDetails.image
-                  ? `Change Course Image (${courseDetails.image})`
-                  : "Add Course Image"}
-              </Button>
+            <FileUploadButton
+              label={courseDetails.courseImage ? "Image Uploaded" : "Add Course Image"}
+              onChange={() => handleFileUpload("courseImage")}
+              fileName={courseDetails.courseImage ? courseDetails.courseImage.name : ""}
+            />
+
             </Box>
           </Box>
         )}
 
         {currentSection === 2 && (
-          <Box className="modules-section">
+          <Box className="edit-modules-section" sx={{ backgroundColor: '#1f3064' }}>
             {modules.map((module, index) => (
-              <Box key={index} className="module-container">
+              <Box key={index} className="edit-module-container" sx={{ backgroundColor: '#1f3064' }}>
                 {/* Display module number */}
                 <Box className="module-number">
                   <strong>Module {index + 1}</strong>
@@ -255,6 +412,31 @@ const EditCourse = ({ courseData }) => {
                 <TextField
                   label="Module Name"
                   variant="outlined"
+                  sx={{
+                    '& label': {
+                      color: 'white', // Default label color when not focused
+                    },
+                    '& label.Mui-focused': {
+                      color: '#FF7900', // Orange color when the label is focused
+                    },
+                    '& .MuiOutlinedInput-root': {
+                      '& fieldset': {
+                        borderColor: 'grey', // Default border color
+                      },
+                      '&:hover fieldset': {
+                        borderColor: '#FF7900', // Orange color on hover
+                      },
+                      '&.Mui-focused fieldset': {
+                        borderColor: '#FF7900', // Orange color when focused
+                      },
+                      '& input': {
+                        color: 'white', // Text color inside input
+                      },
+                    },
+                    backgroundColor: '#000e3dfb',
+                    borderRadius: '5px',
+                    marginBottom: '20px'
+                  }}
                   fullWidth
                   value={module.moduleName}
                   onChange={(e) =>
@@ -262,10 +444,36 @@ const EditCourse = ({ courseData }) => {
                   }
                   required
                 />
-                <FormControl fullWidth>
-                  <InputLabel>Module Type</InputLabel>
+                <FormControl fullWidth
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#FF7900', // Orange on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#FF7900', // Orange when focused
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
+                >
+                  <InputLabel
+                    sx={{
+                      color: 'white', // Default label color
+                      '&.Mui-focused': {
+                        color: '#FF7900', // Orange color when focused
+                      },
+                    }}>Module Type</InputLabel>
                   <Select
                     value={module.moduleType}
+                    label="Module Type"
+                    sx={{
+                      color: 'white', // Text color inside input
+                    }}
                     onChange={(e) =>
                       handleModuleChange(index, "moduleType", e.target.value)
                     }
@@ -279,8 +487,17 @@ const EditCourse = ({ courseData }) => {
                   </Select>
                 </FormControl>
                 {module.moduleType === "lecture" && (
-                  <Box className="file-upload-buttons">
+                  <Box className="edit-file-upload-buttons">
                     <Button
+                      sx={{
+                        backgroundColor: '#FF7900', // Orange color
+                        color: '#FFFFFF', // White text
+                        '&:hover': {
+                          backgroundColor: '#FF7900', // Prevent color change on hover
+                        },
+                        marginRight: '20px',
+                        marginTop: '20px'
+                      }}
                       variant="outlined"
                       startIcon={<CloudUploadIcon />}
                       onClick={() => handleFileUpload("moduleContent", index)}
@@ -290,6 +507,15 @@ const EditCourse = ({ courseData }) => {
                         : "Add PDF"}
                     </Button>
                     <Button
+                      sx={{
+                        backgroundColor: '#FF7900', // Orange color
+                        color: '#FFFFFF', // White text
+                        '&:hover': {
+                          backgroundColor: '#FF7900', // Prevent color change on hover
+                        },
+                        marginRight: '20px',
+                        marginTop: '20px'
+                      }}
                       variant="outlined"
                       startIcon={<CloudUploadIcon />}
                       onClick={() => handleFileUpload("moduleVideo", index)}
@@ -301,24 +527,46 @@ const EditCourse = ({ courseData }) => {
                   </Box>
                 )}
                 {module.moduleType === "quiz" && (
-                  <Button variant="contained" onClick={handleQuizRedirect}>
+                  <Button 
+                  sx={{
+                    backgroundColor: '#FF7900', // Orange color
+                    color: '#FFFFFF', // White text
+                    '&:hover': {
+                      backgroundColor: '#FF7900', // Prevent color change on hover
+                    },
+                    marginRight: '20px',
+                    marginTop: '20px'
+                  }}
+                  variant="contained" onClick={handleQuizRedirect}>
                     Edit Quiz
                   </Button>
                 )}
-
                 {/* Delete Button */}
                 <Button
+                      sx={{
+                        backgroundColor: '#FF7900', // Orange color
+                        color: '#FFFFFF', // White text
+                        '&:hover': {
+                          backgroundColor: '#FF7900', // Prevent color change on hover
+                        },
+                        marginRight: '20px',
+                        marginTop: '20px'
+                      }}
                   variant="outlined"
                   color="error"
                   startIcon={<DeleteIcon />}
                   onClick={() => handleDeleteModule(index)}
-                  className="delete-module-btn"
                 >
                   Delete Module
                 </Button>
               </Box>
             ))}
             <Button
+              sx={{
+                backgroundColor: "#FF7900",
+                color: "#FFFFFF",
+                "&:hover": { backgroundColor: "#FF7900" },
+              }}
               variant="contained"
               startIcon={<CloudUploadIcon />}
               onClick={handleAddModule}
@@ -328,20 +576,35 @@ const EditCourse = ({ courseData }) => {
           </Box>
         )}
 
-        <Box className="footer-buttons">
-          <Button
-            variant="outlined"
-            startIcon={<NavigateBefore />}
-            onClick={() => setCurrentSection(1)}
-          >
-            Back
-          </Button>
-          <Button variant="contained" onClick={handleSubmit}>
-            Save Changes
-          </Button>
+        <Box className="edit-footer-buttons">
+        <Button
+  variant="outlined"
+  startIcon={<NavigateBefore />}
+  onClick={() => {
+    if (currentSection === 2) {
+      setCurrentSection(1);
+    } else {
+      window.location.href = '/instructor-dashboard'; // Replace '?' with the desired path
+    }
+  }}
+>
+  Back
+</Button>
+
+<Button
+  variant="contained"
+  onClick={() => {
+    handleSubmit()
+  }}
+>
+  Save Changes
+</Button>
+
         </Box>
       </Box>
     </Box>
+    <Footer></Footer>
+    </>
   );
 };
 
