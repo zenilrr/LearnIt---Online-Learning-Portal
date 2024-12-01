@@ -161,7 +161,7 @@ const EditCourse = ({ courseData }) => {
   };
 
   const FileUploadButton = ({ label, onChange, fileName }) => (
-    <Button
+    <Button classname="edit_course_btn"
       sx={{
         backgroundColor: '#FF7900',
         color: '#FFFFFF',
@@ -180,7 +180,7 @@ const EditCourse = ({ courseData }) => {
      <Header2></Header2>
     <Box className="edit-course-container">
       <Box className="edit-section-tabs">
-        <Button
+        <Button classname="edit_course_btn"
           sx={{
             backgroundColor: currentSection === 1 ? "#FF7900" : "transparent",
             color: currentSection === 1 ? "#fff" : "#000",
@@ -191,7 +191,7 @@ const EditCourse = ({ courseData }) => {
         >
           Course Details
         </Button>
-        <Button
+        <Button classname="edit_course_btn"
           sx={{
             backgroundColor: currentSection === 2 ? "#FF7900" : "transparent",
             color: currentSection === 2 ? "#fff" : "#000",
@@ -488,7 +488,7 @@ const EditCourse = ({ courseData }) => {
                 </FormControl>
                 {module.moduleType === "lecture" && (
                   <Box className="edit-file-upload-buttons">
-                    <Button
+                    <Button classname="edit_course_btn"
                       sx={{
                         backgroundColor: '#FF7900', // Orange color
                         color: '#FFFFFF', // White text
@@ -506,7 +506,7 @@ const EditCourse = ({ courseData }) => {
                         ? module.moduleContent.name
                         : "Add PDF"}
                     </Button>
-                    <Button
+                    <Button classname="edit_course_btn"
                       sx={{
                         backgroundColor: '#FF7900', // Orange color
                         color: '#FFFFFF', // White text
@@ -527,7 +527,7 @@ const EditCourse = ({ courseData }) => {
                   </Box>
                 )}
                 {module.moduleType === "quiz" && (
-                  <Button 
+                  <Button classname="edit_course_btn" 
                   sx={{
                     backgroundColor: '#FF7900', // Orange color
                     color: '#FFFFFF', // White text
@@ -542,7 +542,7 @@ const EditCourse = ({ courseData }) => {
                   </Button>
                 )}
                 {/* Delete Button */}
-                <Button
+                <Button classname="edit_course_btn"
                       sx={{
                         backgroundColor: '#FF7900', // Orange color
                         color: '#FFFFFF', // White text
@@ -561,7 +561,7 @@ const EditCourse = ({ courseData }) => {
                 </Button>
               </Box>
             ))}
-            <Button
+            <Button classname="edit_course_btn"
               sx={{
                 backgroundColor: "#FF7900",
                 color: "#FFFFFF",
@@ -577,7 +577,7 @@ const EditCourse = ({ courseData }) => {
         )}
 
         <Box className="edit-footer-buttons">
-        <Button
+        <Button classname="edit_course_btn"
   variant="outlined"
   startIcon={<NavigateBefore />}
   onClick={() => {
@@ -591,7 +591,7 @@ const EditCourse = ({ courseData }) => {
   Back
 </Button>
 
-<Button
+<Button classname="edit_course_btn"
   variant="contained"
   onClick={() => {
     handleSubmit()

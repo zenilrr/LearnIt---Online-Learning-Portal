@@ -41,8 +41,8 @@ function App() {
         <Route path="/buy-now/:id" element={<BuyNowPage />} />
         <Route path="/start-learning/:id" element={<StartLearningPage />} />
       </Routes>
-      
-      
+
+
       
     </div>
   );

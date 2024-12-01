@@ -113,7 +113,7 @@ body, .edit-course-container-unique {
 }
 
 /* General button styling */
-button {
+.edit_course_btn {
     background-color: #ff7900;
     color: #fff;
     border: none;
@@ -123,7 +123,7 @@ button {
     font-size: 16px;
 }
 
-button:hover {
+.edit_course_btn:hover {
     background-color: #ff7900;
     transform: scale(1.01);
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
