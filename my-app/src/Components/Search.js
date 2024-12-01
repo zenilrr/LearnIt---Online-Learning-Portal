@@ -1,33 +1,35 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './Styles/Search.css'
-import { FaChevronDown } from 'react-icons/fa';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from "react";
+import "./Styles/Search.css";
+import { useNavigate } from "react-router-dom";
+import { FaChevronDown } from "react-icons/fa";
+import axios from "axios";
 
 function Search() {
   const [showFilterDropdown, setShowFilterDropdown] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [priceFilter, setPriceFilter] = useState(null);
-  const [selectedOthers, setSelectedOthers] = useState(false); 
+  const [selectedOthers, setSelectedOthers] = useState(false);
   const [showSortDropdown, setShowSortDropdown] = useState(false);
   const [selectedSort, setSelectedSort] = useState("A-Z");
-  const [bookmarkedCourses, setBookmarkedCourses] = useState([]); 
+  const [bookmarkedCourses, setBookmarkedCourses] = useState([]);
   const [toastMessages, setToastMessages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState([]);
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
+  const navigate = useNavigate();
 
   const categories = [
-    "Photography", 
-    "IT", 
-    "Developer", 
-    "Marketing", 
-    "Health", 
-    "Teaching Online", 
-    "Technology", 
-    "Business", 
-    "Design", 
-    "Others"
+    "Photography",
+    "IT",
+    "Developer",
+    "Marketing",
+    "Health",
+    "Teaching Online",
+    "Technology",
+    "Business",
+    "Design",
+    "Others",
   ];
 
   // const courses = [
@@ -48,20 +50,25 @@ function Search() {
   // ];
 
   useEffect(() => {
-    axios.get('http://localhost:8000/instructor/course/get')
+    axios
+      .get("http://localhost:8000/instructor/course/get")
       .then((response) => {
         if (Array.isArray(response.data.data)) {
           setCourses(response.data.data); // Set courses to state
         } else {
-          console.error('Courses data is not an array:', response.data.data);
+          console.error("Courses data is not an array:", response.data.data);
         }
         setLoading(false); // Stop loading after fetching
       })
       .catch((error) => {
-        console.error('Error fetching courses:', error);
+        console.error("Error fetching courses:", error);
         setLoading(false); // Stop loading in case of error
       });
   }, []);
+
+  const handleCourseClick = (id) => {
+    navigate(`/buy-now/${id}`); // Navigate to the buy-now page with the course ID
+  };
 
   const toggleFilterDropdown = () => {
     setShowFilterDropdown((prev) => !prev);
@@ -78,7 +85,9 @@ function Search() {
       }
     } else {
       setSelectedCategories((prev) =>
-        prev.includes(category) ? prev.filter((cat) => cat !== category) : [...prev, category]
+        prev.includes(category)
+          ? prev.filter((cat) => cat !== category)
+          : [...prev, category]
       );
     }
   };
@@ -113,7 +122,9 @@ function Search() {
       case "price-high-low":
         return [...courses].sort((a, b) => b.pricing - a.pricing);
       case "newly-added":
-        return [...courses].sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+        return [...courses].sort(
+          (a, b) => new Date(b.dateAdded) - new Date(a.dateAdded)
+        );
       case "popular":
         return [...courses].sort((a, b) => b.popularity - a.popularity);
       default:
@@ -123,11 +134,18 @@ function Search() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target) && 
-          !buttonRef.current.contains(event.target)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !buttonRef.current.contains(event.target)
+      ) {
         setShowFilterDropdown(false);
       }
-      if (showSortDropdown && dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (
+        showSortDropdown &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
         setShowSortDropdown(false);
       }
     };
@@ -141,30 +159,35 @@ function Search() {
   const handleBookmark = (courseTitle) => {
     setBookmarkedCourses((prev) => {
       const isBookmarked = prev.includes(courseTitle);
-      const newMessage = isBookmarked ? "Course is UnBookmarked!!" : "Course is Bookmarked!!";
+      const newMessage = isBookmarked
+        ? "Course is UnBookmarked!!"
+        : "Course is Bookmarked!!";
 
       const newToastMessage = { message: newMessage, id: new Date().getTime() };
 
-      setToastMessages((prevMessages) => [
-        ...prevMessages,
-        newToastMessage, 
-      ]);
+      setToastMessages((prevMessages) => [...prevMessages, newToastMessage]);
 
       setTimeout(() => {
-        setToastMessages((prevMessages) => prevMessages.slice(1)); 
+        setToastMessages((prevMessages) => prevMessages.slice(1));
       }, 2000);
 
       if (isBookmarked) {
-        return prev.filter(course => course !== courseTitle);
+        return prev.filter((course) => course !== courseTitle);
       } else {
-        return [...prev, courseTitle]; 
+        return [...prev, courseTitle];
       }
     });
   };
 
   const filteredCourses = courses.filter((course) => {
-    const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(course.category);
-    const priceMatch = priceFilter ? (priceFilter === "Free" ? course.pricing === 0 : course.pricing > 0) : true;
+    const categoryMatch =
+      selectedCategories.length === 0 ||
+      selectedCategories.includes(course.category);
+    const priceMatch = priceFilter
+      ? priceFilter === "Free"
+        ? course.pricing === 0
+        : course.pricing > 0
+      : true;
     return categoryMatch && priceMatch;
   });
 
@@ -183,8 +206,15 @@ function Search() {
 
       <div className="controls">
         <div className="filter-container">
-          <button ref={buttonRef} className="filter-btn" onClick={toggleFilterDropdown}>
-            Filter <FaChevronDown className={`dropdown-icon ${showFilterDropdown ? 'open' : ''}`} />
+          <button
+            ref={buttonRef}
+            className="filter-btn"
+            onClick={toggleFilterDropdown}
+          >
+            Filter{" "}
+            <FaChevronDown
+              className={`dropdown-icon ${showFilterDropdown ? "open" : ""}`}
+            />
           </button>
           {showFilterDropdown && (
             <div className="filter-dropdown" ref={dropdownRef}>
@@ -193,7 +223,11 @@ function Search() {
                 <label key={index} className="filter-option">
                   <input
                     type="checkbox"
-                    checked={category === "Others" ? selectedOthers : selectedCategories.includes(category)}
+                    checked={
+                      category === "Others"
+                        ? selectedOthers
+                        : selectedCategories.includes(category)
+                    }
                     onChange={() => handleCategoryChange(category)}
                   />
                   {category}
@@ -203,39 +237,55 @@ function Search() {
               <label className="filter-option">
                 <input
                   type="checkbox"
-                  checked={priceFilter === 'Free'}
-                  onChange={() => handlePriceChange('Free')}
+                  checked={priceFilter === "Free"}
+                  onChange={() => handlePriceChange("Free")}
                 />
                 Free
               </label>
               <label className="filter-option">
                 <input
                   type="checkbox"
-                  checked={priceFilter === 'Paid'}
-                  onChange={() => handlePriceChange('Paid')}
+                  checked={priceFilter === "Paid"}
+                  onChange={() => handlePriceChange("Paid")}
                 />
                 Paid
               </label>
               <div className="filter-btns">
-                <button className="reset-btn" onClick={resetFilters}>Reset</button>
-                <button className="apply-btn" onClick={handleApplyFilters}>Apply</button>
+                <button className="reset-btn" onClick={resetFilters}>
+                  Reset
+                </button>
+                <button className="apply-btn" onClick={handleApplyFilters}>
+                  Apply
+                </button>
               </div>
             </div>
           )}
         </div>
 
         <div className="sort-container">
-          <div className="sort-btn" onClick={() => setShowSortDropdown(!showSortDropdown)}>
-            {selectedSort} <FaChevronDown className={`dropdown-icon ${showSortDropdown ? 'open' : ''}`} />
+          <div
+            className="sort-btn"
+            onClick={() => setShowSortDropdown(!showSortDropdown)}
+          >
+            {selectedSort}{" "}
+            <FaChevronDown
+              className={`dropdown-icon ${showSortDropdown ? "open" : ""}`}
+            />
           </div>
           {showSortDropdown && (
             <div className="sort-dropdown" ref={dropdownRef}>
               <ul>
                 <li onClick={() => handleSortChange("A-Z")}>A-Z</li>
                 <li onClick={() => handleSortChange("Z-A")}>Z-A</li>
-                <li onClick={() => handleSortChange("price-low-high")}>Price Low-High</li>
-                <li onClick={() => handleSortChange("price-high-low")}>Price High-Low</li>
-                <li onClick={() => handleSortChange("newly-added")}>Newly Added</li>
+                <li onClick={() => handleSortChange("price-low-high")}>
+                  Price Low-High
+                </li>
+                <li onClick={() => handleSortChange("price-high-low")}>
+                  Price High-Low
+                </li>
+                <li onClick={() => handleSortChange("newly-added")}>
+                  Newly Added
+                </li>
                 {/* <li onClick={() => handleSortChange("popular")}>Popular</li> */}
                 <li onClick={() => handleSortChange("popular")}>Level</li>
               </ul>
@@ -246,21 +296,27 @@ function Search() {
 
       <div className="courses-container">
         {sortedCourses.map((course, index) => (
-          <div key={index} className="course-card">
+          <div
+            key={course.id}
+            className="course-card"
+            onClick={() => handleCourseClick(course._id)}
+          >
             {/* <div className="course-tag">{course.price === 0 ? 'Free' : 'Paid'}</div>
             <img src="https://picsum.photos/150" alt="Course" className="course-image" /> */}
-            <div className="course-tag">{course.pricing === 0 ? 'Free' : 'Paid'}</div>
+            <div className="course-tag">
+              {course.pricing === 0 ? "Free" : "Paid"}
+            </div>
             <img src={course.image} alt="Course" className="course-image" />
             <h3 className="course-title">{course.title}</h3>
             {/* <p className="course-meta">Price: ${course.price}</p>
             <p className="course-description">This is a description of the course.</p> */}
-             <p className="course-meta">Price: ${course.pricing}</p>
+            <p className="course-meta">Price: ${course.pricing}</p>
             <p className="course-description">{course.description}</p>
             <button
               className="course-plus-btn"
               onClick={() => handleBookmark(course.title)}
             >
-              {bookmarkedCourses.includes(course.title) ? '✔' : '+'}
+              {bookmarkedCourses.includes(course.title) ? "✔" : "+"}
             </button>
           </div>
         ))}
