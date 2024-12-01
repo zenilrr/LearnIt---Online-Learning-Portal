@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
+import CloseIcon from '@mui/icons-material/Close'; // Import MUI Close icon
 import './Styles/Login.css';
 
 function Login({ onClose, onRegister }) {
@@ -54,7 +55,9 @@ function Login({ onClose, onRegister }) {
   return (
     <div className="login-overlay">
       <div className="login-container">
-        <button className="close-btn" onClick={onClose}>×</button>
+        <button className="close-btn" onClick={onClose}>
+          <CloseIcon style={{ fontSize: '24px', color: '#ffffff' }} /> {/* Close Icon */}
+        </button>
         <h2 className="login-title">Login to your account</h2>
 
         <form className="login-form" onSubmit={handleSubmit}>

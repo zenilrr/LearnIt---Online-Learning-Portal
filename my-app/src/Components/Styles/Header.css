@@ -16,7 +16,8 @@
   font-weight: 700;
   font-size: 1.5rem;
   text-decoration: none;
-  margin: 0px
+  margin: 0px;
+  padding-left: 40px;
 }
 
 .header-links-2 {
@@ -84,55 +85,24 @@
   background-color: #ff5e00;
 }
 
-/* Additional styles for search functionality */
-
-/* Search Box Styling */
-.searchBox {
-  position: relative;
-  background: #000e3dfb;
-  height: 25px;
-  border-radius: 40px;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-  transition: width 0.4s ease;
-}
-
-.searchButton {
-  color: #ff9100;
-  width: 35px;
-  height: 35px;
-  border:none;
-  border-radius: 50%;
-  background: #000e3dfb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.4s;
-}
-
-.searchInput {
+.go-to-courses-button {
   font-family: 'Poppins', sans-serif;
-  border: none;
-  background: none;
-  outline: none;
-  color: white;
-  font-size: 16px;
-  transition: width 0.4s ease;
-  width: 0px;
+  background-color: #ff9100;
+  color: #ffffff;
   font-weight: 700;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 20px;
+  margin-bottom:3px;
+  margin-top: 3px;
+  width:10rem;
 }
 
-.searchBox:hover .searchInput {
-  width: 240px;
-  padding: 6px 6px;
-}
-
-.searchBox:hover .searchButton {
-  background: #ff5e00;
-  color: #2f3640;
+.go-to-courses-button:hover {
+  background-color: #ff5e00; /* Darker green on hover */
 }
 
 /* Styles for the dropdown menu */

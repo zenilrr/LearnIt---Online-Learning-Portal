@@ -18,6 +18,7 @@ import SearchPage from "./Pages/General/SearchPage";
 import BuyNowPage from "./Components/BuyNow"; 
 import StartLearningPage from "./Components/StartLearning";
 import EditCourse from './Components/EditCourse.js';
+import Headeraftersignin from './Components/HeaderAfterSignIn.js';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/buy-now/:id" element={<BuyNowPage />} />
         <Route path="/start-learning/:id" element={<StartLearningPage />} />
       </Routes>
+      
       
       
     </div>

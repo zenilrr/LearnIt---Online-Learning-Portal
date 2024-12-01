@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import CloseIcon from '@mui/icons-material/Close'; // Import MUI Close icon
 import './Styles/Register.css';
 
 function Register({ onClose, onLogin }) {
@@ -50,7 +51,9 @@ function Register({ onClose, onLogin }) {
   return (
     <div className="login-overlay">
       <div className="login-container">
-        <button className="close-btn" onClick={onClose}>×</button>
+      <button className="close-btn" onClick={onClose}>
+          <CloseIcon style={{ fontSize: '24px', color: '#ffffff' }} /> {/* Close Icon */}
+        </button>
         <h2 className="login-title">Create a new account</h2>
 
         {/* Role Selection Buttons */}

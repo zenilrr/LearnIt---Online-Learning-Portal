@@ -17,7 +17,7 @@ body {
 .header, .footer, .search-container {
     width: 100vw; 
     margin: 0;
-    padding: 0;
+    /* padding: 0; */
 }
 
 .search-container {

@@ -86,53 +86,24 @@
 
 /* Additional styles for search functionality */
 
-/* Search Box Styling */
-.searchBox {
-  position: relative;
-  background: #000e3dfb;
-  height: 25px;
-  border-radius: 40px;
-  padding: 20x;
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-  transition: width 0.4s ease;
-}
-
-.searchButton {
-  color: #ff9100;
-  width: 35px;
-  height: 35px;
-  border:none;
-  border-radius: 50%;
-  background: #000e3dfb;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  transition: background 0.4s;
-}
-
-.searchInput {
+.go-to-courses-button {
   font-family: 'Poppins', sans-serif;
-  border: none;
-  background: none;
-  outline: none;
-  color: white;
-  font-size: 16px;
-  transition: width 0.4s ease;
-  width: 0px;
+  background-color: #ff9100;
+  color: #ffffff;
   font-weight: 700;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 20px;
+  margin-bottom:3px;
+  margin-top: 3px;
+  width:10rem;
 }
 
-.searchBox:hover .searchInput {
-  width: 240px;
-  padding: 6px 6px;
-}
-
-.searchBox:hover .searchButton {
-  background: #ff5e00;
-  color: #2f3640;
+.go-to-courses-button:hover {
+  background-color: #ff5e00; /* Darker green on hover */
 }
 
 /* Styles for the dropdown menu */
@@ -250,6 +221,7 @@
   cursor: pointer;
   padding: 0;
   display: flex;
+  border-radius: 50%;
   align-items: center;
   margin-right: 15px; /* Shift left by reducing right margin */
 }
@@ -263,10 +235,10 @@
 /* Updated Dropdown Menu Styling */
 .profile-dropdown {
   position: absolute;
-  top: 70px; /* Adjust based on your header height */
+  top: 85px; /* Adjust based on your header height */
   right: 10px; /* Align to the profile button */
   background-color: #1f3064; /* Updated background color */
-  border-radius: 8px;
+  border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   width: 130px;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaChevronDown } from 'react-icons/fa';
-import SearchIcon from '@mui/icons-material/Search';
 import './Styles/Header_after_signin.css';
 import capLogo from '../Assets/Cap.png';
 import DefaultProfilePic from '../Assets/profile-img.jpeg';
@@ -11,8 +10,6 @@ function Header2() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showProfileDropdown, setShowProfileDropdown] = useState(false);
   const [activeLink, setActiveLink] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [selectedSuggestion, setSelectedSuggestion] = useState('');
   const [profilePic, setProfilePic] = useState(DefaultProfilePic);
   const location = useLocation();
@@ -31,47 +28,29 @@ function Header2() {
     'Python',
   ];
 
-  const toggleSearch = () => {
-    if (selectedSuggestion) {
-      navigate(`/courses/${selectedSuggestion.toLowerCase().replace(/\s+/g, '-')}`);
-      setSearchTerm('');
-      setSelectedSuggestion('');
-    } else {
-      setSearchTerm('');
-      setFilteredSuggestions([]);
-    }
-    setShowSearch(!showSearch);
-  };
-
   const handleMouseEnter = () => setShowDropdown(true);
   const handleMouseLeave = () => setShowDropdown(false);
 
   const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      setActiveLink(sectionId);
-    }
-  };
-
-  const handleSearchChange = (e) => {
-    const userInput = e.target.value;
-    setSearchTerm(userInput);
-    if (userInput) {
-      const filtered = suggestions.filter((suggestion) =>
-        suggestion.toLowerCase().startsWith(userInput.toLowerCase())
-      );
-      setFilteredSuggestions(filtered);
+    if (location.pathname !== '/') {
+      // Navigate to home page first if not already there
+      navigate('/');
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+          setActiveLink(sectionId);
+        }
+      }, 300); // Delay to ensure the page loads
     } else {
-      setFilteredSuggestions([]);
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        setActiveLink(sectionId);
+      }
     }
   };
-
-  const handleSuggestionClick = (suggestion) => {
-    setSearchTerm(suggestion);
-    setSelectedSuggestion(suggestion);
-    setFilteredSuggestions([]);
-  };
+  
 
   const handleLogout = () => {
     console.log('User logged out');
@@ -163,21 +142,9 @@ function Header2() {
         </span>
       </nav>
 
-      <div className="searchBox">
-        <input type="text" className="searchInput" placeholder="Search..." value={searchTerm} onChange={handleSearchChange} />
-        <button className="searchButton" onClick={toggleSearch}>
-          <SearchIcon style={{ color: '#ffffff' }} />
-        </button>
-        {filteredSuggestions.length > 0 && (
-          <div className="suggestions-dropdown">
-            {filteredSuggestions.map((suggestion, index) => (
-              <div key={index} className="suggestion-item" onClick={() => handleSuggestionClick(suggestion)}>
-                {suggestion}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      <button className="go-to-courses-button" onClick={() => navigate('/search-courses')}>
+        Search Courses
+      </button>
 
       <button className="profile-button" onClick={() => setShowProfileDropdown(!showProfileDropdown)}>
         <img src={profilePic} alt="Profile" />
