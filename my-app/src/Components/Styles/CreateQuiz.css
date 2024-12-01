@@ -11,6 +11,9 @@
     background-color: var(--background-color);
     color: var(--text-color);
     min-height: 100vh;
+    display:flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 .quiz_creation-title {
@@ -25,6 +28,7 @@
 .quiz_creation-passing-score-input,
 .quiz_creation-question-input,
 .quiz_creation-option-input,
+.quiz_creation-course-name-input,
 .quiz_creation-correct-answer-select {
     margin-bottom: 16px;
 }

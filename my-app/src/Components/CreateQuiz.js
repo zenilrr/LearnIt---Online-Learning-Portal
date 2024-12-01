@@ -89,6 +89,46 @@ const CreateQuiz = () => {
       </div>
 
       <TextField
+        label="Course Name"
+        variant="outlined"
+        fullWidth
+        type="text" // Changed type to text
+        value={quizDetails.courseName} // Assuming "courseName" is a property in quizDetails
+        onChange={(e) =>
+          setQuizDetails((prev) => ({
+            ...prev,
+            courseName: e.target.value, // Update courseName property
+          }))
+        }
+        className="quiz_creation-course-name-input"
+        sx={{
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': {
+              borderColor: '#ff9100', // Orange border
+            },
+            '&:hover fieldset': {
+              borderColor: '#ff5e00', // Hover color
+            },
+            '&.Mui-focused fieldset': {
+              borderColor: '#ff5e00', // Focused border color
+            },
+          },
+          '& .MuiInputLabel-root': {
+            color: 'white', // White label text
+            fontWeight: 'bold',
+            fontFamily: 'Poppins', // Set font family to Poppins
+          },
+          '& .MuiInputBase-root': {
+            color: 'white', // White input text color
+            fontWeight: 'bold',
+            fontFamily: 'Poppins', // Set font family to Poppins
+          },
+        }}
+      />
+
+      <div> </div>
+
+      <TextField
         label="Passing Score (%)"
         variant="outlined"
         fullWidth

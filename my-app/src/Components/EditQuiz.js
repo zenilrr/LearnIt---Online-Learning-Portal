@@ -146,62 +146,8 @@ const EditQuiz = () => {
   return (
     <Box className="create-quiz-container">
       <div className="title">Edit Quiz</div>
-
-      {/* Course, Quiz, and Passing Score Section */}
-        {/* Course Selection */}
         
-          <TextField
-            label="Select Course"
-            variant="outlined"
-            fullWidth
-            select
-            value={quizDetails.course}
-            onChange={handleSelectCourse}
-            className="course-select"
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': { borderColor: '#ff9100' },
-                '&:hover fieldset': { borderColor: '#ff5e00' },
-                '&.Mui-focused fieldset': { borderColor: '#ff5e00' },
-              },
-              '& .MuiInputLabel-root': { color: 'white', fontWeight: 'bold', fontFamily: 'Poppins' },
-              '& .MuiInputBase-root': { color: 'white', fontWeight: 'bold', fontFamily: 'Poppins' },
-            }}
-          >
-            {Object.keys(quizDetails.quizzes).map((course) => (
-              <MenuItem key={course} value={course}>
-                {course}
-              </MenuItem>
-            ))}
-          </TextField>
-
-        {/* Quiz Selection */}
-        
-          <TextField
-            label="Select Quiz"
-            variant="outlined"
-            fullWidth
-            select
-            value={quizDetails.quiz}
-            onChange={handleSelectQuiz}
-            className="quiz-select"
-            sx={{
-              '& .MuiOutlinedInput-root': {
-                '& fieldset': { borderColor: '#ff9100' },
-                '&:hover fieldset': { borderColor: '#ff5e00' },
-                '&.Mui-focused fieldset': { borderColor: '#ff5e00' },
-              },
-              '& .MuiInputLabel-root': { color: 'white', fontWeight: 'bold', fontFamily: 'Poppins' },
-              '& .MuiInputBase-root': { color: 'white', fontWeight: 'bold', fontFamily: 'Poppins' },
-            }}
-          >
-            {quizDetails.quizzes[quizDetails.course]?.map((quiz) => (
-              <MenuItem key={quiz.quizName} value={quiz.quizName}>
-                {quiz.quizName}
-              </MenuItem>
-            ))}
-          </TextField>
-
+    
         {/* Passing Score */}
         
           <TextField
@@ -323,7 +269,7 @@ const EditQuiz = () => {
             </Button>
           </Box>
         ))}
-        {quizDetails.quiz && (
+        
             <Button
           variant="outlined"
           onClick={handleAddQuestion}
@@ -338,7 +284,7 @@ const EditQuiz = () => {
         >
           Add Question
         </Button>
-            )}
+          
       </Box>
 
       <Box
@@ -364,7 +310,6 @@ const EditQuiz = () => {
   </Button>
 
   {/* Save Quiz Button */}
-  {quizDetails.quiz && ( 
     <Button
     variant="contained"
     onClick={handleSaveQuiz}
@@ -377,7 +322,6 @@ const EditQuiz = () => {
   >
     Save Quiz
   </Button>
-    )}
 </Box>
 
     </Box>
