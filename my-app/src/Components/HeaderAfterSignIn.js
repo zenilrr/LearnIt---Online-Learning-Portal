@@ -1,170 +1,167 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaChevronDown } from 'react-icons/fa';
-import './Styles/Header_after_signin.css';
-import capLogo from '../Assets/Cap.png';
-import DefaultProfilePic from '../Assets/profile-img.jpeg';
+import React, { useState, useEffect } from "react";
+import "./Styles/BuyNow.css";
+import { FaLinkedin } from "react-icons/fa";
+import { useParams } from "react-router-dom";
 
-function Header2() {
-  const [showSearch, setShowSearch] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
-  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
-  const [activeLink, setActiveLink] = useState('');
-  const [selectedSuggestion, setSelectedSuggestion] = useState('');
-  const [profilePic, setProfilePic] = useState(DefaultProfilePic);
-  const location = useLocation();
-  const navigate = useNavigate();
+function BuyNow() {
+  const { id } = useParams();
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeTab, setActiveTab] = useState("description"); // Initialize activeTab state
+  const [openSections, setOpenSections] = useState({}); // State to track open sections
 
-  const suggestions = [
-    'Web Development',
-    'Data Science',
-    'Machine Learning',
-    'Design',
-    'Artificial Intelligence',
-    'Cybersecurity',
-    'Blockchain',
-    'Cloud Computing',
-    'JavaScript',
-    'Python',
-  ];
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/api/coursedetails/${id}`);
 
-  const handleMouseEnter = () => setShowDropdown(true);
-  const handleMouseLeave = () => setShowDropdown(false);
-
-  const scrollToSection = (sectionId) => {
-    if (location.pathname !== '/') {
-      // Navigate to home page first if not already there
-      navigate('/');
-      setTimeout(() => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
-          setActiveLink(sectionId);
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
         }
-      }, 300); // Delay to ensure the page loads
-    } else {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-        setActiveLink(sectionId);
-      }
-    }
-  };
-  
-
-  const handleLogout = () => {
-    localStorage.clear();
-    if(location.pathname != '/') {
-      navigate('/');
-    }
-    window.location.reload();
-  };
-
-  const handleProfilePicChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => setProfilePic(reader.result);
-      reader.readAsDataURL(file);
-    }
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ['home', 'about', 'contact'];
-      let currentSection = '';
-
-      sections.forEach((sectionId) => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const rect = section.getBoundingClientRect();
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            currentSection = sectionId;
-          }
-        }
-      });
-
-      setActiveLink(currentSection);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    if (location.pathname === '/') {
-      setActiveLink('home');
-    } else if (location.pathname.includes('/courses')) {
-      setActiveLink('courses');
-    } else if (location.pathname === '/contact') {
-      setActiveLink('contact');
-    }
-  }, [location]);
-
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!e.target.closest('.profile-button') && !e.target.closest('.profile-dropdown')) {
-        setShowProfileDropdown(false);
+        const data = await response.json();
+        setCourses(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error.message);
+        setLoading(false);
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, []);
+    if (id) {
+      fetchCourses();
+    }
+  }, [id]);
+
+  const showTab = (tabId) => setActiveTab(tabId);
+  const toggleSections = (chapterId) => {
+    const allSections = document.querySelectorAll(".learnit-section-list");
+    allSections.forEach((section) => {
+      if (section.id !== chapterId) {
+        section.style.display = "none";
+      }
+    });
+    const sectionList = document.getElementById(chapterId);
+    sectionList.style.display =
+      sectionList.style.display === "none" ? "block" : "none";
+  };
 
   return (
-    <header className="header">
-      <div className="header-logo">
-        <img src={capLogo} alt="Graduation Cap" className="logo-image" />
-        LearnIt
-      </div>
+    <div className="learnit-container">
+      {/* Header */}
+      <header className="learnit-header">
+        <h1>{courses.title}</h1>
+      </header>
 
-      <nav className="header-links-2">
-        <Link to="/" className={activeLink === 'home' ? 'active' : ''} onClick={() => scrollToSection('home')}>
-          Home
-        </Link>
-        <span className={`header-button ${activeLink === 'about' ? 'active' : ''}`} onClick={() => scrollToSection('about')}>
-          About
-        </span>
-        <div className="dropdown" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          <Link to="/courses" className={activeLink === 'courses' ? 'active' : ''}>
-            Courses <FaChevronDown className={`dropdown-icon ${showDropdown ? 'open' : ''}`} />
-          </Link>
-          {showDropdown && (
-            <div className="dropdown-menu">
-              {suggestions.map((suggestion, index) => (
-                <Link key={index} to={`/courses/${suggestion.toLowerCase().replace(/\s+/g, '-')}`}>
-                  {suggestion}
-                </Link>
-              ))}
+      {/* Main Content */}
+      <div className="learnit-main-content">
+        {/* Sidebar */}
+        <div className="learnit-sidebar">
+          <div className="learnit-video">
+            <iframe
+              src={courses.demoVideourl}
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+          <div className="learnit-course-info">
+            <p>
+              <strong>📅</strong>Published On : {courses.date}
+            </p>
+            <p>
+              <strong>🧑‍🎓</strong> Enrolled Students : {courses.students?.length||0}
+            </p>
+            <p>
+              <strong>📖</strong> Modules : {courses.curriculum?.length||0}
+            </p>
+            <p>
+              <strong>🌐</strong> Language : {courses.primaryLanguage}
+            </p>
+            <p>
+              <strong>📝</strong>Category : {courses.category}
+            </p>
+            <p>
+              <strong>✏️</strong>Level : {courses.level}
+            </p>
+
+            <p>
+              <strong>💰</strong>Price : ₹{courses.pricing}
+            </p>
+          </div>
+          <a href="/payment" className="learnit-start-button">
+            Buy Now
+          </a>
+        </div>
+
+        {/* Content */}
+        <div className="learnit-content">
+          {/* Tabs */}
+          <div className="learnit-tabs">
+            <div
+              className={`learnit-tab ${
+                activeTab === "description" ? "learnit-tab-active" : ""
+              }`}
+              onClick={() => showTab("description")}
+            >
+              Description
+            </div>
+            <div
+              className={`learnit-tab ${
+                activeTab === "instructor" ? "learnit-tab-active" : ""
+              }`}
+              onClick={() => showTab("instructor")}
+            >
+              Instructor
+            </div>
+          </div>
+
+          {/* Tab Content */}
+          {activeTab === "description" && (
+            <div className="learnit-tab-content">
+              <p>{courses.description}</p>
+              <div className="learnit-feature-box">
+                <h3>In This Free Course, You Will Learn How To</h3>
+                <ul>
+                  <li>{courses.objectives}</li>
+                </ul>
+              </div>
+            </div>
+          )}
+
+          {activeTab === "instructor" && (
+            <div className="learnit-tab-content">
+              <div className="learnit-instructor-profile">
+                <img
+                  src={courses.image}
+                  alt="Instructor"
+                  className="instructor-image"
+                  height="100"
+                  width="100"
+                />
+                <p>
+                  <strong>{courses.instructorName}</strong>
+                </p>
+                <p>👉 Expert in {courses.expertise}</p>
+                <p>👉 Students taught: {courses.taughtStudents}+</p>
+                <p>👉 Total courses offered: {courses.offeredCourses}</p>
+                <p>👉 Rating: {courses.rating}</p>
+
+                <a
+                  href={courses.linkedinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="linkedin-link"
+                >
+                  <FaLinkedin size={30} className="linkedin-icon" />
+                </a>
+              </div>
             </div>
           )}
         </div>
-        <span className={`header-button ${activeLink === 'contact' ? 'active' : ''}`} onClick={() => scrollToSection('contact')}>
-          Contact
-        </span>
-      </nav>
-
-      <button className="go-to-courses-button" onClick={() => navigate('/search-courses')}>
-        Search Courses
-      </button>
-
-      <button className="profile-button" onClick={() => setShowProfileDropdown(!showProfileDropdown)}>
-        <img src={profilePic} alt="Profile" />
-      </button>
-      {showProfileDropdown && (
-        <div className="profile-dropdown">
-          <Link to="/profile" className="dropdown-item">View Profile</Link>
-          <Link to="/edit-profile" className="dropdown-item">Edit Profile</Link>
-          {/* <label className="dropdown-item update-profile-pic">
-            Update Profile Picture
-            <input type="file" accept="image/*" style={{ display: 'none' }} onChange={handleProfilePicChange} />
-          </label> */}
-          <button className="dropdown-item" onClick={handleLogout}>Logout</button>
-        </div>
-      )}
-    </header>
+      </div>
+    </div>
   );
 }
 
-export default Header2;
+export default BuyNow;
