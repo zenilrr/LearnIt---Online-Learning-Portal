@@ -15,10 +15,10 @@ import CreateQuiz from "./CreateQuiz";
 // ];
 
 const initialQuizzesData = [
-  { id: 1, title: "React Basics Quiz", attempts: 10, passRate: "80%" },
-  { id: 2, title: "Next JS Advanced Quiz", attempts: 15, passRate: "70%" },
-  { id: 3, title: "CSS Fundamentals Quiz", attempts: 12, passRate: "75%" },
-  { id: 4, title: "Python Essentials Quiz", attempts: 8, passRate: "90%" },
+  { id: 1, title: "React Basics Quiz", coursename: 'webdev', passRate: "80%" },
+  { id: 2, title: "Next JS Advanced Quiz", coursename: 'js', passRate: "70%" },
+  { id: 3, title: "CSS Fundamentals Quiz", coursename: 'webdev', passRate: "75%" },
+  { id: 4, title: "Python Essentials Quiz", coursename: 'python', passRate: "90%" },
 ];
 
 const InstructorDashboard = () => {
@@ -167,7 +167,7 @@ const InstructorDashboard = () => {
               <thead>
                 <tr>
                   <th>Quiz</th>
-                  <th>Attempts</th>
+                  <th>Course</th>
                   <th>Pass Rate</th>
                   <th>Actions</th>
                 </tr>
@@ -176,7 +176,7 @@ const InstructorDashboard = () => {
                 {quizzesData.map((quiz) => (
                   <tr key={quiz.id}>
                     <td><Link to={`/quiz/${quiz.id}`}>{quiz.title}</Link></td>
-                    <td>{quiz.attempts}</td>
+                    <td>{quiz.coursename}</td>
                     <td>{quiz.passRate}</td>
                     <td>
                       <button className="edit-btn" onClick={() => handleEditQuiz(quiz.id)}><FaEdit /></button>
