@@ -53,7 +53,8 @@ const InstructorDashboard = () => {
 
   // Function to handle logout
   const handleLogout = () => {
-    navigate("/logout");
+    localStorage.clear();
+    navigate('/');
   };
 
   // Function to calculate total students
