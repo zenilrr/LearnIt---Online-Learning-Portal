@@ -19,6 +19,7 @@ import BuyNowPage from "./Components/BuyNow";
 import StartLearningPage from "./Components/StartLearning";
 import EditCourse from './Components/EditCourse.js';
 import Headeraftersignin from './Components/HeaderAfterSignIn.js';
+import EditQuiz from "./Components/EditQuiz.js";
 
 function App() {
   return (
@@ -42,8 +43,8 @@ function App() {
         <Route path="/start-learning/:id" element={<StartLearningPage />} />
       </Routes>
 
-
       
+
     </div>
   );
 }
