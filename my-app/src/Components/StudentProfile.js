@@ -38,7 +38,7 @@ const Profile = () => {
     <div className="profile-page">
       <header className="profile-header">
         <nav>
-          <p>Home &gt; Profile</p>
+          <p>Profile</p>
         </nav>
       </header>
       <div className="profile-content">

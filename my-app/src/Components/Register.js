@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close'; // Import MUI Close icon
+import { IconButton } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import './Styles/Register.css';
 
 function Register({ onClose, onLogin }) {
@@ -10,6 +12,17 @@ function Register({ onClose, onLogin }) {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(''); 
   const [success, setSuccess] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const togglePasswordVisibility2 = () => {
+    setShowConfirmPassword(!showConfirmPassword);
+  };
 
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -119,24 +132,49 @@ function Register({ onClose, onLogin }) {
             onChange={(e) => setUserEmail(e.target.value)}
             required
           />
-          <div className="password-container">
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="password-container">
-          <input
-              type="password"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
+          <div className="password-container" style={{ position: 'relative' }}>
+        <input
+          type={showPassword ? 'text' : 'password'}
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <IconButton
+          onClick={togglePasswordVisibility}
+          style={{
+            position: 'absolute',
+            right: '10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            color: 'white',
+          }}
+        >
+          {showPassword ? <Visibility /> : <VisibilityOff />}
+        </IconButton>
+      </div>
+
+      <div className="password-container" style={{ position: 'relative' }}>
+        <input
+          type={showConfirmPassword ? 'text' : 'password'}
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <IconButton
+          onClick={togglePasswordVisibility2}
+          style={{
+            position: 'absolute',
+            right: '10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            color: 'white',
+          }}
+        >
+          {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+        </IconButton>
+      </div>
 
           <button type="submit" className="login-button">Register</button>
         </form>

@@ -73,6 +73,19 @@ const EditCourse = ({ courseData }) => {
     ]);
   };
 
+  const categories = [
+    "Photography",
+    "IT",
+    "Developer",
+    "Marketing",
+    "Health",
+    "Teaching Online",
+    "Technology",
+    "Business",
+    "Design",
+    "Others",
+  ];
+
   const handleModuleChange = (index, key, value) => {
     const updatedModules = [...modules];
     updatedModules[index][key] = value;
@@ -163,9 +176,9 @@ const EditCourse = ({ courseData }) => {
   const FileUploadButton = ({ label, onChange, fileName }) => (
     <Button classname="edit_course_btn"
       sx={{
-        backgroundColor: '#FF7900',
+        backgroundColor: '#ff5e00',
         color: '#FFFFFF',
-        '&:hover': { backgroundColor: '#FF7900' },
+        '&:hover': { backgroundColor: '#ff5e00' },
       }}
       variant="outlined"
       startIcon={<CloudUploadIcon />}
@@ -182,9 +195,9 @@ const EditCourse = ({ courseData }) => {
       <Box className="edit-section-tabs">
         <Button classname="edit_course_btn"
           sx={{
-            backgroundColor: currentSection === 1 ? "#FF7900" : "transparent",
+            backgroundColor: currentSection === 1 ? "#ff5e00" : "transparent",
             color: currentSection === 1 ? "#fff" : "#000",
-            "&:hover": { backgroundColor: "#FF7900" },
+            "&:hover": { backgroundColor: "#ff5e00" },
           }}
           variant="contained"
           onClick={() => setCurrentSection(1)}
@@ -193,9 +206,9 @@ const EditCourse = ({ courseData }) => {
         </Button>
         <Button classname="edit_course_btn"
           sx={{
-            backgroundColor: currentSection === 2 ? "#FF7900" : "transparent",
+            backgroundColor: currentSection === 2 ? "#ff5e00" : "transparent",
             color: currentSection === 2 ? "#fff" : "#000",
-            "&:hover": { backgroundColor: "#FF7900" },
+            "&:hover": { backgroundColor: "#ff5e00" },
           }}
           variant="contained"
           onClick={() => setCurrentSection(2)}
@@ -216,17 +229,17 @@ const EditCourse = ({ courseData }) => {
                     color: 'white', // Default label color when not focused
                   },
                   '& label.Mui-focused': {
-                    color: '#FF7900', // Orange color when the label is focused
+                    color: '#ff5e00', // Orange color when the label is focused
                   },
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
                       borderColor: 'grey', // Default border color
                     },
                     '&:hover fieldset': {
-                      borderColor: '#FF7900', // Orange color on hover
+                      borderColor: '#ff5e00', // Orange color on hover
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: '#FF7900', // Orange color when focused
+                      borderColor: '#ff5e00', // Orange color when focused
                     },
                     '& input': {
                       color: 'white', // Text color inside input
@@ -243,134 +256,126 @@ const EditCourse = ({ courseData }) => {
                 required
               />
               <TextField
-                label="Category"
-                variant="outlined"
-                fullWidth
-                value={courseDetails.category}
-                sx={{
-                  '& label': {
-                    color: 'white', // Default label color when not focused
-                  },
-                  '& label.Mui-focused': {
-                    color: '#FF7900', // Orange color when the label is focused
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: 'grey', // Default border color
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#FF7900', // Orange color on hover
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#FF7900', // Orange color when focused
-                    },
-                    '& input': {
-                      color: 'white', // Text color inside input
-                    },
-                  },
-                  backgroundColor: '#000e3dfb',
-                  borderRadius: '5px',
-                }}
-                onChange={(e) =>
-                  setCourseDetails({
-                    ...courseDetails,
-                    category: e.target.value,
-                  })
-                }
-                required
-              />
+  select
+  label="Category"
+  variant="outlined"
+  sx={{
+    '& label': {
+      color: 'white', // Default label color when not focused
+    },
+    '& label.Mui-focused': {
+      color: '#ff5e00', // Orange color when the label is focused
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'grey', // Default border color
+      },
+      '&:hover fieldset': {
+        borderColor: '#ff5e00', // Orange color on hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#ff5e00', // Orange color when focused
+      },
+      '& .MuiSelect-select': {
+        color: 'white', // Text color in input after selection
+      },
+    },
+    backgroundColor: '#000e3dfb',
+    borderRadius: '5px',
+  }}
+  fullWidth
+  value={courseDetails.category}
+  onChange={(e) => setCourseDetails({ ...courseDetails, category: e.target.value })}
+  SelectProps={{
+    MenuProps: {
+      PaperProps: {
+        sx: {
+          maxHeight: 150, // Limit dropdown height
+          backgroundColor: '#000e3dfb', // Dropdown background color
+          color: 'white', // Dropdown text color
+        },
+      },
+    },
+  }}
+>
+  {categories.map((category) => (
+    <MenuItem key={category} value={category} sx={{ color: 'white' }}>
+      {category}
+    </MenuItem>
+  ))}
+</TextField>
+
               <TextField
-                label="Level (e.g., Beginner, Intermediate, Advanced)"
-                variant="outlined"
-                sx={{
-                  '& label': {
-                    color: 'white', // Default label color when not focused
-                  },
-                  '& label.Mui-focused': {
-                    color: '#FF7900', // Orange color when the label is focused
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: 'grey', // Default border color
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#FF7900', // Orange color on hover
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#FF7900', // Orange color when focused
-                    },
-                    '& input': {
-                      color: 'white', // Text color inside input
-                    },
-                  },
-                  backgroundColor: '#000e3dfb',
-                  borderRadius: '5px',
-                }}
-                fullWidth
-                value={courseDetails.level}
-                onChange={(e) =>
-                  setCourseDetails({ ...courseDetails, level: e.target.value })
-                }
-                required
-              />
+  select
+  label="Level (e.g., Beginner, Intermediate, Advanced)"
+  variant="outlined"
+  sx={{
+    '& label': {
+      color: 'white', // Default label color when not focused
+    },
+    '& label.Mui-focused': {
+      color: '#ff5e00', // Orange color when the label is focused
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'grey', // Default border color
+      },
+      '&:hover fieldset': {
+        borderColor: '#ff5e00', // Orange color on hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#ff5e00', // Orange color when focused
+      },
+      '& input': {
+        color: 'white', // Text color inside input
+      },
+      '& .MuiSelect-select': {
+        color: 'white', // Ensure selected text color in dropdown is white
+      },
+    },
+    backgroundColor: '#000e3dfb',
+    borderRadius: '5px',
+  }}
+  fullWidth
+  value={courseDetails.level}
+  onChange={(e) => setCourseDetails({ ...courseDetails, level: e.target.value })}
+  SelectProps={{
+    MenuProps: {
+      PaperProps: {
+        sx: {
+          maxHeight: 150, // Limit dropdown height
+          backgroundColor: '#000e3dfb', // Dropdown background color
+          color: 'white', // Dropdown text color
+        },
+      },
+    },
+  }}
+>
+  <MenuItem value="Beginner">Beginner</MenuItem>
+  <MenuItem value="Intermediate">Intermediate</MenuItem>
+  <MenuItem value="Advanced">Advanced</MenuItem>
+</TextField>
+
+
               <TextField
-                label="Description"
+                label="Primary Language"
                 variant="outlined"
                 sx={{
                   '& label': {
                     color: 'white', // Default label color when not focused
                   },
                   '& label.Mui-focused': {
-                    color: '#FF7900', // Orange color when the label is focused
+                    color: '#ff5e00', // Orange color when the label is focused
                   },
                   '& .MuiOutlinedInput-root': {
                     '& fieldset': {
                       borderColor: 'grey', // Default border color
                     },
                     '&:hover fieldset': {
-                      borderColor: '#FF7900', // Orange color on hover
+                      borderColor: '#ff5e00', // Orange color on hover
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: '#FF7900', // Orange color when focused
-                    },
-                    '& input': {
-                      color: '#f9f9f9', // Text color inside input
-                    },
-                  },
-                  backgroundColor: '#000e3dfb',
-                  borderRadius: '5px',
-                }}
-                fullWidth
-                multiline
-                rows={4}
-                value={courseDetails.description}
-                onChange={(e) =>
-                  setCourseDetails({
-                    ...courseDetails,
-                    description: e.target.value,
-                  })
-                }
-                required
-              />
-              <TextField
-                label="Pricing"
-                variant="outlined"
-                sx={{
-                  '& label': {
-                    color: 'white', // Default label color when not focused
-                  },
-                  '& label.Mui-focused': {
-                    color: '#FF7900', // Orange color when the label is focused
-                  },
-                  '& .MuiOutlinedInput-root': {
-                    '& fieldset': {
-                      borderColor: 'grey', // Default border color
-                    },
-                    '&:hover fieldset': {
-                      borderColor: '#FF7900', // Orange color on hover
-                    },
-                    '&.Mui-focused fieldset': {
-                      borderColor: '#FF7900', // Orange color when focused
+                      borderColor: '#ff5e00', // Orange color when focused
                     },
                     '& input': {
                       color: 'white', // Text color inside input
@@ -380,16 +385,111 @@ const EditCourse = ({ courseData }) => {
                   borderRadius: '5px',
                 }}
                 fullWidth
-                type="number"
-                value={courseDetails.pricing}
-                onChange={(e) =>
-                  setCourseDetails({
-                    ...courseDetails,
-                    pricing: e.target.value,
-                  })
-                }
-                required
+                value={courseDetails.primaryLanguage}
+                onChange={(e) => setCourseDetails({ ...courseDetails, primaryLanguage: e.target.value })}
               />
+              <TextField
+                label="Subtitle"
+                variant="outlined"
+                sx={{
+                  '& label': {
+                    color: 'white', // Default label color when not focused
+                  },
+                  '& label.Mui-focused': {
+                    color: '#ff5e00', // Orange color when the label is focused
+                  },
+                  '& .MuiOutlinedInput-root': {
+                    '& fieldset': {
+                      borderColor: 'grey', // Default border color
+                    },
+                    '&:hover fieldset': {
+                      borderColor: '#ff5e00', // Orange color on hover
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#ff5e00', // Orange color when focused
+                    },
+                    '& input': {
+                      color: 'white', // Text color inside input
+                    },
+                  },
+                  backgroundColor: '#000e3dfb',
+                  borderRadius: '5px',
+                }}
+                fullWidth
+                value={courseDetails.subtitle}
+                onChange={(e) => setCourseDetails({ ...courseDetails, subtitle: e.target.value })}
+              />
+              <TextField
+  label="Description"
+  variant="outlined"
+  sx={{
+    '& label': {
+      color: 'white', // Default label color when not focused
+    },
+    '& label.Mui-focused': {
+      color: '#ff5e00', // Orange color when the label is focused
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'grey', // Default border color
+      },
+      '&:hover fieldset': {
+        borderColor: '#ff5e00', // Orange color on hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#ff5e00', // Orange color when focused
+      },
+      '& textarea': {
+        color: 'white', // Text color inside textarea
+      },
+    },
+    backgroundColor: '#000e3dfb',
+    borderRadius: '5px',
+  }}
+  fullWidth
+  multiline
+  rows={4}
+  value={courseDetails.description}
+  onChange={(e) => setCourseDetails({ ...courseDetails, description: e.target.value })}
+/>
+
+<TextField
+  label="Pricing"
+  variant="outlined"
+  sx={{
+    '& label': {
+      color: 'white', // Default label color when not focused
+    },
+    '& label.Mui-focused': {
+      color: '#ff5e00', // Orange color when the label is focused
+    },
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'grey', // Default border color
+      },
+      '&:hover fieldset': {
+        borderColor: '#ff5e00', // Orange color on hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#ff5e00', // Orange color when focused
+      },
+      '& input': {
+        color: 'white', // Text color inside input
+      },
+    },
+    backgroundColor: '#000e3dfb',
+    borderRadius: '5px',
+  }}
+  fullWidth
+  type="number"
+  value={courseDetails.pricing}
+  onChange={(e) => {
+    const value = e.target.value;
+    if (value === '' || Number(value) >= 0) {
+      setCourseDetails({ ...courseDetails, pricing: value });
+    }
+  }}
+/>
             <FileUploadButton
               label={courseDetails.courseImage ? "Image Uploaded" : "Add Course Image"}
               onChange={() => handleFileUpload("courseImage")}
@@ -417,17 +517,17 @@ const EditCourse = ({ courseData }) => {
                       color: 'white', // Default label color when not focused
                     },
                     '& label.Mui-focused': {
-                      color: '#FF7900', // Orange color when the label is focused
+                      color: '#ff5e00', // Orange color when the label is focused
                     },
                     '& .MuiOutlinedInput-root': {
                       '& fieldset': {
                         borderColor: 'grey', // Default border color
                       },
                       '&:hover fieldset': {
-                        borderColor: '#FF7900', // Orange color on hover
+                        borderColor: '#ff5e00', // Orange color on hover
                       },
                       '&.Mui-focused fieldset': {
-                        borderColor: '#FF7900', // Orange color when focused
+                        borderColor: '#ff5e00', // Orange color when focused
                       },
                       '& input': {
                         color: 'white', // Text color inside input
@@ -451,10 +551,10 @@ const EditCourse = ({ courseData }) => {
                       borderColor: 'grey', // Default border color
                     },
                     '&:hover fieldset': {
-                      borderColor: '#FF7900', // Orange on hover
+                      borderColor: '#ff5e00', // Orange on hover
                     },
                     '&.Mui-focused fieldset': {
-                      borderColor: '#FF7900', // Orange when focused
+                      borderColor: '#ff5e00', // Orange when focused
                     },
                   },
                   backgroundColor: '#000e3dfb',
@@ -465,7 +565,7 @@ const EditCourse = ({ courseData }) => {
                     sx={{
                       color: 'white', // Default label color
                       '&.Mui-focused': {
-                        color: '#FF7900', // Orange color when focused
+                        color: '#ff5e00', // Orange color when focused
                       },
                     }}>Module Type</InputLabel>
                   <Select
@@ -490,10 +590,10 @@ const EditCourse = ({ courseData }) => {
                   <Box className="edit-file-upload-buttons">
                     <Button classname="edit_course_btn"
                       sx={{
-                        backgroundColor: '#FF7900', // Orange color
+                        backgroundColor: '#ff5e00', // Orange color
                         color: '#FFFFFF', // White text
                         '&:hover': {
-                          backgroundColor: '#FF7900', // Prevent color change on hover
+                          backgroundColor: '#ff5e00', // Prevent color change on hover
                         },
                         marginRight: '20px',
                         marginTop: '20px'
@@ -508,10 +608,10 @@ const EditCourse = ({ courseData }) => {
                     </Button>
                     <Button classname="edit_course_btn"
                       sx={{
-                        backgroundColor: '#FF7900', // Orange color
+                        backgroundColor: '#ff5e00', // Orange color
                         color: '#FFFFFF', // White text
                         '&:hover': {
-                          backgroundColor: '#FF7900', // Prevent color change on hover
+                          backgroundColor: '#ff5e00', // Prevent color change on hover
                         },
                         marginRight: '20px',
                         marginTop: '20px'
@@ -529,10 +629,10 @@ const EditCourse = ({ courseData }) => {
                 {module.moduleType === "quiz" && (
                   <Button classname="edit_course_btn" 
                   sx={{
-                    backgroundColor: '#FF7900', // Orange color
+                    backgroundColor: '#ff5e00', // Orange color
                     color: '#FFFFFF', // White text
                     '&:hover': {
-                      backgroundColor: '#FF7900', // Prevent color change on hover
+                      backgroundColor: '#ff5e00', // Prevent color change on hover
                     },
                     marginRight: '20px',
                     marginTop: '20px'
@@ -544,10 +644,10 @@ const EditCourse = ({ courseData }) => {
                 {/* Delete Button */}
                 <Button classname="edit_course_btn"
                       sx={{
-                        backgroundColor: '#FF7900', // Orange color
+                        backgroundColor: '#ff5e00', // Orange color
                         color: '#FFFFFF', // White text
                         '&:hover': {
-                          backgroundColor: '#FF7900', // Prevent color change on hover
+                          backgroundColor: '#ff5e00', // Prevent color change on hover
                         },
                         marginRight: '20px',
                         marginTop: '20px'
@@ -563,9 +663,9 @@ const EditCourse = ({ courseData }) => {
             ))}
             <Button classname="edit_course_btn"
               sx={{
-                backgroundColor: "#FF7900",
+                backgroundColor: "#ff5e00",
                 color: "#FFFFFF",
-                "&:hover": { backgroundColor: "#FF7900" },
+                "&:hover": { backgroundColor: "#ff5e00" },
               }}
               variant="contained"
               startIcon={<CloudUploadIcon />}

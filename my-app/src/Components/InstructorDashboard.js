@@ -160,7 +160,7 @@ const InstructorDashboard = () => {
                 className="create-quiz-btn"
                 onClick={() => setActiveTab("create-quiz")}
               >
-                <FaPlus style={{ marginRight: "5px" }} /> New Quize
+                <FaPlus style={{ marginRight: "5px" }} /> New Quiz
               </button>
             </header>
             <table className="courses-table">

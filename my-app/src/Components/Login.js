@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import CloseIcon from '@mui/icons-material/Close'; // Import MUI Close icon
+import { IconButton } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import './Styles/Login.css';
 
 function Login({ onClose, onRegister }) {
@@ -9,6 +11,12 @@ function Login({ onClose, onRegister }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -63,19 +71,31 @@ function Login({ onClose, onRegister }) {
         <form className="login-form" onSubmit={handleSubmit}>
           <input
             type="text"
-            placeholder="Username or Email"
+            placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
           <div className="password-container">
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <input
+        type={showPassword ? 'text' : 'password'}
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        required
+      />
+      <IconButton
+        onClick={togglePasswordVisibility}
+        style={{
+          position: 'absolute',
+          right: '10px',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          color: 'white',
+        }}
+      >
+        {showPassword ? <Visibility /> : <VisibilityOff />}
+      </IconButton>
           </div>
           <button type="submit" className="login-button">Login</button>
         </form>

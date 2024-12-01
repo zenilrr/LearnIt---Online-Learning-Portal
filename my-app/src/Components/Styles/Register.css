@@ -13,7 +13,7 @@
 }
 
 .login-container {
-  background-color: #0e1325;
+  background-color: #0a194f;
   color: #ffffff;
   width: 400px;
   padding: 30px;
@@ -36,13 +36,14 @@
 }
 
 .role-button {
-  background-color: #11172f;
+  background-color: #000e3dfb;
   border: none;
   color: #ffffff;
   font-size: 16px;
+  font-weight: 700;
   padding: 12px;
   width: 45%;
-  border-radius: 4px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -52,7 +53,7 @@
 }
 
 .role-button.active {
-  background-color: #ff7d00;
+  background-color: #ff9100;
 }
 
 /* Form styling */
@@ -60,9 +61,9 @@
   width: 100%;
   padding: 12px;
   margin: 8px 0;
-  background-color: #11172f;
+  background-color: #000e3dfb;
   border: none;
-  border-radius: 4px;
+  border-radius: 5px;
   color: #ffffff;
   font-size: 16px;
 }
@@ -81,7 +82,7 @@
 .password-container input {
   width: 100%;
   padding: 12px 10px 12px 10px;
-  background-color: #11172f;
+  background-color: #000e3dfb;
   border: none;
   border-radius: 4px;
   color: #ffffff;
@@ -92,7 +93,7 @@
 .login-button {
   width: 100%;
   padding: 12px;
-  background-color: #ff7d00;
+  background-color: #ff9100;
   border: none;
   border-radius: 4px;
   color: #ffffff;
@@ -103,7 +104,7 @@
 }
 
 .login-button:hover {
-  background-color: #e36f00;
+  background-color: #ff5e00;
 }
 
 .member-text {
@@ -112,7 +113,7 @@
 }
 
 .register-link {
-  color: #ff7d00;
+  color: #ff9100;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;

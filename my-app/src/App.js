@@ -20,6 +20,8 @@ import StartLearningPage from "./Components/StartLearning";
 import EditCourse from './Components/EditCourse.js';
 import Headeraftersignin from './Components/HeaderAfterSignIn.js';
 import EditQuiz from "./Components/EditQuiz.js";
+import { Login } from "@mui/icons-material";
+import Profile from "./Components/StudentProfile.js";
 
 function App() {
   return (
@@ -41,9 +43,7 @@ function App() {
         <Route path="/course/:id" element={<EditCourse />} />
         <Route path="/buy-now/:id" element={<BuyNowPage />} />
         <Route path="/start-learning/:id" element={<StartLearningPage />} />
-      </Routes>
-
-      
+      </Routes>   
 
     </div>
   );

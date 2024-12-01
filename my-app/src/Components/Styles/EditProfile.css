@@ -8,7 +8,10 @@
   }
   
   h2 {
-    color: #ff7f11;
+    color: #ff9100;
+    text-align: center;
+    font-size: 2rem;
+    padding-bottom: 10px;
   }
   
   /* Profile Page Wrapper */
@@ -31,6 +34,7 @@
     align-items: center; /* Vertically center the image */
     flex-direction: column; /* Ensures the input button stays below the image */
     margin-bottom: 20px; /* Adds some space below the image */
+    margin-top: 20px; /* Adds some space above the image */
   }
   
   .avatar img {
@@ -69,7 +73,7 @@
     padding: 12px;
     font-size: 1rem;
     border-radius: 8px;
-    border: 2px solid #283366;
+    border: 2px solid #1f3064;
     background-color: #000e3dfb;
     color: #ffffff;
     transition: border-color 0.3s;
@@ -81,7 +85,7 @@
   .form-group input:focus,
   .form-group textarea:focus {
     outline: none;
-    border-color: #ff7f11;
+    border-color: #ff5e00;
     box-shadow: 0 0 8px rgba(255, 127, 17, 0.4);
   }
   
@@ -89,7 +93,7 @@
 .save-button {
     width: 96%;
     padding: 12px 20px;
-    background-color: #ff7f11;
+    background-color: #ff9100;
     color: #ffffff;
     font-size: 1.1rem;
     border-radius: 8px;
@@ -101,7 +105,7 @@
   /* Remove any unwanted color change or background color on hover */
   .save-button:hover {
     transform: translateY(-2px); /* Only the translation effect */
-    background-color: #ff7f11; /* Keep the same background color on hover */
+    background-color: #ff5e00; /* Keep the same background color on hover */
   }
   
   
@@ -111,7 +115,7 @@
     width: 225px;
     background-color: #000e3dfb;
     color: #ffffff;
-    padding: 15px 5px;
+    padding: 15px 15px;
     font-size: 0.8rem;
     border-radius: 10px;
     border: none;

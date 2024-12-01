@@ -24,7 +24,7 @@ app.use(cors({
 
 //database connection
 mongoose
-.connect("mongodb://localhost:27017/learnit")
+.connect("mongodb+srv://parvpatel20804:Parv1234@cluster0.fw8ji.mongodb.net/learnit")
 .then(() => console.log("mongodb is connected"))
 .catch((e) => console.log(e));
 

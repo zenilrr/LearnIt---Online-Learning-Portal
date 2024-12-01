@@ -41,6 +41,7 @@
   font-weight: 800; /* Adjusted to 900 for maximum weight */
   line-height: 1.2;
   padding-bottom: 30px;
+  text-align: left;
 }
 
 .hero-image {
